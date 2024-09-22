@@ -18,4 +18,4 @@ for events in remove_events:
     df = df[df['event_type'] != events]
 
 new_filepath = "../data/cleaned_events.csv"
-df.to_csv(new_filepath)
+df.to_csv(new_filepath, index=False)

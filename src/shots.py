@@ -1,5 +1,5 @@
 import pandas as pd
-from typing import List
+from typing import List, Dict
 
 def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     for column in columns:
@@ -18,14 +18,6 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[in
         df = df[df[column] != cond]
     return df
 
-'''def checking_on_target(df: pd.DataFrame):
-    inconsistency = df[(df['is_goal'] == 1) & (df['shot_outcome'] != 1)]
-    if inconsistency.empty:
-        return True
-    else:
-        return False
-    return inconsistency
-'''
 def map_shot_outcomes(df: pd.DataFrame) -> pd.DataFrame:
     shots_mapping = {
         1.0: 'Gol', 
@@ -37,7 +29,7 @@ def map_shot_outcomes(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def calculate_goal_percentages(goals: pd.DataFrame) -> tuple:
+def calculate_goals(goals: pd.DataFrame) -> tuple:
     total_goals = len(goals)
     goals_inside = len(goals[goals['situation'] == 'inside'])
     goals_outside = len(goals[goals['situation'] == 'outside'])
@@ -48,34 +40,43 @@ def calculate_goal_percentages(goals: pd.DataFrame) -> tuple:
     return perc_inside, perc_outside
 
 
-def print_goal_percentages(perc_inside, perc_outside):
+def print_goals(perc_inside, perc_outside):
 
-    print(f'{" DOS GOLS ":=^40}')
-    print(f"Dentro da área: {perc_inside:.2f}%")
-    print(f"Fora da área:   {perc_outside:.2f}%\n")
-
-
-def shot_outcome_by_situation(df: pd.DataFrame, situation: str) -> dict:
-        attempts = df[df['situation'] == situation]
-        return attempts['shot_outcome'].value_counts()
+    print(f'{" ESTATÍSTICAS POR GOLS ":=^40}')
+    print('-'*40)
+    print(f'Dentro da área | {perc_inside:.2f}%')
+    print(f'Fora da área   | {perc_outside:.2f}%')
+    print('-'*40)
 
 
-def print_shot_outcome_percent(df: pd.DataFrame) -> None:
-    inside_attempts = shot_outcome_by_situation(df, 'inside')
-    sum_inside_attempts = sum(inside_attempts)
+def shot_outcome_by_situation(df: pd.DataFrame, situation: str) -> Dict:
+    attempts = df[df['situation'] == situation]
+    return attempts['shot_outcome'].value_counts()
 
-    outside_attempts = shot_outcome_by_situation(df, 'outside')
-    sum_outside_attempts = sum(outside_attempts)
+def perc_attempts(df: pd.DataFrame, situation: str) -> Dict:
+    attempts = shot_outcome_by_situation(df, situation)
+    sum_attempts = sum(attempts)
+    perc_attempts = attempts / sum_attempts
+    return perc_attempts
 
-    print(f'{" DOS CHUTES ":=^40}')
+def print_dict(attempts: Dict) -> None:
+    for key, value in attempts.items():
+        print(f"{key:<10} | {value:.2%}")
 
-    print(f'\nDentro da área: ')
-    for outcome, percent in (inside_attempts / sum_inside_attempts).items():
-        print(f"{outcome:>10}: {percent:.2%}")
+def print_shot_outcome(df: pd.DataFrame) -> None:
 
-    print(f'\nFora da área: ')
-    for outcome, percent in (outside_attempts / sum_outside_attempts).items():
-        print(f"{outcome:>10}: {percent:.2%}")
+    perc_inside_attempts = perc_attempts(df, 'inside')
+    perc_outside_attempts = perc_attempts(df, 'outside')
+
+    print(f'{" ESTATÍSTICAS POR CHUTE ":=^40}')
+    print('-'*40)
+    print(f'Dentro da área: ')
+    print_dict(perc_inside_attempts)
+
+    print('-'*40)
+    print(f'Fora da área: ')
+    print_dict(perc_outside_attempts)
+    print('-'*40)
 
 def main():
 
@@ -88,7 +89,7 @@ def main():
     # Iremos verificar apenas Attempts 
     filter(df, 'event_type', 1)
 
-    # retirar não registrados e inuteis
+    # retirar não registrados (19) e inuteis (1 e 2)
     # 7 e 8 angulo dificil a direita ou a esquerda nao da informacao se é dentro
     # ou fora da area, entao sera mais vantajoso remover
     remove_lines_by_condition(df, 'location', [1, 2, 7, 8, 19])
@@ -111,13 +112,13 @@ def main():
     
     goals = filter(df,'is_goal', 1)
 
-    perc_inside, perc_outside = calculate_goal_percentages(goals)
+    perc_inside, perc_outside = calculate_goals(goals)
 
     # Imprimir porcentagens de gols
-    print_goal_percentages(perc_inside, perc_outside)
+    print_goals(perc_inside, perc_outside)
 
     # Calculando porcentagens de outcomes fora e dentro da área
-    print_shot_outcome_percent(df)
+    print_shot_outcome(df)
 
 if __name__ == '__main__':
     main()

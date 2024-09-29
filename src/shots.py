@@ -1,19 +1,87 @@
 import pandas as pd
-from typing import List, Dict
+from typing import List, Dict, Union
 
 def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
+    """Função para remover colunas de um DataFrame
+
+    Args:
+        df (pd.DataFrame): DataFrame a ser recebido pela função
+        columns (List[str]): Lista com os nomes das colunas a serem deletadas
+
+    Returns:
+        pd.DataFrame: Retorna o DataFrame com as colunas deletadas
+    
+    Examples:
+        >>> data = [
+        ...        [1, 'Arnaldo', 7.0], 
+        ...        [2, 'Bernaldo', 8.5], 
+        ...        [3, 'Cernaldo', 9.7]
+        ...        ]
+        >>> df = pd.DataFrame(data, columns=['ID', 'Nome', 'Nota'])
+        >>> remove_columns(df, ['ID', 'Nome'])
+           Nota
+        0   7.0
+        1   8.5
+        2   9.7
+    """
     for column in columns:
         df.drop(column, axis=1, inplace=True)
     
     return df
 
 
-def filter(df: pd.DataFrame, column: str ,x: int) -> pd.DataFrame: # melhorar nome
+def filter_df(df: pd.DataFrame, column: str , x: Union[str, int, float]) -> pd.DataFrame:
+    """Filtra o DataFrame com base em um valor específico de uma coluna dada.
+
+    Args:
+        df (pd.DataFrame): DataFrame a ser recebido pela função.
+        column (str): Nome da coluna a ser usada para o filtro.
+        x (Union[str, int, float]): Elemento a ser filtrado na coluna especificada.
+
+    Returns:
+        pd.DataFrame: DataFrame filtrado contendo apenas as linhas onde o valor da coluna é igual a x.
+    
+    Examples:
+        >>> data = [
+        ...        [1, 'Arnaldo', 7.0], 
+        ...        [2, 'Bernaldo', 8.5], 
+        ...        [3, 'Cernaldo', 7.0]
+        ...        ]
+        >>> df = pd.DataFrame(data, columns=['ID', 'Nome', 'Nota'])
+        >>> filter_df(df, 'Nota', 7.0)
+           ID      Nome  Nota
+        0   1   Arnaldo   7.0
+        2   3  Cernaldo   7.0
+    """
     df = df[df[column] == x]
+    
     return df
 
 
-def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[int]) -> pd.DataFrame:
+def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Union[str, int, float]]) -> pd.DataFrame:
+    """Remove linhas de um DataFrame com base em condições específicas.
+
+    Args:
+        df (pd.DataFrame): DataFrame a ser recebido pela função.
+        column (str): Nome da coluna a ser usada para verificar as condições.
+        conditions (List[Union[str, int, float]]): Lista de valores que, se encontrados 
+        na coluna especificada, resultarão na remoção das linhas correspondentes.
+
+    Returns:
+        pd.DataFrame: DataFrame filtrado sem as linhas que atendem às condições.
+
+    Examples:
+        >>> data = [
+        ...        [1, 'Arnaldo', 7.0], 
+        ...        [2, 'Bernaldo', 8.5], 
+        ...        [3, 'Cernaldo', 7.0]
+        ...        ]
+        >>> df = pd.DataFrame(data, columns=['ID', 'Nome', 'Nota'])
+        >>> remove_lines_by_condition(df, 'Nota', [7.0])
+           ID      Nome  Nota
+        1   2  Bernaldo   8.5
+
+    """
     for cond in conditions:
         df = df[df[column] != cond]
     return df
@@ -40,7 +108,7 @@ def calculate_goals(goals: pd.DataFrame) -> tuple:
     return perc_inside, perc_outside
 
 
-def print_goals(perc_inside, perc_outside):
+def print_goals(perc_inside: float, perc_outside: float) -> None:
 
     print(f'{" ESTATÍSTICAS POR GOLS ":=^40}')
     print('-'*40)
@@ -87,7 +155,7 @@ def main():
     remove_columns(df, ['time', 'side', 'bodypart'])
 
     # Iremos verificar apenas Attempts 
-    filter(df, 'event_type', 1)
+    filter_df(df, 'event_type', 1)
 
     # retirar não registrados (19) e inuteis (1 e 2)
     # 7 e 8 angulo dificil a direita ou a esquerda nao da informacao se é dentro
@@ -110,7 +178,7 @@ def main():
 
     map_shot_outcomes(df)
     
-    goals = filter(df,'is_goal', 1)
+    goals = filter_df(df,'is_goal', 1)
 
     perc_inside, perc_outside = calculate_goals(goals)
 

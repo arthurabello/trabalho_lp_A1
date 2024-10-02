@@ -1,6 +1,10 @@
 import pandas as pd
+
 import doctest
+import matplotlib.pyplot as plt
+
 from typing import List, Tuple, Dict, Union
+
 
 def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     """Remove colunas de um DataFrame
@@ -118,7 +122,20 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
     return df
 
 
-def calculate_goals(goals: pd.DataFrame) -> Tuple:
+# A partir daqui as funções são mais específicas para a hipótese
+
+def calculate_goals(goals: pd.DataFrame) -> Tuple[float, float]:
+    """Recebe um Dataframe com todos os gols e calcula a porcentagem de gols que 
+    foram feitos dentro da área e a porcentagem de gols feitos fora da área.
+
+    Args:
+        goals (pd.DataFrame): DataFrame a ser recebido pela função.
+
+    Returns:
+        Tuple: Uma tupla contendo duas porcentagens:
+               - A porcentagem de gols feitos dentro da área.
+               - A porcentagem de gols feitos fora da área.
+    """
 
     total_goals = goals.shape[0]
     goals_inside = filter_df(goals, 'situation', 'inside').shape[0]
@@ -131,39 +148,100 @@ def calculate_goals(goals: pd.DataFrame) -> Tuple:
 
 
 def print_goals(perc_inside: float, perc_outside: float) -> None:
-    print(f'{" ESTATÍSTICAS POR GOLS ":=^40}')
-    print('-'*40)
+    """Exibe as porcentagem de gols marcados dentro e fora da área em um formato tabelado. 
+
+    Args:
+        perc_inside (float): Porcentagem de gols dentro da área.
+        perc_outside (float): Porcentagem de gols fora da área.
+    """
+    print(f'{" ESTATÍSTICAS POR GOLS ":=^50}')
+    print('-'*50)
     print(f'Dentro da área | {perc_inside:.2f}%')
     print(f'Fora da área   | {perc_outside:.2f}%')
-    print('-'*40)
+    print('-'*50)
 
-# Usando dataframe
-def shot_outcome_by_situation(df: pd.DataFrame, situation: str) -> pd.DataFrame:
-    attempts = filter_df(df, 'situation', situation)['shot_outcome'].value_counts().reset_index()
-    attempts.columns = ['Resultado', 'count']
+def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
+    """Conta a frequência de cada resultado de chute (shot_outcome) dentro e fora da área.
+    Os resultados são agrupados em um Dataframe com as contagens separadas para chutes feitos
+    dentro e fora da área.
+
+    Args:
+        df (pd.DataFrame): DataFrame contendo os dados dos chutes, onde cada linha representa um chute
+                           e inclui informações sobre o resultado do chute e a situação (dentro ou fora da área).
+
+    Returns:
+        pd.DataFrame: DataFrame contendo as seguintes colunas:
+                      - 'Resultado': O tipo de resultado do chute ('Gol', 'Fora', 'Defendido' ou 'Trave').
+                      - 'count_in': A contagem de resultados para chutes feitos dentro da área.
+                      - 'count_out': A contagem de resultados para chutes feitos fora da área.
+    """
+    attempts_inside = filter_df(df, 'situation', 'inside')['shot_outcome'].value_counts().reset_index()
+    attempts_outside = filter_df(df, 'situation', 'outside')['shot_outcome'].value_counts().reset_index()
+    attempts = attempts_inside.merge(attempts_outside, on='shot_outcome', suffixes=('_in', '_out'))
+
+    attempts.columns = ['Resultado', 'count_in', 'count_out']
     return attempts
 
-def perc_attempts(df: pd.DataFrame, situation: str) -> pd.DataFrame:
-    attempts = shot_outcome_by_situation(df, situation)
-    attempts['Porcentagem'] = (attempts['count'] / attempts['count'].sum()) * 100
-    attempts['Porcentagem'] = attempts['Porcentagem'].round(2)
-    remove_columns(attempts, ['count'])
+def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
+    """Calcula a porcentagem de cada resultado de chute (shot_outcome) dentro e fora da área.
+    Esta função transforma as contagens de cada um dos resultados de chute obtidos a partir da função 
+    `shot_outcome_count` em porcentagens. Os resultados são agrupados em um Dataframe com as porcentagens 
+    separadas para chutes feitos dentro e fora da área.
+
+    Args:
+        df (pd.DataFrame): DataFrame contendo os dados dos chutes, onde cada linha representa um chute
+                           e inclui informações sobre o resultado do chute e a situação (dentro ou fora da área).
+
+    Returns:
+        pd.DataFrame: DataFrame contendo as seguintes colunas:
+                      - 'Resultado': O tipo de resultado do chute.
+                      - 'Porcentagem_in': A porcentagem de chutes dentro da área para cada resultado.
+                      - 'Porcentagem_out': A porcentagem de chutes fora da área para cada resultado.
+    """
+
+    attempts = shot_outcome_count(df)
+    attempts['Porcentagem_in'] = ((attempts['count_in'] / attempts['count_in'].sum()) * 100).round(2)
+    attempts['Porcentagem_out'] = ((attempts['count_out'] / attempts['count_out'].sum()) * 100).round(2)
+
+    remove_columns(attempts, ['count_in','count_out'])
     return attempts
 
 def print_shot_outcome(df: pd.DataFrame) -> None:
+    """Exibe as estatísticas por chutes de forma organizada.
 
-    perc_inside_attempts = perc_attempts(df, 'inside')
-    perc_outside_attempts = perc_attempts(df, 'outside')
+    Args:
+        df (pd.DataFrame): DataFrame contendo dados de chutes, que será utilizado para calcular
+                           e exibir as estatísticas.
+    """
 
-    print(f'{" ESTATÍSTICAS POR CHUTE ":=^40}')
-    print('-'*40)
-    print(f'Dentro da área: ')
-    print(perc_inside_attempts)
+    perc_attempts = perc_shot_outcome(df)
 
-    print('-'*40)
-    print(f'Fora da área: ')
-    print(perc_outside_attempts)
-    print('-'*40)
+    print(f'{" ESTATÍSTICAS POR CHUTE ":=^50}')
+    print('-'*50)
+    print(perc_attempts)
+
+
+def graph_view(df: pd.DataFrame) -> None:
+    """Exibe um gráfico de barras duplas das porcentagens de resultados de chutes.
+
+    Esta função cria e salva um gráfico de barras duplas que compara as porcentagens de resultados 
+    de chutes dentro e fora da área para cada resultado de chute. O gráfico é salvo como uma imagem PNG.
+
+    Args:
+        df (pd.DataFrame): DataFrame contendo dados de chutes, que será utilizado para calcular as 
+                           porcentagens que serão exibidas no gráfico.
+    """
+    attempts = perc_shot_outcome(df) 
+    
+    attempts.set_index('Resultado').plot.bar(title='Chutes dentro e fora da área', color=['lightblue', 'orange'])
+
+    plt.xlabel('Resultado do chute')
+    plt.ylabel('Porcentagem')
+    plt.legend(title='Situação', labels=['Dentro da Área', 'Fora da Área'])
+    plt.xticks(rotation=0)
+    plt.ylim(0, 50) 
+
+    plt.savefig('graph_shots.png',format='png', dpi=300)
 
 def main():
 
@@ -187,8 +265,9 @@ def main():
     perc_inside, perc_outside = calculate_goals(goals)
 
     print_goals(perc_inside, perc_outside)
-    
     print_shot_outcome(df)
+
+    graph_view(df)
 
 if __name__ == '__main__':
     main()

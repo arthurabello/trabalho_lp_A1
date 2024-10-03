@@ -1,10 +1,9 @@
 import pandas as pd
-
-import doctest
 import matplotlib.pyplot as plt
-
 from typing import List, Tuple, Dict, Union
 
+# TODO: Verificar possiveis Raises e blocos de Try-Except
+# TODO: Realização de testes unitários
 
 def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     """Remove colunas de um DataFrame
@@ -15,7 +14,7 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
 
     Returns:
         pd.DataFrame: Retorna o DataFrame com as colunas deletadas
-    
+        
     Examples:
         >>> data = [
         ...        [1, 'Arnaldo', 7.0], 
@@ -31,7 +30,7 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     """
     for column in columns:
         df.drop(column, axis=1, inplace=True)
-    
+ 
     return df
 
 
@@ -121,20 +120,32 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
 
     return df
 
+def print_dataframe(df: pd.DataFrame, title: str) -> None:
+    """Imprime o DataFrame com um título fornecido.
+
+    Args:
+        df (pd.DataFrame): O DataFrame a ser exibido.
+        titulo (str): O título a ser exibido acima do DataFrame.
+    """
+    print('-'*50)
+    print(f'{f"  {title}  ":=^50}')
+    print('-'*50)
+    print(df.to_string(index=False))
+
 
 # A partir daqui as funções são mais específicas para a hipótese
 
-def calculate_goals(goals: pd.DataFrame) -> Tuple[float, float]:
+def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
     """Recebe um Dataframe com todos os gols e calcula a porcentagem de gols que 
     foram feitos dentro da área e a porcentagem de gols feitos fora da área.
 
     Args:
         goals (pd.DataFrame): DataFrame a ser recebido pela função.
-
+    
     Returns:
-        Tuple: Uma tupla contendo duas porcentagens:
-               - A porcentagem de gols feitos dentro da área.
-               - A porcentagem de gols feitos fora da área.
+        pd.DataFrame: Um DataFrame contendo duas colunas:
+                      - 'Situação': A situação do gol ('Dentro da área' ou 'Fora da área').
+                      - 'Porcentagem': A porcentagem de gols feitos em cada situação.
     """
 
     total_goals = goals.shape[0]
@@ -144,21 +155,12 @@ def calculate_goals(goals: pd.DataFrame) -> Tuple[float, float]:
     perc_inside = (goals_inside / total_goals) * 100
     perc_outside = (goals_outside / total_goals) * 100
 
-    return perc_inside, perc_outside
+    results = pd.DataFrame({
+        'Situação': ['Dentro da área', 'Fora da área'],
+        'Porcentagem': [round(perc_inside, 2), round(perc_outside, 2)]
+    })
 
-
-def print_goals(perc_inside: float, perc_outside: float) -> None:
-    """Exibe as porcentagem de gols marcados dentro e fora da área em um formato tabelado. 
-
-    Args:
-        perc_inside (float): Porcentagem de gols dentro da área.
-        perc_outside (float): Porcentagem de gols fora da área.
-    """
-    print(f'{" ESTATÍSTICAS POR GOLS ":=^50}')
-    print('-'*50)
-    print(f'Dentro da área | {perc_inside:.2f}%')
-    print(f'Fora da área   | {perc_outside:.2f}%')
-    print('-'*50)
+    return results
 
 def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
     """Conta a frequência de cada resultado de chute (shot_outcome) dentro e fora da área.
@@ -206,21 +208,6 @@ def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
     remove_columns(attempts, ['count_in','count_out'])
     return attempts
 
-def print_shot_outcome(df: pd.DataFrame) -> None:
-    """Exibe as estatísticas por chutes de forma organizada.
-
-    Args:
-        df (pd.DataFrame): DataFrame contendo dados de chutes, que será utilizado para calcular
-                           e exibir as estatísticas.
-    """
-
-    perc_attempts = perc_shot_outcome(df)
-
-    print(f'{" ESTATÍSTICAS POR CHUTE ":=^50}')
-    print('-'*50)
-    print(perc_attempts)
-
-
 def graph_view(df: pd.DataFrame) -> None:
     """Exibe um gráfico de barras duplas das porcentagens de resultados de chutes.
 
@@ -258,14 +245,16 @@ def main():
 
     df = remove_columns(df, ['location'])
 
-    shots_mapping = {1.0: 'Gol', 2.0: 'Fora',3.0: 'Defendido', 4.0: 'Trave'}
+    shots_mapping = {1.0: 'Gol', 2.0: 'Fora', 3.0: 'Defendido', 4.0: 'Trave'}
     df = map_column_values(df, 'shot_outcome', shots_mapping)
     
     goals = filter_df(df,'is_goal', 1)
-    perc_inside, perc_outside = calculate_goals(goals)
+    stats_goals = calculate_goals(goals)
 
-    print_goals(perc_inside, perc_outside)
-    print_shot_outcome(df)
+    perc_attempts = perc_shot_outcome(df)
+
+    print_dataframe(stats_goals, "ESTATÍSTICAS POR GOL")
+    print_dataframe(perc_attempts, "ESTATÍSTICAS POR CHUTE")
 
     graph_view(df)
 

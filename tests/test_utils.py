@@ -4,7 +4,7 @@ import pandas as pd
 import sys
 sys.path.append('../src')
 
-from utils import remove_columns,filter_df, remove_lines_by_condition, map_column_values, print_dataframe
+from utils import remove_columns,filter_df, remove_lines_by_condition, map_column_values
 
 grades = [
         [1, 'Arnaldo', 7.0], 

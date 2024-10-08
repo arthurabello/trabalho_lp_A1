@@ -39,10 +39,9 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     if missing_columns:
         raise KeyError(f"As seguintes colunas não existem no DataFrame: {missing_columns}")
 
-
     # main code
     for column in columns:
-            df.drop(column, axis=1, inplace=True)
+        df.drop(column, axis=1, inplace=True)
 
     return df
 
@@ -86,6 +85,7 @@ def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -
             raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
 
     # main code
+
     for column, value in conditions.items():
         df = df[df[column] == value]
     
@@ -107,7 +107,7 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Un
     Raises:
         TypeError: Se `df` não for um pd.DataFrame ou `conditions` não for uma lista.
         KeyError: Se a coluna 'column' não existir no DataFrame.
-    
+
     Examples:
         >>> data = [
         ...        [1, 'Arnaldo', 7.0], 
@@ -165,7 +165,7 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
         0   1  Aluno 1   7.0
         1   2  Aluno 2   8.5
         2   3  Aluno 3   7.0"""
-    
+
     # raises
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
@@ -177,6 +177,7 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
         raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
     
     # main code
+
     df[column] = df[column].map(map)
 
     return df
@@ -187,7 +188,7 @@ def print_dataframe(df: pd.DataFrame, title: str) -> None:
     Args:
         df (pd.DataFrame): O DataFrame a ser exibido.
         titulo (str): O título a ser exibido acima do DataFrame.
-    
+
     Raises:
         TypeError: Se `df` não for um pd.DataFrame ou `title` não for uma string.
     """

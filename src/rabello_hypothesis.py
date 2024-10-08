@@ -1,15 +1,16 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def load_dataset(csv_path):
-    
+
     """
-    Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado.
+    Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado
 
     Args:
-        csv_path (str): Caminho para o arquivo CSV contendo o dataset.
+        csv_path (str): Caminho para o arquivo CSV contendo o dataset
 
     Returns:
-        pandas.DataFrame: Um DataFrame contendo todos os dados carregados do arquivo CSV.
+        pandas.DataFrame: Um DataFrame contendo todos os dados carregados do arquivo CSV
     """
 
     return pd.read_csv(csv_path)
@@ -17,20 +18,13 @@ def load_dataset(csv_path):
 def group_goals_by_match(df):
 
     """
-    Agrupa os eventos por partida e lado do time (casa ou visitante), focando especificamente nos gols.
-
-    Esta função filtra os eventos que não estão relacionados aos gols e, em seguida, agrupa os eventos 
-    relacionados a gols por partida e lado do time (casa ou visitante). O resultado é um DataFrame que 
-    exibe o número de gols marcados pelos times da casa e visitantes para cada partida.
+    Agrupa os eventos por partida e lado do time (casa ou visitante), focando especificamente nos gols
 
     Args:
-        df (pandas.DataFrame): O dataset original contendo todos os eventos de futebol. Cada linha 
-                               no dataset representa um evento em uma partida, incluindo gols, faltas, etc.
+        df (pandas.DataFrame): O dataset original contendo todos os eventos de futebol
 
     Returns:
-        pandas.DataFrame: Um DataFrame com duas colunas: 'home' e 'away', onde cada linha corresponde a 
-                          uma partida, mostrando o número de gols marcados pelos times da casa e visitante.
-                          Partidas sem gols estão incluídas com valores zero em ambas as colunas.
+        pandas.DataFrame: Um DataFrame com colunas 'home' e 'away' representando os gols marcados pelos times da casa e visitantes
     """
 
     df_goals = df[(df['event_type'] == 1) & (df['is_goal'] == 1)]
@@ -42,21 +36,13 @@ def group_goals_by_match(df):
 def calculate_results(goals_per_match):
 
     """
-    Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e visitantes.
-
-    A função compara o número de gols marcados pelo time da casa com aqueles marcados pelo time visitante 
-    e determina o resultado da partida:
-    - 1: Vitória do time da casa
-    - 0: Vitória do time visitante
-    - -1: Empate
+    Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e visitantes
 
     Args:
-        goals_per_match (pandas.DataFrame): DataFrame contendo o número de gols por partida para ambos 
-                                            os times da casa e visitantes.
+        goals_per_match (pandas.DataFrame): DataFrame contendo os gols por partida
 
     Returns:
-        pandas.DataFrame: O DataFrame de entrada com uma coluna adicional 'result', que indica o 
-                          resultado da partida.
+        pandas.DataFrame: O DataFrame com uma coluna adicional 'result', indicando o resultado da partida
     """
 
     goals_per_match['result'] = goals_per_match.apply(
@@ -64,166 +50,66 @@ def calculate_results(goals_per_match):
     )
     return goals_per_match
 
-def calculate_home_win_percentage_excluding_draws(goals_per_match):
+def create_summary_dataframe(goals_per_match):
 
     """
-    Calcula a porcentagem de partidas vencidas pelo time da casa, excluindo empates.
-
-    Esta função filtra as partidas que resultaram em empate e, em seguida, calcula a porcentagem 
-    de vitórias do time da casa em relação ao número total de partidas que tiveram um vencedor claro.
+    Cria um DataFrame com porcentagens: 'home_percentage' para vitórias, derrotas e empates do time da casa
 
     Args:
-        goals_per_match (pandas.DataFrame): Um DataFrame contendo os resultados das partidas com colunas 
-                                            para o número de gols marcados pelos times da casa e visitantes 
-                                            e uma coluna 'result' indicando o resultado da partida.
+        goals_per_match (pandas.DataFrame): DataFrame contendo os resultados das partidas
 
     Returns:
-        float: A porcentagem de partidas vencidas pelo time da casa, excluindo empates.
+        pandas.DataFrame: DataFrame com as porcentagens de vitórias, derrotas e empates para o time da casa
     """
 
-    matches_without_draw = goals_per_match[goals_per_match['result'] != -1]
-    home_wins = (matches_without_draw['result'] == 1).sum()
-    total_matches_without_draw = matches_without_draw.shape[0]
-    home_win_percentage = (home_wins / total_matches_without_draw) * 100
-    return home_win_percentage
+    home_victories = (goals_per_match['result'] == 1).sum()
+    home_defeats = (goals_per_match['result'] == 0).sum()
+    home_draws = (goals_per_match['result'] == -1).sum()
 
-def calculate_home_win_percentage_including_draws(goals_per_match):
+    total_matches = home_victories + home_defeats + home_draws
+
+    summary_df = pd.DataFrame({
+        'home_percentage': [home_victories / total_matches * 100, home_defeats / total_matches * 100, home_draws / total_matches * 100]
+    }, index=['victories', 'defeats', 'draws'])
+
+    return summary_df
+
+def plot_summary(summary_df):
 
     """
-    Calcula a porcentagem de partidas em que o time da casa venceu ou empatou, tratando empates como vitórias.
-
-    Esta função conta tanto as vitórias do time da casa quanto os empates como "vitórias do time da casa" 
-    e calcula sua porcentagem em relação ao número total de partidas jogadas.
+    Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do time da casa
 
     Args:
-        goals_per_match (pandas.DataFrame): Um DataFrame contendo os resultados das partidas com colunas 
-                                            para o número de gols marcados pelos times da casa e visitantes 
-                                            e uma coluna 'result' indicando o resultado da partida.
-
-    Returns:
-        float: A porcentagem de partidas em que o time da casa venceu ou empatou, tratando empates como vitórias.
+        summary_df (pandas.DataFrame): DataFrame contendo as porcentagens de vitórias, derrotas e empates
     """
 
-    home_wins_or_draws = (goals_per_match['result'] == 1).sum() + (goals_per_match['result'] == -1).sum()
-    total_matches = goals_per_match.shape[0]
-    home_win_or_draw_percentage = (home_wins_or_draws / total_matches) * 100
-    return home_win_or_draw_percentage
+    plt.figure(figsize=(8, 5))
+    summary_df['home_percentage'].plot(kind='bar', color=['#4CAF50', '#FF9800', '#2196F3'])
 
-def calculate_draw_percentage(goals_per_match):
+    plt.title('Porcentagem de vitórias, derrotas e empates do time da casa', fontsize=16)
+    plt.xlabel('Resultados', fontsize=14)
+    plt.ylabel('Porcentagem (%)', fontsize=14)
+    plt.xticks(rotation=0)
 
-    """
-    Calcula a porcentagem de partidas que terminaram em empate.
+    for index, value in enumerate(summary_df['home_percentage']):
+        plt.text(index, value + 1, f'{value:.2f}%', ha='center', fontsize=12)
 
-    Esta função calcula a porcentagem de partidas que terminaram com o mesmo número de gols marcados 
-    pelos times da casa e visitantes (ou seja, empates) em relação ao número total de partidas jogadas.
-
-    Args:
-        goals_per_match (pandas.DataFrame): Um DataFrame contendo os resultados das partidas com colunas 
-                                            para o número de gols marcados pelos times da casa e visitantes 
-                                            e uma coluna 'result' indicando o resultado da partida.
-
-    Returns:
-        float: A porcentagem de partidas que terminaram em empate.
-    """
-
-    draws = (goals_per_match['result'] == -1).sum()
-    total_matches = goals_per_match.shape[0]
-    draw_percentage = (draws / total_matches) * 100
-    return draw_percentage
-
-def calculate_home_loss_percentage_excluding_draws(goals_per_match):
-
-    """
-    Calcula a porcentagem de partidas perdidas pelo time da casa, excluindo empates.
-
-    Esta função filtra as partidas que resultaram em empate e calcula a porcentagem de derrotas 
-    do time da casa em relação ao número total de partidas com um vencedor claro.
-
-    Args:
-        goals_per_match (pandas.DataFrame): Um DataFrame contendo os resultados das partidas com colunas 
-                                            para o número de gols marcados pelos times da casa e visitantes 
-                                            e uma coluna 'result' indicando o resultado da partida.
-
-    Returns:
-        float: A porcentagem de partidas perdidas pelo time da casa, excluindo empates.
-    """
-
-    matches_without_draw = goals_per_match[goals_per_match['result'] != -1]
-    home_losses = (matches_without_draw['result'] == 0).sum()
-    total_matches_without_draw = matches_without_draw.shape[0]
-    home_loss_percentage = (home_losses / total_matches_without_draw) * 100
-    return home_loss_percentage
-
-def calculate_home_loss_percentage_including_draws(goals_per_match):
-
-    """
-    Calcula a porcentagem de partidas perdidas pelo time da casa, incluindo empates como derrotas.
-
-    Esta função trata tanto as vitórias do time visitante quanto os empates como "derrotas do time da casa" 
-    e calcula sua porcentagem em relação ao número total de partidas jogadas.
-
-    Args:
-        goals_per_match (pandas.DataFrame): Um DataFrame contendo os resultados das partidas com colunas 
-                                            para o número de gols marcados pelos times da casa e visitantes 
-                                            e uma coluna 'result' indicando o resultado da partida.
-
-    Returns:
-        float: A porcentagem de partidas em que o time da casa perdeu ou empatou, tratando empates como derrotas.
-    """
-
-    home_losses_or_draws = (goals_per_match['result'] == 0).sum() + (goals_per_match['result'] == -1).sum()
-    total_matches = goals_per_match.shape[0]
-    home_loss_percentage = (home_losses_or_draws / total_matches) * 100
-    return home_loss_percentage
-
-def calculate_draws_from_original_dataset(df):
-
-    """
-    Calcula o número total de partidas que terminaram em empate com base no dataset original.
-
-    Esta função retorna ao dataset original e agrupa eventos relacionados a gols por partida para contar 
-    o número total de empates. Ela compara o número de gols marcados pelos times da casa e visitantes 
-    para cada partida e conta quantas terminaram com o mesmo número de gols para ambos os lados.
-
-    Args:
-        df (pandas.DataFrame): O dataset original contendo todos os eventos de futebol.
-
-    Returns:
-        int: O número total de partidas que terminaram em empate.
-    """
-
-    df_goals = df[df['is_goal'] == 1]
-    df_grouped = df_goals.groupby(['id_odsp', 'side'])['is_goal'].sum().unstack(fill_value=0)
-    df_grouped.columns = ['away', 'home']
-    draws = df_grouped[df_grouped['home'] == df_grouped['away']].shape[0]
-    return draws
+    plt.tight_layout()
+    plt.show()
 
 def main():
 
     """
-    Função principal que orquestra toda a análise. Todas as funções utilizadas já foram descritas neste script.
+    Função principal para orquestrar a análise e exibir os resultados
     """
 
     csv_path = '../data/events.csv'
-
     df = load_dataset(csv_path)
     goals_per_match = group_goals_by_match(df)
     goals_per_match = calculate_results(goals_per_match)
+    summary_df = create_summary_dataframe(goals_per_match)
 
-    home_win_percentage_excluding_draws = calculate_home_win_percentage_excluding_draws(goals_per_match)
-    home_win_percentage_including_draws = calculate_home_win_percentage_including_draws(goals_per_match)
-
-    draw_percentage = calculate_draw_percentage(goals_per_match)
-
-    home_loss_percentage_excluding_draws = calculate_home_loss_percentage_excluding_draws(goals_per_match)
-    home_loss_percentage_including_draws = calculate_home_loss_percentage_including_draws(goals_per_match)
-
-    total_draws = calculate_draws_from_original_dataset(df)
-
-    print(f'Percentage of home team wins (excluding draws): {home_win_percentage_excluding_draws:.2f}%')
-    print(f'Percentage of home team wins (including draws as victories): {home_win_percentage_including_draws:.2f}%')
-    print(f'Percentage of home team losses (excluding draws): {home_loss_percentage_excluding_draws:.2f}%')
-    print(f'Percentage of home team losses (including draws as losses): {home_loss_percentage_including_draws:.2f}%')
+    plot_summary(summary_df)
 
 if __name__ == '__main__':
     main()

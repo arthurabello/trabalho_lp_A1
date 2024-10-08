@@ -30,17 +30,17 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     return df
 
 
-def filter_df(df: pd.DataFrame, column: str , x: Union[str, int, float]) -> pd.DataFrame:
-    """Filtra o DataFrame com base em um valor específico de uma coluna dada.
+def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
+    """Filtra o DataFrame com base em valores específicos de colunas dadas.
 
     Args:
         df (pd.DataFrame): DataFrame a ser recebido pela função.
-        column (str): Nome da coluna a ser usada para o filtro.
-        x (Union[str, int, float]): Elemento a ser filtrado na coluna especificada.
+        conditions (Dict[str, Union[str, int, float]]): Condições a serem usadas
+        pelo filtro.
 
     Returns:
-        pd.DataFrame: DataFrame filtrado contendo apenas as linhas onde o valor da coluna é igual a x.
-    
+        pd.DataFrame: DataFrame filtrado contendo apenas as linhas que atendem as soluções.
+
     Examples:
         >>> data = [
         ...        [1, 'Arnaldo', 7.0], 
@@ -48,12 +48,13 @@ def filter_df(df: pd.DataFrame, column: str , x: Union[str, int, float]) -> pd.D
         ...        [3, 'Cernaldo', 7.0]
         ...        ]
         >>> df = pd.DataFrame(data, columns=['ID', 'Nome', 'Nota'])
-        >>> filter_df(df, 'Nota', 7.0)
+        >>> filter_df(df, {'Nota': 7.0})
            ID      Nome  Nota
         0   1   Arnaldo   7.0
         2   3  Cernaldo   7.0
     """
-    df = df[df[column] == x]
+    for column, value in conditions.items():
+        df = df[df[column] == value]
     
     return df
 

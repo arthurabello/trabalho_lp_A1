@@ -1,7 +1,9 @@
 import pandas as pd
 from typing import Dict, Union
+import matplotlib.pyplot as plt
 
-from utils import remove_columns, filter_df
+from utils import remove_columns, filter_df, print_dataframe
+
 
 def get_rows_with_previous(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
     """Filtra as linhas de um DataFrame com base em um valor específico de uma coluna
@@ -27,6 +29,7 @@ def get_rows_with_previous(df: pd.DataFrame, conditions: Dict[str, Union[str, in
 
     return df.iloc[indices_to_save].reset_index(drop=True)
 
+
 def is_headed_goal(df: pd.DataFrame, row_index: int) -> bool:
     """Confere se um evento é um gol de cabeça.
 
@@ -41,6 +44,7 @@ def is_headed_goal(df: pd.DataFrame, row_index: int) -> bool:
         return True
     else:
         return False
+
 
 def is_same_match(df: pd.DataFrame, row_index_a: int, row_index_b: int) -> bool:
     """Confere se dois eventos ocorreram no mesmo jogo.
@@ -57,6 +61,7 @@ def is_same_match(df: pd.DataFrame, row_index_a: int, row_index_b: int) -> bool:
         return True
     else:
         return False
+
 
 def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
     """Calcula a porcentagem das origens dos gols de cabeça.
@@ -90,14 +95,35 @@ def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
     total = corners + fouls + offsides + others
 
     results = pd.DataFrame({
-    'Origem': ['Escanteios', 'Faltas', 'Impedimentos', 'Outros'],
-    'Porcentagem': [round((corners / total) * 100, 2), 
+    'ORIGEM': ['Escanteios', 'Faltas', 'Impedimentos', 'BOLA PARADA', 'Outros'],
+    'PORCENTAGEM': [round((corners / total) * 100, 2), 
                     round((fouls / total) * 100, 2),
-                    round((offsides / total) * 100, 2), 
+                    round((offsides / total) * 100, 2),
+                    round(((corners + fouls + offsides) / total) * 100, 2), 
                     round((others / total) * 100, 2)]
 })
 
     return results
+
+
+def graph_view(df: pd.DataFrame) -> None:
+    """Salva um gráfico de barras que indicam as porcentagens das origens dos fols de
+    cabeça.
+
+    Args:
+        df (pd.DataFrame): DataFrame que contém as porcentagens de cada origem.
+    """
+    plt.figure(figsize=(8, 6))
+    plt.bar(df['ORIGEM'], df['PORCENTAGEM'],
+            color=['lightblue', 'orange', 'lightgreen', 'pink', 'purple'])
+    
+    plt.title('Porcentagem das Origens dos Gols de Cabeça')
+    plt.xlabel('Origem')
+    plt.ylabel('Porcentagem')
+
+    plt.savefig('graph_head.png',format='png', dpi=300)
+    plt.close()
+
 
 def main():
     filepath = "../data/cleaned_events.csv"
@@ -106,8 +132,10 @@ def main():
     remove_columns(df, ['side', 'shot_outcome', 'location'])
     df = get_rows_with_previous(df, {'bodypart': 3, 'is_goal': 1})
 
-    c = origin_of_headed_goals(df)
-    print(c)
+    percent_of_origins = origin_of_headed_goals(df)
+    print_dataframe(percent_of_origins, "ORIGEM DOS GOLS DE CABEÇA")
+    graph_view(percent_of_origins)
+
 
 if __name__ == '__main__':
     main()

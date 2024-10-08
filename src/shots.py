@@ -97,7 +97,7 @@ def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
     
     return df
 
-def graph_view(df: pd.DataFrame) -> None:
+def graph_view_shot_outcome(df: pd.DataFrame) -> None:
     """Exibe um gráfico de barras duplas das porcentagens de resultados de chutes.
 
     Esta função cria e salva um gráfico de barras duplas que compara as porcentagens de resultados 
@@ -107,9 +107,8 @@ def graph_view(df: pd.DataFrame) -> None:
         df (pd.DataFrame): DataFrame contendo dados de chutes, que será utilizado para calcular as 
                            porcentagens que serão exibidas no gráfico.
     """
-    attempts = perc_shot_outcome(df) 
-    
-    attempts.set_index('Resultado').plot.bar(title='Chutes dentro e fora da área', color=['lightblue', 'orange'])
+
+    df.set_index('Resultado').plot.bar(title='Chutes dentro e fora da área', color=['lightblue', 'orange'])
 
     plt.xlabel('Resultado do chute')
     plt.ylabel('Porcentagem')
@@ -148,7 +147,7 @@ def main():
     print_dataframe(stats_goals, "ESTATÍSTICAS POR GOL")
     print_dataframe(perc_attempts, "ESTATÍSTICAS POR CHUTE")
 
-    graph_view(df)
+    graph_view_shot_outcome(perc_attempts)
 
 if __name__ == '__main__':
     main()

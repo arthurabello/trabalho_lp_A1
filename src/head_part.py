@@ -1,17 +1,42 @@
 import pandas as pd
+from typing import Dict, Union
 
-df = pd.read_csv('../data/cleaned_events.csv')
+from utils import remove_columns, filter_df
 
-# Criar arquivo com cabeceio e eventos anteriores
-head_index = df[df['bodypart'] == 3].index
-index_to_save = []
+def get_rows_with_previous(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
+    """Filtra as linhas de um DataFrame com base em um valor específico de uma coluna
+    dada e inclui, se existir, a linha anterior a cada linha que corresponde a condição.
 
-for index in head_index:
-    if index > 0:
-        index_to_save.append(index - 1)
-    index_to_save.append(index)
-indices_to_save = sorted(set(index_to_save)) #evita repetição em caso de cabeceio seguido de cabeceio
+    Args:
+        df (pd.DataFrame): Dataframe a ser filtrado.
+        column (str): Coluna a ser usada para base do filtro.
+        x (Union[str, int, float]): Elemento a ser filtrado.
 
-new_df = df.iloc[indices_to_save]
-new_df.to_csv('../data/head_part.csv', index=False)
-print(new_df.head(50))
+    Returns:
+        pd.DataFrame: Dataframe apenas com as linhas que corresponde a condição e as
+        anteriores quando houver.
+    """
+    indices = filter_df(df, conditions).index
+    indices_to_save = []
+
+    for index in indices:
+        if index > 0:
+            indices_to_save.append(index - 1)
+        indices_to_save.append(index)
+    indices_to_save = sorted(set(indices_to_save))
+
+    return df.iloc[indices_to_save].reset_index(drop=True)
+
+def main():
+    filepath = "../data/cleaned_events.csv"
+    df = pd.read_csv(filepath)
+
+    remove_columns(df, ['side', 'shot_outcome', 'location'])
+    df = get_rows_with_previous(df, {'bodypart': 3, 'is_goal': 1})
+
+    dead_ball_types = [2, 3, 9]
+
+    print(df.head(50))
+
+if __name__ == '__main__':
+    main()

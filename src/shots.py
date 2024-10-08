@@ -19,8 +19,8 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
     """
 
     total_goals = goals.shape[0]
-    goals_inside = filter_df(goals, 'situation', 'inside').shape[0]
-    goals_outside = filter_df(goals, 'situation', 'outside').shape[0]
+    goals_inside = filter_df(goals, {'situation': 'inside'}).shape[0]
+    goals_outside = filter_df(goals, {'situation': 'outside'}).shape[0]
 
     perc_inside = (goals_inside / total_goals) * 100
     perc_outside = (goals_outside / total_goals) * 100
@@ -47,8 +47,8 @@ def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
                       - 'count_in': A contagem de resultados para chutes feitos dentro da área.
                       - 'count_out': A contagem de resultados para chutes feitos fora da área.
     """
-    attempts_inside = filter_df(df, 'situation', 'inside')['shot_outcome'].value_counts().reset_index()
-    attempts_outside = filter_df(df, 'situation', 'outside')['shot_outcome'].value_counts().reset_index()
+    attempts_inside = filter_df(df, {'situation': 'inside'})['shot_outcome'].value_counts().reset_index()
+    attempts_outside = filter_df(df, {'situation': 'outside'})['shot_outcome'].value_counts().reset_index()
     attempts = attempts_inside.merge(attempts_outside, on='shot_outcome', suffixes=('_in', '_out'))
 
     attempts.columns = ['Resultado', 'count_in', 'count_out']
@@ -78,6 +78,25 @@ def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
     remove_columns(attempts, ['count_in','count_out'])
     return attempts
 
+def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
+    """Ajusta a coluna 'shot_outcome' do DataFrame para criar uma nova categoria que separa
+    os chutes no alvo ('On target') em 'Gol' e 'Defendido' com base no valor de 'is_goal'.
+    
+    Args:
+        df (pd.DataFrame): DataFrame a ser recebido pela função.
+    
+    Returns:
+        pd.DataFrame: DataFrame atualizado com a coluna 'shot_outcome' ajustada.
+    """
+    
+    df['shot_outcome'] = df.apply(
+        lambda row: 'Gol' if row['shot_outcome'] == 'No alvo' and row['is_goal'] == 1 
+                    else 'Defendido' if row['shot_outcome'] == 'No alvo' and row['is_goal'] == 0
+                    else row['shot_outcome'], axis=1
+    )
+    
+    return df
+
 def graph_view(df: pd.DataFrame) -> None:
     """Exibe um gráfico de barras duplas das porcentagens de resultados de chutes.
 
@@ -100,13 +119,14 @@ def graph_view(df: pd.DataFrame) -> None:
 
     plt.savefig('graph_shots.png',format='png', dpi=300)
 
+
 def main():
 
     filepath = "../data/cleaned_events.csv"
     df = pd.read_csv(filepath)
 
     df = remove_columns(df, ['time', 'side', 'bodypart'])
-    df = filter_df(df, 'event_type', 1)
+    df = filter_df(df, {'event_type': 1})
     df = remove_lines_by_condition(df, 'location', [1, 2, 7, 8, 19])
     df = remove_columns(df, ['event_type'])
 
@@ -115,10 +135,12 @@ def main():
 
     df = remove_columns(df, ['location'])
 
-    shots_mapping = {1.0: 'Gol', 2.0: 'Fora', 3.0: 'Defendido', 4.0: 'Trave'}
+    shots_mapping = {1.0: 'No alvo', 2.0: 'Fora', 3.0: 'Bloqueado', 4.0: 'Trave'}
     df = map_column_values(df, 'shot_outcome', shots_mapping)
+
+    df = adjust_shot_outcome_df(df)
     
-    goals = filter_df(df,'is_goal', 1)
+    goals = filter_df(df, {'is_goal': 1})
     stats_goals = calculate_goals(goals)
 
     perc_attempts = perc_shot_outcome(df)

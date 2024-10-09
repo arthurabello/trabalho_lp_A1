@@ -1,28 +1,69 @@
 # Análise de Eventos de Futebol
 
-Este projeto foi desenvolvido para a avaliação A1 da disciplina de Linguagens de Programação da FGV/EMAp. Consiste em uma análise do dataset [Football Events](https://www.kaggle.com/datasets/secareanualin/football-events).
+Este projeto foi desenvolvido como parte da avaliação A1 da disciplina de Linguagens de Programação da FGV/EMAp. O objetivo é realizar uma análise aprofundada do dataset [Football Events](https://www.kaggle.com/datasets/secareanualin/football-events) para testar três hipóteses relacionadas ao desempenho em partidas de futebol.
 
 ## Objetivos
 
-Avaliar as seguintes hipóteses:
+As hipóteses avaliadas são:
 
-1. O time da casa ganha mais? (Arthur Rabello Oliveira)
-2. A maioria dos gols de cabeça surgem de bola parada? (Antonio Francisco Batista Filho)
-3. Chute de fora da área tem menor chance de conversão a gol? (Rodrigo Severo Araújo)
+1. **O time da casa ganha mais partidas?**  
+   Autor: *Arthur Rabello Oliveira*
+
+2. **A maioria dos gols de cabeça ocorre após uma bola parada?**  
+   Autor: *Antonio Francisco Batista Filho*
+
+3. **Chutes de fora da área têm menor chance de conversão em gol?**  
+   Autor: *Rodrigo Severo Araújo*
 
 ## Estrutura do Projeto
 
-- Branches individuais: `branch-rabello`, `branch-rodri`, `branch-batista`
-  - Contêm scripts que avaliam as hipóteses usando bibliotecas de data science
-  - Cada hipótese foi escrita em scripts individuais:
-    - `shots.py` -> Rodrigo (Chute de fora da área)
-    - `head.py` -> Antonio (Gols de cabeça)
-    - `matches.py` -> Rabello (Time da casa)
-- Branch `main`: 
-  - Contém o script que sumariza os resultados
-  - Gera DataFrames e visualizações gráficas
+O projeto está organizado em diferentes branches e diretórios, cada um com seu propósito:
+
+- **Branches individuais**: `branch-rabello`, `branch-rodri`, `branch-batista`  
+  Contêm os scripts desenvolvidos individualmente por cada autor para avaliação das hipóteses.
+  
+- **Branch `main`**:  
+  Contém o código final e consolidado, além dos seguintes diretórios:
+  
+  - **docs/**:  
+    Documentação gerada com Sphinx. O relatório final pode ser acessado em formato HTML. Para gerar e visualizar a documentação:
+    ```bash
+    make html
+    open build/html/relatorio.html
+    ```
+
+  - **data/**:  
+    - `cleaned_events.csv`: Dados processados, contendo apenas as informações relevantes para análise.
+    - `events.csv`: Dataset bruto conforme lido diretamente do Kaggle.
+    - `graph_head.png`: Gráfico referente à análise da hipótese 2.
+    - `graph_matches.png`: Gráfico referente à análise da hipótese 1.
+    - `graph_shots.png`: Gráfico referente à análise da hipótese 3.
+
+  - **src/**:  
+    Contém os scripts principais para processamento e análise dos dados:
+    - `clean_data.py`: Função para pré-processamento e limpeza do dataset.
+    - `head.py`: Script para avaliação da hipótese 2.
+    - `shots.py`: Script para avaliação da hipótese 3.
+    - `matches.py`: Script para avaliação da hipótese 1.
+    - `utils.py`: Funções auxiliares utilizadas em vários scripts.
+    - `main.py`: Integra os scripts anteriores e gera as visualizações dos resultados.
+
+  - **tests/**:  
+    Scripts de testes unitários para validar o funcionamento do código:
+    - `test_head.py`: Testes para a hipótese 2 (gols de cabeça).
+    - `test_matches.py`: Testes para a hipótese 1 (vitórias do time da casa).
+    - `test_shots.py`: Testes para a hipótese 3 (chutes de fora da área).
+    - `test_utils.py`: Testes para as funções auxiliares em `utils.py`.
+
+  - **requirements.txt**:  
+    Lista de dependências necessárias para executar o projeto.
+
+  - **LICENSE**:  
+    Arquivo contendo a licença para o projeto.
 
 ## Instalação
+
+Siga os passos abaixo para configurar o projeto em seu ambiente local:
 
 1. Clone o repositório:
    ```bash
@@ -30,12 +71,18 @@ Avaliar as seguintes hipóteses:
    cd trabalho_lp_A1
    ```
 
-2. Instale as dependências (recomenda-se usar um ambiente virtual):
+2. Crie e ative um ambiente virtual (recomendado):
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate 
+   ```
+
+3. Instale as dependências:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Execute o script principal:
+4. Execute o script principal para visualizar os resultados:
    ```bash
    cd src
    python3 main.py
@@ -43,30 +90,17 @@ Avaliar as seguintes hipóteses:
 
 ## Executando os Testes
 
-O projeto inclui testes unitários para cada uma das três hipóteses. Para executar os testes, siga estas etapas:
+O projeto inclui testes unitários para garantir a correção das análises. Para executá-los:
 
 1. Navegue até o diretório de testes:
    ```bash
    cd tests
    ```
 
-2. Execute os testes para cada hipótese:
+2. Execute os testes para cada script:
    ```bash
-   python3 -m unittest tests_shots.py
-   python3 -m unittest tests_matches.py
-   python3 -m unittest tests_head.py
+   python3 -m unittest test_shots.py
+   python3 -m unittest test_matches.py
+   python3 -m unittest test_head.py
+   python3 -m unittest test_utils.py
    ```
-
-Cada arquivo de teste corresponde a uma das hipóteses do projeto:
-- `test_shots.py`: Testes para a hipótese de chutes fora da área
-- `test_matches.py`: Testes para a hipótese do time da casa
-- `test_head.py`: Testes para a hipótese de gols de cabeça
-- `test_utils.py`: Testes para as funções auxiliares que foram utilizadas
-
-## Contribuição
-
-Para contribuir, abra um pull request. Certifique-se de que suas alterações estão alinhadas com o estilo do projeto e que todos os testes passam.
-
-## Licença
-
-Este projeto está licenciado sob a MIT License. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.

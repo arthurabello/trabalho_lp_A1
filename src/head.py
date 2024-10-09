@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 
 from utils import remove_columns, filter_df, print_dataframe
 
-
-def get_rows_with_previous(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
-    """Filtra as linhas de um DataFrame com base em um valor específico de uma coluna
+"""Filtra as linhas de um DataFrame com base em um valor específico de uma coluna
     dada e inclui, se existir, a linha anterior a cada linha que corresponde a condição.
 
     Args:
@@ -18,9 +16,25 @@ def get_rows_with_previous(df: pd.DataFrame, conditions: Dict[str, Union[str, in
         pd.DataFrame: Dataframe apenas com as linhas que corresponde a condição e as
         anteriores quando houver.
     """
-    indices = filter_df(df, conditions).index
-    indices_to_save = []
 
+
+def get_rows_with_previous(df: pd.DataFrame,
+                        conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
+    """Filtra as linhas de um DataFrame com base em condições dadas e inclui, se existir,
+    a linha anterior a cada linha que corresponde às condições.
+
+    Args:
+        df (pd.DataFrame): Dataframe a ser filtrado.
+        conditions (Dict[str, Union[str, int, float]]): Dicionário onde as chaves
+        são as colunas e os valores que devem aparecer nessas colunas.
+
+    Returns:
+        pd.DataFrame: Dataframe apenas com as linhas que corresponde às condições e as
+        anteriores quando existir.
+    """
+    indices = filter_df(df, conditions).index
+    
+    indices_to_save = []
     for index in indices:
         if index > 0:
             indices_to_save.append(index - 1)
@@ -40,10 +54,12 @@ def is_headed_goal(df: pd.DataFrame, row_index: int) -> bool:
     Returns:
         bool: True se refere-se a um gol de cabeça, e False caso contrário.
     """
-    if df.loc[row_index, 'is_goal'] == 1 and df.loc[row_index, 'bodypart'] == 3:
-        return True
-    else:
-        return False
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("O primeiro argumento deve ser um DataFrame.")
+    if not isinstance(row_index, int):
+        raise TypeError("O segundo argumento deve ser um Int.")
+    
+    return df.loc[row_index, 'is_goal'] == 1 and df.loc[row_index, 'bodypart'] == 3
 
 
 def is_same_match(df: pd.DataFrame, row_index_a: int, row_index_b: int) -> bool:
@@ -57,10 +73,14 @@ def is_same_match(df: pd.DataFrame, row_index_a: int, row_index_b: int) -> bool:
     Returns:
         bool: True se os eventos ocorreram no mesmo jogo, e False caso contrário.
     """
-    if df.loc[row_index_a, 'id_odsp'] == df.loc[row_index_b, 'id_odsp']:
-        return True
-    else:
-        return False
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("O primeiro argumento deve ser um DataFrame.")
+    if not isinstance(row_index_a, int):
+        raise TypeError("O segundo argumento deve ser um Int.")
+    if not isinstance(row_index_b, int):
+        raise TypeError("O terceiro argumento deve ser um Int.")
+    
+    return df.loc[row_index_a, 'id_odsp'] == df.loc[row_index_b, 'id_odsp']
 
 
 def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
@@ -75,14 +95,20 @@ def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
                       - 'Origem': O tipo do evento anterior ao gol de cabeça.
                       - 'Porcentagem': A porcentagem referente a cada origem.
     """
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("O argumento deve ser um DataFrame.")
+    
     corners = 0
     fouls = 0
     offsides = 0
     others = 0
-    for i in range(df.shape[0]):
-        if (is_headed_goal(df, i) and is_same_match(df, i, i-1) and
-            (df.loc[i, 'time'] - df.loc[i-1, 'time']) <= 1):
 
+    for i in range(df.shape[0]):
+        if i == 0 and is_headed_goal(df, i):
+            others += 1
+        elif (is_headed_goal(df, i) and is_same_match(df, i, i-1) and
+            (df.loc[i, 'time'] - df.loc[i-1, 'time']) <= 1):
+            
             if df.loc[i-1, 'event_type'] == 2:
                 corners += 1
             elif df.loc[i-1, 'event_type'] == 3:
@@ -93,21 +119,22 @@ def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
                 others += 1
 
     total = corners + fouls + offsides + others
-
+    if total == 0:
+        return pd.DataFrame({'': ['Sem gols de cabeça']})
     results = pd.DataFrame({
-    'ORIGEM': ['Escanteios', 'Faltas', 'Impedimentos', 'BOLA PARADA', 'Outros'],
-    'PORCENTAGEM': [round((corners / total) * 100, 2), 
-                    round((fouls / total) * 100, 2),
-                    round((offsides / total) * 100, 2),
-                    round(((corners + fouls + offsides) / total) * 100, 2), 
-                    round((others / total) * 100, 2)]
-})
+        'ORIGEM': ['Escanteios', 'Faltas', 'Impedimentos', 'BOLA PARADA', 'Outros'],
+        'PORCENTAGEM': [round((corners / total) * 100, 2), 
+                        round((fouls / total) * 100, 2),
+                        round((offsides / total) * 100, 2),
+                        round(((corners + fouls + offsides) / total) * 100, 2), 
+                        round((others / total) * 100, 2)]
+        })
 
     return results
 
 
 def graph_view(df: pd.DataFrame) -> None:
-    """Salva um gráfico de barras que indicam as porcentagens das origens dos fols de
+    """Salva um gráfico de barras que indicam as porcentagens das origens dos gols de
     cabeça.
 
     Args:

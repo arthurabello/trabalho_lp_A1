@@ -55,7 +55,7 @@ def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -
         pelo filtro.
 
     Returns:
-        pd.DataFrame: DataFrame filtrado contendo apenas as linhas que atendem as soluções.
+        pd.DataFrame: DataFrame filtrado contendo apenas as linhas que atendem às condições.
 
     Raises:
         TypeError: Se `df` não for um pd.DataFrame ou `conditions` não for um dicionário.

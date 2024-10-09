@@ -4,19 +4,8 @@ import matplotlib.pyplot as plt
 
 from utils import remove_columns, filter_df, print_dataframe
 
-"""Filtra as linhas de um DataFrame com base em um valor específico de uma coluna
-    dada e inclui, se existir, a linha anterior a cada linha que corresponde a condição.
-
-    Args:
-        df (pd.DataFrame): Dataframe a ser filtrado.
-        column (str): Coluna a ser usada para base do filtro.
-        x (Union[str, int, float]): Elemento a ser filtrado.
-
-    Returns:
-        pd.DataFrame: Dataframe apenas com as linhas que corresponde a condição e as
-        anteriores quando houver.
-    """
-
+# Hipótese: maior parte dos gols de cabeça têm origem em lances de bola parada.
+# Lances de bola parada: escanteios, faltas e impedimentos. 
 
 def get_rows_with_previous(df: pd.DataFrame,
                         conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
@@ -39,7 +28,7 @@ def get_rows_with_previous(df: pd.DataFrame,
         if index > 0:
             indices_to_save.append(index - 1)
         indices_to_save.append(index)
-    indices_to_save = sorted(set(indices_to_save))
+    indices_to_save = sorted(set(indices_to_save)) #evitar repetição
 
     return df.iloc[indices_to_save].reset_index(drop=True)
 
@@ -108,7 +97,7 @@ def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
             others += 1
         elif (is_headed_goal(df, i) and is_same_match(df, i, i-1) and
             (df.loc[i, 'time'] - df.loc[i-1, 'time']) <= 1):
-            
+
             if df.loc[i-1, 'event_type'] == 2:
                 corners += 1
             elif df.loc[i-1, 'event_type'] == 3:

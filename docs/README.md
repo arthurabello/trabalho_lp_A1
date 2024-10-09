@@ -26,4 +26,4 @@ Para executar o código, certifique-se de ter as requirements instaladas. Siga o
 
 ```bash
 pip install -r requirements.txt
-python rabello_hypothesis.py
+python matches.py

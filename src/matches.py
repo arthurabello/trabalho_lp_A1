@@ -1,31 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from utils import filter_df
-
-def load_dataset(csv_path):
-
-    """
-    Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado
-
-    Args:
-        csv_path (str): Caminho para o arquivo CSV contendo o dataset
-
-    Returns:
-        pandas.DataFrame: Um DataFrame contendo todos os dados carregados do arquivo CSV
-
-    Raises:
-        TypeError: Se `csv_path` não for uma string
-        FileNotFoundError: Se o arquivo CSV não for encontrado
-    """
-
-    #raises
-    if not isinstance(csv_path, str):
-        raise TypeError("O parâmetro 'csv_path' deve ser uma string")
-    #actual code
-    try:
-        return pd.read_csv(csv_path)
-    except FileNotFoundError:
-        raise FileNotFoundError(f"O arquivo '{csv_path}' não foi encontrado")
+from utils import filter_df, load_dataset
 
 def group_goals_by_match(df):
 
@@ -156,7 +131,7 @@ def plot_summary(summary_df):
     plt.show()
     plt.savefig('../data/home_results_summary.png',format='png', dpi=300)
 
-def main():
+def matches_main(df: pd.DataFrame):
 
     """
     Função principal para orquestrar a análise e exibir os resultados
@@ -165,9 +140,6 @@ def main():
         pandas.DataFrame: DataFrame contendo as porcentagens de vitórias, derrotas e empates do time da casa
     """
 
-    #actual code
-    csv_path = '../data/cleaned_events.csv'
-    df = load_dataset(csv_path)
     goals_per_match = group_goals_by_match(df)
     goals_per_match = calculate_results(goals_per_match)
     summary_df = create_summary_dataframe(goals_per_match)
@@ -175,5 +147,3 @@ def main():
     plot_summary(summary_df)
     print(summary_df)
 
-if __name__ == '__main__':
-    main()

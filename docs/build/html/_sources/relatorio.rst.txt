@@ -134,8 +134,9 @@ DESAFIOS ENCONTRADOS
 CONTRIBUIÇÃO DE CADA INTEGRANTE
 -------------------------------
 
-- Antonio Francisco: Responsável por validar a hipótese sobre a origem dos gols de cabeça. Coloborou com o pré-processamento dos dados
-e elaborou o relatório.
+- Antonio Francisco: Responsável por validar a hipótese sobre a origem dos gols de cabeça. Coloborou com o pré-processamento dos dados e elaborou o relatório.
+
 - Arthur Rabello: Responsável por validar a hipótese sobre as vitórias do time da casa e elaboração do README.md.
+
 - Rodrigo Severo: Responsável por validar a hipótese dos chutes de fora da área. Colaborou com o pré-processamento dos dados e
 elaborou o arquivo utils.py.

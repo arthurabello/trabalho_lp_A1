@@ -131,18 +131,28 @@ def graph_view(df: pd.DataFrame) -> None:
     """
     plt.figure(figsize=(8, 6))
     plt.bar(df['ORIGEM'], df['PORCENTAGEM'],
-            color=['lightblue', 'orange', 'lightgreen', 'pink', 'purple'])
+            color=['#3889ce', '#3889ce', '#3889ce', '#3889ce', '#3889ce'])
     
-    plt.title('Porcentagem das Origens dos Gols de Cabeça')
-    plt.xlabel('Origem')
-    plt.ylabel('Porcentagem')
+    plt.title('Porcentagem das Origens dos Gols de Cabeça', color='white')
+    plt.xlabel('Origem', color='white')
+    plt.ylabel('Porcentagem', color='white')
 
-    plt.savefig('graph_head.png',format='png', dpi=300)
+    ax = plt.gca()
+    ax.spines['bottom'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.spines['top'].set_color('white')
+    ax.spines['right'].set_color('white')
+
+ 
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    
+    plt.savefig('graph_head.png', format='png', dpi=300, transparent=True)
     plt.close()
 
 
 def main():
-    filepath = "../data/cleaned_events.csv"
+    filepath = "../data/events.csv"
     df = pd.read_csv(filepath)
 
     remove_columns(df, ['side', 'shot_outcome', 'location'])

@@ -8,6 +8,7 @@ sys.path.append('../src')
 from head import (get_rows_with_previous, is_headed_goal, is_same_match,
                   origin_of_headed_goals)
 
+#Dataframes utilizados para os testesgi
 events_df = pd.DataFrame({
             'id_odsp': ['match1', 'match1', 'match1', 'match1', 'match2', 'match2',
                         'match2', 'match3', 'match3', 'match3'],
@@ -29,6 +30,8 @@ zero_headed_goals_df = pd.DataFrame({
 
 class TestGetRowsWithPrevious(unittest.TestCase):
     def test_get_rows_with_previous(self):
+        """Testa o funcionamento da função get_rows_with_previous.
+        """
         expected = pd.DataFrame({
             'id_odsp': ['match1', 'match1', 'match1', 'match2', 'match2', 'match3',
                         'match3'],
@@ -51,22 +54,33 @@ class TestGetRowsWithPrevious(unittest.TestCase):
         pd.testing.assert_frame_equal(result, expected)
 
     def test_invalid_input_df_type(self):
+        """Testa o funcionamento da função get_rows_with_previous ao receber um parâmetro
+        do tipo errado para o df.
+        """
         self.assertRaises(TypeError, get_rows_with_previous, 'events',
                           {'bodypart': 3})
         
     def test_invalid_condition_type(self):
+        """Testa o funcionamento da função get_rows_with_previous ao receber um parâmetro
+        do tipo errado para as condições.
+        """
         self.assertRaises(TypeError, get_rows_with_previous,
                           (events_df.copy(), 'bodypart'))
         self.assertRaises(TypeError, get_rows_with_previous,
                           (events_df.copy(), 3))
         
     def test_non_existing_columns(self):
+        """Testa o funcionamento da função get_rows_with_previous ao receber uma condição
+        relacionada a uma coluna que não existe.
+        """
         self.assertRaises(KeyError, get_rows_with_previous, events_df,
                           {'side': 1})
         
 
 class TestIsHeadedGoal(unittest.TestCase):
     def test_is_headed_goal(self):
+        """Testa o funcionamento da função is_headed_goal.
+        """
         expected = True
         result = is_headed_goal(events_df, 6)
         self.assertEqual(result, expected)
@@ -76,17 +90,28 @@ class TestIsHeadedGoal(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_invalid_input_df_type(self):
+        """Testa o funcionamento da função is_headed_goal ao receber um parâmetro
+        do tipo errado para o df.
+        """
         self.assertRaises(TypeError, is_headed_goal, 'events', 3)
 
     def test_invalid_input_index_type(self):
+        """Testa o funcionamento da função is_headed_goal ao receber um parâmetro
+        do tipo errado para o índice.
+        """
         self.assertRaises(TypeError, is_headed_goal, events_df, '3')
 
     def test_non_existing_index(self):
+        """Testa o funcionamento da função is_headed_goal ao receber um índice
+        que não existe.
+        """
         self.assertRaises(KeyError, is_headed_goal, events_df, 10)
 
 
 class TestIsSameMatch(unittest.TestCase):
     def test_is_same_match(self):
+        """Testa o funcionamento da função is_same_match.
+        """
         excepted = True
         result = is_same_match(events_df, 0, 2)
         self.assertEqual(result, excepted)
@@ -96,19 +121,30 @@ class TestIsSameMatch(unittest.TestCase):
         self.assertEqual(result, excepted)
 
     def test_invalid_input_df_type(self):
+        """Testa o funcionamento da função is_same_match ao receber um parâmetro
+        do tipo errado para o df.
+        """
         self.assertRaises(TypeError, is_same_match, 'events', 0, 2)
 
     def test_invalid_input_index_type(self):
+        """Testa o funcionamento da função is_same_match ao receber um parâmetro
+        do tipo errado para os índices.
+        """
         self.assertRaises(TypeError, is_same_match, events_df, '0', 2)
         self.assertRaises(TypeError, is_same_match, events_df, 0, '2')
 
     def test_non_existing_index(self):
+        """Testa o funcionamento da função is_same_match ao receber um índice
+        que não existe.
+        """
         self.assertRaises(KeyError, is_same_match, events_df, 10, 2)
         self.assertRaises(KeyError, is_same_match, events_df, 0, 10)
 
 
 class TestOriginOfHeadedGoals(unittest.TestCase):
     def test_origin_of_headed_goals(self):
+        """Testa o funcionamento da função origin_of_headed_goals.
+        """
         expected = pd.DataFrame({
                 'ORIGEM': ['Escanteios', 'Faltas', 'Impedimentos', 'BOLA PARADA',
                            'Outros'],
@@ -118,6 +154,9 @@ class TestOriginOfHeadedGoals(unittest.TestCase):
         pd.testing.assert_frame_equal(result, expected)
 
     def test_zero_headed_goals(self):
+        """Testa o funcionamento da função origin_of_headed_goals ao receber um
+        df em que não há gols de cabeça.
+        """
         expected = pd.DataFrame({
                 '': ['Sem gols de cabeça']
             })
@@ -125,6 +164,9 @@ class TestOriginOfHeadedGoals(unittest.TestCase):
         pd.testing.assert_frame_equal(result, expected)    
 
     def test_invalid_input_df(self):
+        """Testa o funcionamento da função origin_of_headed_goals ao receber um
+        parâmetro do tipo errado para o df.
+        """
         self.assertRaises(TypeError, origin_of_headed_goals, 'events')
 
 

@@ -177,15 +177,10 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
     plt.legend(title='Situação', labels=['Dentro da Área', 'Fora da Área'])
     plt.xticks(rotation=0)
     plt.ylim(0, 50) 
-
-    path = os.path.join("../data", 'graph_shots.png')
-    plt.savefig(path,format='png', dpi=300)
+    plt.savefig('../data/graph_shots.png',format='png', dpi=300)
 
 
-def main():
-
-    filepath = "../data/cleaned_events.csv"
-    df = pd.read_csv(filepath)
+def shots_main(df: pd.DataFrame):
 
     df = remove_columns(df, ['time', 'side', 'bodypart'])
     df = filter_df(df, {'event_type': 1})
@@ -211,6 +206,3 @@ def main():
     print_dataframe(perc_attempts, "ESTATÍSTICAS POR CHUTE")
 
     graph_view_shot_outcome(perc_attempts)
-
-if __name__ == '__main__':
-    main()

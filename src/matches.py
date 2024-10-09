@@ -154,6 +154,7 @@ def plot_summary(summary_df):
 
     plt.tight_layout()
     plt.show()
+    plt.savefig('../data/home_results_summary.png',format='png', dpi=300)
 
 def main():
 

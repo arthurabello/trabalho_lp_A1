@@ -148,13 +148,9 @@ def plot_summary(summary_df):
     plt.xlabel('Resultados', fontsize=14)
     plt.ylabel('Porcentagem (%)', fontsize=14)
     plt.xticks(rotation=0)
-
-    for index, value in enumerate(summary_df['home_percentage']):
-        plt.text(index, value + 1, f'{value:.2f}%', ha='center', fontsize=12)
-
     plt.tight_layout()
-    plt.show()
     plt.savefig('../data/home_results_summary.png',format='png', dpi=300)
+    plt.show()
 
 def main():
 

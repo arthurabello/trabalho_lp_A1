@@ -5,7 +5,15 @@ import sys
 
 sys.path.append('../src')
 
-from shots import calculate_goals, shot_outcome_count, perc_shot_outcome
+from shots import calculate_goals, shot_outcome_count, perc_shot_outcome, adjust_shot_outcome_df
+
+# dados para os testes
+grades = [
+        [1, 'Arnaldo', 7.0], 
+        [2, 'Bernaldo', 8.5], 
+        [3, 'Cernaldo', 7.0]
+        ]
+grades_df = pd.DataFrame(grades, columns=['ID', 'Nome', 'Nota'])
 
 shots_data = [
     {'situation': 'inside', 'shot_outcome': 'Gol'},
@@ -41,6 +49,19 @@ goals_data = [
     ]
 goals_df = pd.DataFrame(goals_data)
 
+adjust_shots_data = [
+    {'is_goal': 1, 'shot_outcome': 'No alvo'},
+    {'is_goal': 0, 'shot_outcome': 'Fora'},
+    {'is_goal': 0, 'shot_outcome': 'Trave'},
+    {'is_goal': 0, 'shot_outcome': 'No alvo'},
+    {'is_goal': 0, 'shot_outcome': 'Bloqueado'},
+    {'is_goal': 1, 'shot_outcome': 'No alvo'},   
+]
+
+adjust_shots_df = pd.DataFrame(adjust_shots_data)
+
+# testes unitários
+
 class TestCalculateGoals(unittest.TestCase):
     def test_calculate_goals_success(self):
         expected = pd.DataFrame({
@@ -49,6 +70,12 @@ class TestCalculateGoals(unittest.TestCase):
         })
         result = calculate_goals(goals_df.copy())
         pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+    
+    def test_invalid_input_df(self):
+        self.assertRaises(TypeError, calculate_goals, goals_data)
+    
+    def test_non_existing_columns(self):
+        self.assertRaises(KeyError, calculate_goals, grades_df)
 
 
 class TestShotOutcomeCount(unittest.TestCase):
@@ -60,6 +87,13 @@ class TestShotOutcomeCount(unittest.TestCase):
         })
         result = shot_outcome_count(shots_df.copy())
         pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+    
+    def test_invalid_df(self):
+        self.assertRaises(TypeError, shot_outcome_count, shots_data)
+
+    def test_non_existing_columns(self):
+        self.assertRaises(KeyError, shot_outcome_count, goals_df)
+
 
 class TestShotOutcomePerc(unittest.TestCase):
         
@@ -71,6 +105,29 @@ class TestShotOutcomePerc(unittest.TestCase):
         })
         result = perc_shot_outcome(shots_df.copy())
         pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+    
+    def test_invalid_df(self):
+        self.assertRaises(TypeError, perc_shot_outcome, shots_data)
+
+class TestAdjustShotOutcomeDf(unittest.TestCase):
+    def test_adjust_shot_outcome_df_sucess(self):
+        expected = pd.DataFrame([
+            {'is_goal': 1, 'shot_outcome': 'Gol'},
+            {'is_goal': 0, 'shot_outcome': 'Fora'},
+            {'is_goal': 0, 'shot_outcome': 'Trave'},
+            {'is_goal': 0, 'shot_outcome': 'Defendido'},
+            {'is_goal': 0, 'shot_outcome': 'Bloqueado'},
+            {'is_goal': 1, 'shot_outcome': 'Gol'},   
+        ])
+        result = adjust_shot_outcome_df(adjust_shots_df)
+        pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+    
+    def test_invalid_df(self):
+        self.assertRaises(TypeError, adjust_shot_outcome_df, adjust_shots_data)
+
+    def test_non_existing_columns(self):
+        self.assertRaises(KeyError, adjust_shot_outcome_df, shots_df)
+
 
 if __name__ == '__main__':
     unittest.main()

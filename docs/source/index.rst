@@ -20,3 +20,5 @@ documentation for details.
    shots
    rabello_hypothesis
    head_part
+   1.hip_shots
+   modules

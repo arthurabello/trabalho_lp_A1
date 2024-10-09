@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -116,7 +117,8 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
     plt.xticks(rotation=0)
     plt.ylim(0, 50) 
 
-    plt.savefig('graph_shots.png',format='png', dpi=300)
+    path = os.path.join("../data", 'graph_shots.png')
+    plt.savefig(path,format='png', dpi=300)
 
 
 def main():

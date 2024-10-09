@@ -15,6 +15,8 @@
     <script src="_static/translations.js?v=daa5921a"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
+    <link rel="next" title="head_part module" href="head_part.html" />
+    <link rel="prev" title="shots module" href="shots.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,150 +37,32 @@
   <section id="module-rabello_hypothesis">
 <span id="rabello-hypothesis-module"></span><h1>rabello_hypothesis module<a class="headerlink" href="#module-rabello_hypothesis" title="Link para este cabeçalho">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="rabello_hypothesis.calculate_draw_percentage">
-<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">calculate_draw_percentage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.calculate_draw_percentage" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula a porcentagem de partidas que terminaram em empate.</p>
-<p>Esta função calcula a porcentagem de partidas que terminaram com o mesmo número de gols marcados
-pelos times da casa e visitantes (ou seja, empates) em relação ao número total de partidas jogadas.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – Um DataFrame contendo os resultados das partidas com colunas
-para o número de gols marcados pelos times da casa e visitantes
-e uma coluna ‘result’ indicando o resultado da partida.</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>A porcentagem de partidas que terminaram em empate.</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="rabello_hypothesis.calculate_draws_from_original_dataset">
-<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">calculate_draws_from_original_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.calculate_draws_from_original_dataset" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula o número total de partidas que terminaram em empate com base no dataset original.</p>
-<p>Esta função retorna ao dataset original e agrupa eventos relacionados a gols por partida para contar
-o número total de empates. Ela compara o número de gols marcados pelos times da casa e visitantes
-para cada partida e conta quantas terminaram com o mesmo número de gols para ambos os lados.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – O dataset original contendo todos os eventos de futebol.</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>O número total de partidas que terminaram em empate.</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="rabello_hypothesis.calculate_home_loss_percentage_excluding_draws">
-<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">calculate_home_loss_percentage_excluding_draws</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.calculate_home_loss_percentage_excluding_draws" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula a porcentagem de partidas perdidas pelo time da casa, excluindo empates.</p>
-<p>Esta função filtra as partidas que resultaram em empate e calcula a porcentagem de derrotas
-do time da casa em relação ao número total de partidas com um vencedor claro.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – Um DataFrame contendo os resultados das partidas com colunas
-para o número de gols marcados pelos times da casa e visitantes
-e uma coluna ‘result’ indicando o resultado da partida.</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>A porcentagem de partidas perdidas pelo time da casa, excluindo empates.</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="rabello_hypothesis.calculate_home_loss_percentage_including_draws">
-<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">calculate_home_loss_percentage_including_draws</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.calculate_home_loss_percentage_including_draws" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula a porcentagem de partidas perdidas pelo time da casa, incluindo empates como derrotas.</p>
-<p>Esta função trata tanto as vitórias do time visitante quanto os empates como “derrotas do time da casa”
-e calcula sua porcentagem em relação ao número total de partidas jogadas.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – Um DataFrame contendo os resultados das partidas com colunas
-para o número de gols marcados pelos times da casa e visitantes
-e uma coluna ‘result’ indicando o resultado da partida.</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>A porcentagem de partidas em que o time da casa perdeu ou empatou, tratando empates como derrotas.</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="rabello_hypothesis.calculate_home_win_percentage_excluding_draws">
-<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">calculate_home_win_percentage_excluding_draws</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.calculate_home_win_percentage_excluding_draws" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula a porcentagem de partidas vencidas pelo time da casa, excluindo empates.</p>
-<p>Esta função filtra as partidas que resultaram em empate e, em seguida, calcula a porcentagem
-de vitórias do time da casa em relação ao número total de partidas que tiveram um vencedor claro.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – Um DataFrame contendo os resultados das partidas com colunas
-para o número de gols marcados pelos times da casa e visitantes
-e uma coluna ‘result’ indicando o resultado da partida.</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>A porcentagem de partidas vencidas pelo time da casa, excluindo empates.</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="rabello_hypothesis.calculate_home_win_percentage_including_draws">
-<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">calculate_home_win_percentage_including_draws</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.calculate_home_win_percentage_including_draws" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula a porcentagem de partidas em que o time da casa venceu ou empatou, tratando empates como vitórias.</p>
-<p>Esta função conta tanto as vitórias do time da casa quanto os empates como “vitórias do time da casa”
-e calcula sua porcentagem em relação ao número total de partidas jogadas.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – Um DataFrame contendo os resultados das partidas com colunas
-para o número de gols marcados pelos times da casa e visitantes
-e uma coluna ‘result’ indicando o resultado da partida.</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>A porcentagem de partidas em que o time da casa venceu ou empatou, tratando empates como vitórias.</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="rabello_hypothesis.calculate_results">
 <span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">calculate_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.calculate_results" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e visitantes.</p>
-<p>A função compara o número de gols marcados pelo time da casa com aqueles marcados pelo time visitante
-e determina o resultado da partida:
-- 1: Vitória do time da casa
-- 0: Vitória do time visitante
-- -1: Empate</p>
+<dd><p>Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e visitantes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo o número de gols por partida para ambos
-os times da casa e visitantes.</p>
+<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo os gols por partida</p>
 </dd>
 <dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>O DataFrame de entrada com uma coluna adicional ‘result’, que indica o</dt><dd><p>resultado da partida.</p>
+<dd class="field-even"><p>O DataFrame com uma coluna adicional ‘result’, indicando o resultado da partida</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
-</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rabello_hypothesis.create_summary_dataframe">
+<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">create_summary_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.create_summary_dataframe" title="Link para esta definição">¶</a></dt>
+<dd><p>Cria um DataFrame com porcentagens: ‘home_percentage’ para vitórias, derrotas e empates do time da casa</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo os resultados das partidas</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame com as porcentagens de vitórias, derrotas e empates para o time da casa</p>
 </dd>
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
@@ -189,22 +73,13 @@ os times da casa e visitantes.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="rabello_hypothesis.group_goals_by_match">
 <span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">group_goals_by_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.group_goals_by_match" title="Link para esta definição">¶</a></dt>
-<dd><p>Agrupa os eventos por partida e lado do time (casa ou visitante), focando especificamente nos gols.</p>
-<p>Esta função filtra os eventos que não estão relacionados aos gols e, em seguida, agrupa os eventos
-relacionados a gols por partida e lado do time (casa ou visitante). O resultado é um DataFrame que
-exibe o número de gols marcados pelos times da casa e visitantes para cada partida.</p>
+<dd><p>Agrupa os eventos por partida e lado do time (casa ou visitante), focando especificamente nos gols</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – O dataset original contendo todos os eventos de futebol. Cada linha
-no dataset representa um evento em uma partida, incluindo gols, faltas, etc.</p>
+<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – O dataset original contendo todos os eventos de futebol</p>
 </dd>
 <dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Um DataFrame com duas colunas: ‘home’ e ‘away’, onde cada linha corresponde a</dt><dd><p>uma partida, mostrando o número de gols marcados pelos times da casa e visitante.
-Partidas sem gols estão incluídas com valores zero em ambas as colunas.</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>Um DataFrame com colunas ‘home’ e ‘away’ representando os gols marcados pelos times da casa e visitantes</p>
 </dd>
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
@@ -215,13 +90,13 @@ Partidas sem gols estão incluídas com valores zero em ambas as colunas.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="rabello_hypothesis.load_dataset">
 <span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.load_dataset" title="Link para esta definição">¶</a></dt>
-<dd><p>Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado.</p>
+<dd><p>Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>csv_path</strong> (<em>str</em>) – Caminho para o arquivo CSV contendo o dataset.</p>
+<dd class="field-odd"><p><strong>csv_path</strong> (<em>str</em>) – Caminho para o arquivo CSV contendo o dataset</p>
 </dd>
 <dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>Um DataFrame contendo todos os dados carregados do arquivo CSV.</p>
+<dd class="field-even"><p>Um DataFrame contendo todos os dados carregados do arquivo CSV</p>
 </dd>
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
@@ -232,7 +107,18 @@ Partidas sem gols estão incluídas com valores zero em ambas as colunas.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="rabello_hypothesis.main">
 <span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.main" title="Link para esta definição">¶</a></dt>
-<dd><p>Função principal que orquestra toda a análise. Todas as funções utilizadas já foram descritas neste script.</p>
+<dd><p>Função principal para orquestrar a análise e exibir os resultados</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rabello_hypothesis.plot_summary">
+<span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">plot_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.plot_summary" title="Link para esta definição">¶</a></dt>
+<dd><p>Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do time da casa</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>summary_df</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo as porcentagens de vitórias, derrotas e empates</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -264,15 +150,27 @@ Partidas sem gols estão incluídas com valores zero em ambas as colunas.</p>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegação</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">rabello_hypothesis module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rabello_hypothesis.calculate_results"><code class="docutils literal notranslate"><span class="pre">calculate_results()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rabello_hypothesis.create_summary_dataframe"><code class="docutils literal notranslate"><span class="pre">create_summary_dataframe()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rabello_hypothesis.group_goals_by_match"><code class="docutils literal notranslate"><span class="pre">group_goals_by_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rabello_hypothesis.load_dataset"><code class="docutils literal notranslate"><span class="pre">load_dataset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rabello_hypothesis.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rabello_hypothesis.plot_summary"><code class="docutils literal notranslate"><span class="pre">plot_summary()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="head_part.html">head_part module</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="shots.html" title="capítulo anterior">shots module</a></li>
+      <li>Next: <a href="head_part.html" title="próximo capítulo">head_part module</a></li>
   </ul></li>
 </ul>
 </div>

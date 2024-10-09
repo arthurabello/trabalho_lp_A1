@@ -1,7 +1,7 @@
-head\_part module
+head module
 =================
 
-.. automodule:: head_part
+.. automodule:: head
    :members:
    :undoc-members:
    :show-inheritance:

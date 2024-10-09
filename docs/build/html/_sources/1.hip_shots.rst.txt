@@ -22,17 +22,17 @@ Para testar essa hipótese, utilizamos o arquivo `cleaned_events.csv`, que cont�
 A análise seguiu os seguintes passos:
 
 1. **Preparação dos Dados:**
-    - **Filtragem de Linhas:** Removemos todas as linhas que não correspondem a tentativas de chute (`event_type == 1`).
-    - **Seleção de Colunas:** Mantivemos apenas as colunas necessárias para a análise: `shot_outcome`, `is_goal`, e `location`.
-    - **Simplificação das Localizações:** A coluna `location`, que originalmente continha 14 diferentes locais, foi traduzida para duas categorias principais:
-        - **"inside"** (dentro da área)
-        - **"outside"** (fora da área)
+    - **Filtragem de Linhas:** Removemos todas as linhas que não correspondem a tentativas de chute (`'event_type' == 1`).
+    - **Seleção de Colunas:** Mantivemos apenas as colunas necessárias para a análise: `'shot_outcome'`, `'is_goal'`, e `'location'`.
+    - **Simplificação das Localizações:** A coluna `'location'`, que originalmente continha 14 diferentes locais, foi traduzida para duas categorias principais:
+        - **'inside'** (dentro da área)
+        - **'outside'** (fora da área)
 
 2. **Ajuste das Categorias de Resultado de Chute:**
-    - **Separação de "No Alvo":** A categoria `On target` foi subdividida em duas:
-        - **Gol:** Quando `shot_outcome` é `No Alvo` e `is_goal == 1`.
-        - **Defendido:** Quando `shot_outcome` é `No Alvo` mas `is_goal == 0`.
-    - **Manutenção das Outras Categorias:** As demais categorias (`Trave`, `Bloqueado`, `Trave`) foram mantidas conforme original.
+    - **Separação de "No Alvo":** A categoria `'No Alvo'` foi subdividida em duas:
+        - **Gol:** Quando `'shot_outcome'` é `'No Alvo'` e `'is_goal' == 1`.
+        - **Defendido:** Quando `'shot_outcome'` é `'No Alvo'` mas `'is_goal' == 0`.
+    - **Manutenção das Outras Categorias:** As demais categorias (`'Trave'`, `'Bloqueado'`, `'Trave'`) foram mantidas conforme original.
 
 3. **Cálculo das Estatísticas:**
     - **Estatísticas por Gol:** Calculamos a porcentagem de gols feitos dentro e fora da área.

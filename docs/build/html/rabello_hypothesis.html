@@ -15,7 +15,7 @@
     <script src="_static/translations.js?v=daa5921a"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
-    <link rel="next" title="head_part module" href="head_part.html" />
+    <link rel="next" title="Relatório de Análise de Chutes" href="1.hip_shots.html" />
     <link rel="prev" title="shots module" href="shots.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -50,6 +50,12 @@
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>goals_per_match</cite> não for um pandas DataFrame</p></li>
+<li><p><strong>KeyError</strong> – Se as colunas ‘home’ ou ‘away’ não existirem no DataFrame</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -66,6 +72,12 @@
 </dd>
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>goals_per_match</cite> não for um pandas DataFrame</p></li>
+<li><p><strong>KeyError</strong> – Se a coluna ‘result’ não existir no DataFrame</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -84,6 +96,12 @@
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>df</cite> não for um pandas DataFrame</p></li>
+<li><p><strong>KeyError</strong> – Se colunas essenciais não forem encontradas no DataFrame</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -101,6 +119,12 @@
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>csv_path</cite> não for uma string</p></li>
+<li><p><strong>FileNotFoundError</strong> – Se o arquivo CSV não for encontrado</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -108,6 +132,14 @@
 <dt class="sig sig-object py" id="rabello_hypothesis.main">
 <span class="sig-prename descclassname"><span class="pre">rabello_hypothesis.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rabello_hypothesis.main" title="Link para esta definição">¶</a></dt>
 <dd><p>Função principal para orquestrar a análise e exibir os resultados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame contendo as porcentagens de vitórias, derrotas e empates do time da casa</p>
+</dd>
+<dt class="field-even">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -117,6 +149,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>summary_df</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo as porcentagens de vitórias, derrotas e empates</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – Se ‘summary_df’ não for um pandas DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -162,7 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#rabello_hypothesis.plot_summary"><code class="docutils literal notranslate"><span class="pre">plot_summary()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="head_part.html">head_part module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.hip_shots.html">Relatório de Análise de Chutes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="clean_data.html">clean_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">rabello_hypothesis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shots.html">shots module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
@@ -170,7 +213,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="shots.html" title="capítulo anterior">shots module</a></li>
-      <li>Next: <a href="head_part.html" title="próximo capítulo">head_part module</a></li>
+      <li>Next: <a href="1.hip_shots.html" title="próximo capítulo">Relatório de Análise de Chutes</a></li>
   </ul></li>
 </ul>
 </div>

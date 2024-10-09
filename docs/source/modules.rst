@@ -5,7 +5,7 @@ src
    :maxdepth: 4
 
    clean_data
-   head_part
+   head
    main
    rabello_hypothesis
    shots

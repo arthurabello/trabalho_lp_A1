@@ -17,7 +17,7 @@ Avaliar as seguintes hipóteses:
   - Cada hipótese foi escrita em scripts individuais:
     - `shots.py` -> Rodrigo (Chute de fora da área)
     - `head.py` -> Antonio (Gols de cabeça)
-    - `matchs.py` -> Rabello (Time da casa)
+    - `matches.py` -> Rabello (Time da casa)
 - Branch `main`: 
   - Contém o script que sumariza os resultados
   - Gera DataFrames e visualizações gráficas
@@ -58,9 +58,10 @@ O projeto inclui testes unitários para cada uma das três hipóteses. Para exec
    ```
 
 Cada arquivo de teste corresponde a uma das hipóteses do projeto:
-- `tests_shots.py`: Testes para a hipótese de chutes fora da área
-- `tests_matches.py`: Testes para a hipótese do time da casa
-- `tests_head.py`: Testes para a hipótese de gols de cabeça
+- `test_shots.py`: Testes para a hipótese de chutes fora da área
+- `test_matches.py`: Testes para a hipótese do time da casa
+- `test_head.py`: Testes para a hipótese de gols de cabeça
+- `test_utils.py`: Testes para as funções auxiliares que foram utilizadas
 
 ## Contribuição
 

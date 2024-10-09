@@ -2,33 +2,33 @@ import pandas as pd
 from typing import Dict, Union
 import matplotlib.pyplot as plt
 
+import sys
+sys.path.append('../src')
+
 from utils import remove_columns, filter_df, print_dataframe
 
-# Hipótese: maior parte dos gols de cabeça tem origem em lances de bola parada.
-# Lances de bola parada: escanteios, faltas e impedimentos. 
 
-def get_rows_with_previous(df: pd.DataFrame,
-                        conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
-    """Filtra as linhas de um DataFrame com base em condições dadas e inclui, se existir,
-    a linha anterior a cada linha que corresponde às condições.
+def get_rows_with_previous(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -> pd.DataFrame:
+    """Filtra as linhas de um DataFrame com base em um valor específico de uma coluna
+    dada e inclui, se existir, a linha anterior a cada linha que corresponde a condição.
 
     Args:
         df (pd.DataFrame): Dataframe a ser filtrado.
-        conditions (Dict[str, Union[str, int, float]]): Dicionário onde as chaves
-        são as colunas e os valores que devem aparecer nessas colunas.
+        column (str): Coluna a ser usada para base do filtro.
+        x (Union[str, int, float]): Elemento a ser filtrado.
 
     Returns:
-        pd.DataFrame: Dataframe apenas com as linhas que corresponde às condições e as
-        anteriores quando existir.
+        pd.DataFrame: Dataframe apenas com as linhas que corresponde a condição e as
+        anteriores quando houver.
     """
     indices = filter_df(df, conditions).index
-    
     indices_to_save = []
+
     for index in indices:
         if index > 0:
             indices_to_save.append(index - 1)
         indices_to_save.append(index)
-    indices_to_save = sorted(set(indices_to_save)) #evitar repetição
+    indices_to_save = sorted(set(indices_to_save))
 
     return df.iloc[indices_to_save].reset_index(drop=True)
 
@@ -84,16 +84,12 @@ def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
                       - 'Origem': O tipo do evento anterior ao gol de cabeça.
                       - 'Porcentagem': A porcentagem referente a cada origem.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O argumento deve ser um DataFrame.")
-    
     corners = 0
     fouls = 0
     offsides = 0
     others = 0
-
     for i in range(df.shape[0]):
-        if i == 0 and is_headed_goal(df, i):
+        if i == 0:
             others += 1
         elif (is_headed_goal(df, i) and is_same_match(df, i, i-1) and
             (df.loc[i, 'time'] - df.loc[i-1, 'time']) <= 1):
@@ -108,8 +104,14 @@ def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
                 others += 1
 
     total = corners + fouls + offsides + others
+    print('casa')
+
     if total == 0:
-        return pd.DataFrame({'': ['Sem gols de cabeça']})
+        return pd.DataFrame({
+            '': ['Sem gols de cabeça']
+        })
+
+
     results = pd.DataFrame({
         'ORIGEM': ['Escanteios', 'Faltas', 'Impedimentos', 'BOLA PARADA', 'Outros'],
         'PORCENTAGEM': [round((corners / total) * 100, 2), 
@@ -120,6 +122,7 @@ def origin_of_headed_goals(df: pd.DataFrame) -> pd.DataFrame:
         })
 
     return results
+
 
 
 def graph_view(df: pd.DataFrame) -> None:
@@ -142,15 +145,33 @@ def graph_view(df: pd.DataFrame) -> None:
 
 
 def main():
-    filepath = "../data/cleaned_events.csv"
-    df = pd.read_csv(filepath)
+    
+    df = pd.DataFrame({
+            'id_odsp': ['match1', 'match1', 'match1', 'match1', 'match2', 'match2', 'match2', 'match3', 'match3', 'match3'],
+            'time': [10, 11, 30, 35, 5, 11, 12, 20, 27, 28],
+            'event_type': [2, 2, 3, 9, 9, 2, 3, 2, 3, 1],
+            'is_goal': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            'bodypart': [3, 2, 3, 1, 2, 1, 3, 1, 1, 3]
+        })
 
-    remove_columns(df, ['side', 'shot_outcome', 'location'])
+    print(df)
     df = get_rows_with_previous(df, {'bodypart': 3, 'is_goal': 1})
 
     percent_of_origins = origin_of_headed_goals(df)
     print_dataframe(percent_of_origins, "ORIGEM DOS GOLS DE CABEÇA")
-    graph_view(percent_of_origins)
+    # graph_view(percent_of_origins)
+
+    # Criando o DataFrame
+    data = {
+        'ORIGEM': ['Escanteios', 'Faltas', 'Impedimentos', 'BOLA PARADA', 'Outros'],
+        'PORCENTAGEM': [33.33, 50.0, 0.0, 100.0, 0.0]
+    }
+
+    df = pd.DataFrame(data)
+
+    # Exibindo o DataFrame
+    print_dataframe(df, 'Origem dos Gols de Cabeça')
+
 
 
 if __name__ == '__main__':

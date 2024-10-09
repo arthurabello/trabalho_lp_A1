@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Relatório da Análise sobre Origem dos Gols de Cabeça &#8212; Documentação Trabalho-LP-A1 0.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=88519e4e"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=daa5921a"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Buscar" href="search.html" />
+    <link rel="next" title="src" href="modules.html" />
+    <link rel="prev" title="Relatório de Análise de Chutes" href="1.hip_shots.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="relatorio-da-analise-sobre-origem-dos-gols-de-cabeca">
+<h1>Relatório da Análise sobre Origem dos Gols de Cabeça<a class="headerlink" href="#relatorio-da-analise-sobre-origem-dos-gols-de-cabeca" title="Link para este cabeçalho">¶</a></h1>
+<section id="hipotese">
+<h2>Hipótese<a class="headerlink" href="#hipotese" title="Link para este cabeçalho">¶</a></h2>
+<p>A maior parte dos <em>gols de cabeça</em> tem origem em lances de bola parada (escanteios, faltas e impedimentos)</p>
+</section>
+<section id="motivacao">
+<h2>Motivação<a class="headerlink" href="#motivacao" title="Link para este cabeçalho">¶</a></h2>
+<p>Devido à natureza mais organizada e previsível dos lances de <strong>bola parada</strong>, esses lances são comumente associados a gols de
+cabeça, em especial, os escanteios, que é tradicionalmente cobrado com bola levantada na área com intenção de um jogador bem
+posicionado conseguir cabecear. Assim, é natural esperar que parte considerável dos gols de cabeça tenham origem nesses lances.</p>
+</section>
+<section id="metodologia">
+<h2>Metodologia<a class="headerlink" href="#metodologia" title="Link para este cabeçalho">¶</a></h2>
+<p>Utilizando o arquivo <cite>cleaned_events.csv</cite>, que contém dados sobre diversos eventos ocorridos em jogos de futebol, a análise com o
+objetivo de verificar a hipótese aprensentada seguiu da seguinte maneira:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Preparação dos Dados:</strong></dt><dd><ul class="simple">
+<li><p><strong>Remoção de Colunas:</strong> Foram removidas as colunas <cite>‘side’</cite>, <cite>‘shot_outcome’</cite> e <cite>‘location’</cite>, que não seriam úteis para a análise.</p></li>
+<li><p><strong>Filtragem de Linhas:</strong> Apenas as linhas que correspondem a gols de cabeça e eventos anteriores a gols de cabeça foram mantidas, pois seriam as únicas necessárias.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Cálculo das Estatísticas:</strong></dt><dd><ul class="simple">
+<li><p><strong>Gols de Cabeça Precedidos por Lances de Bola Parada:</strong> Foi calculado o percentual de gols de cabeça que tinha como evento anterior, um escanteio, uma falta ou um impedimento que ocorreu em até 1 minuto antes do gol.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Visualização dos Dados:</strong></dt><dd><ul class="simple">
+<li><p><strong>Gráfico de Barras:</strong> Foi criado um gráfico de barras relacionado ao percentual de gols com origem em escanteio, falta, impedimento, bola parada (qualquer um dos três anteriores) e outras origens.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="resultados">
+<h2>Resultados<a class="headerlink" href="#resultados" title="Link para este cabeçalho">¶</a></h2>
+<section id="estatisticas">
+<h3>Estatísticas<a class="headerlink" href="#estatisticas" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ORIGEM</p></th>
+<th class="head"><p>Porcentagem</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Escanteios</p></td>
+<td><p>38.74</p></td>
+</tr>
+<tr class="row-odd"><td><p>Faltas</p></td>
+<td><p>10.53</p></td>
+</tr>
+<tr class="row-even"><td><p>impedimentos</p></td>
+<td><p>2.30</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOLA PARADA</p></td>
+<td><p>51.58</p></td>
+</tr>
+<tr class="row-even"><td><p>Outros</p></td>
+<td><p>48.42</p></td>
+</tr>
+</tbody>
+</table>
+<p>Gráfico</p>
+<a class="reference internal image-reference" href="_images/graph_head.png"><img alt="_images/graph_head.png" class="align-center" src="_images/graph_head.png" style="width: 600px; height: 400px;" />
+</a>
+</section>
+</section>
+<section id="conclusao">
+<h2>Conclusão<a class="headerlink" href="#conclusao" title="Link para este cabeçalho">¶</a></h2>
+<p>A análise mostra que, nos dados analisados, 51.58% dos gols de cabeça tiveram origem em gols de cabeça. Esse resultado reforça em parte
+a hipótese de que a maioria dos gols desse tipo surgem de escanteios, faltas e impedimentos. Todavia, a margem não é tão grande quanto
+o esperado. Dessa forma, embora a hipótese seja confirmada, a análise revela que grande parte dos gols de cabeça têm origem em lances
+bola parada. Além disso, como esperado, os gols com origem em escanteio representam parte substancial do total.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Trabalho-LP-A1</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegação</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="head.html">head module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.hip_shots.html">Relatório de Análise de Chutes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Relatório da Análise sobre Origem dos Gols de Cabeça</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hipotese">Hipótese</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motivacao">Motivação</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metodologia">Metodologia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resultados">Resultados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusao">Conclusão</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="1.hip_shots.html" title="capítulo anterior">Relatório de Análise de Chutes</a></li>
+      <li>Next: <a href="modules.html" title="próximo capítulo">src</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Antonio Francisco, Arthur Rabello, Rodrigo Severo.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/hip_head.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

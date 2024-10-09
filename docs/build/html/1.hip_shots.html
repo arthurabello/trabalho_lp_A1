@@ -16,7 +16,7 @@
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
     <link rel="next" title="src" href="modules.html" />
-    <link rel="prev" title="head_part module" href="head_part.html" />
+    <link rel="prev" title="rabello_hypothesis module" href="rabello_hypothesis.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -54,12 +54,12 @@ A análise seguiu os seguintes passos:</p>
 <ol class="arabic simple">
 <li><dl class="simple">
 <dt><strong>Preparação dos Dados:</strong></dt><dd><ul class="simple">
-<li><p><strong>Filtragem de Linhas:</strong> Removemos todas as linhas que não correspondem a tentativas de chute (<cite>event_type == 1</cite>).</p></li>
-<li><p><strong>Seleção de Colunas:</strong> Mantivemos apenas as colunas necessárias para a análise: <cite>shot_outcome</cite>, <cite>is_goal</cite>, e <cite>location</cite>.</p></li>
+<li><p><strong>Filtragem de Linhas:</strong> Removemos todas as linhas que não correspondem a tentativas de chute (<cite>‘event_type’ == 1</cite>).</p></li>
+<li><p><strong>Seleção de Colunas:</strong> Mantivemos apenas as colunas necessárias para a análise: <cite>‘shot_outcome’</cite>, <cite>‘is_goal’</cite>, e <cite>‘location’</cite>.</p></li>
 <li><dl class="simple">
-<dt><strong>Simplificação das Localizações:</strong> A coluna <cite>location</cite>, que originalmente continha 14 diferentes locais, foi traduzida para duas categorias principais:</dt><dd><ul>
-<li><p><strong>“inside”</strong> (dentro da área)</p></li>
-<li><p><strong>“outside”</strong> (fora da área)</p></li>
+<dt><strong>Simplificação das Localizações:</strong> A coluna <cite>‘location’</cite>, que originalmente continha 14 diferentes locais, foi traduzida para duas categorias principais:</dt><dd><ul>
+<li><p><strong>‘inside’</strong> (dentro da área)</p></li>
+<li><p><strong>‘outside’</strong> (fora da área)</p></li>
 </ul>
 </dd>
 </dl>
@@ -71,14 +71,14 @@ A análise seguiu os seguintes passos:</p>
 <li><dl class="simple">
 <dt><strong>Ajuste das Categorias de Resultado de Chute:</strong></dt><dd><ul class="simple">
 <li><dl class="simple">
-<dt><strong>Separação de “No Alvo”:</strong> A categoria <cite>On target</cite> foi subdividida em duas:</dt><dd><ul>
-<li><p><strong>Gol:</strong> Quando <cite>shot_outcome</cite> é <cite>No Alvo</cite> e <cite>is_goal == 1</cite>.</p></li>
-<li><p><strong>Defendido:</strong> Quando <cite>shot_outcome</cite> é <cite>No Alvo</cite> mas <cite>is_goal == 0</cite>.</p></li>
+<dt><strong>Separação de “No Alvo”:</strong> A categoria <cite>‘No Alvo’</cite> foi subdividida em duas:</dt><dd><ul>
+<li><p><strong>Gol:</strong> Quando <cite>‘shot_outcome’</cite> é <cite>‘No Alvo’</cite> e <cite>‘is_goal’ == 1</cite>.</p></li>
+<li><p><strong>Defendido:</strong> Quando <cite>‘shot_outcome’</cite> é <cite>‘No Alvo’</cite> mas <cite>‘is_goal’ == 0</cite>.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p><strong>Manutenção das Outras Categorias:</strong> As demais categorias (<cite>Trave</cite>, <cite>Bloqueado</cite>, <cite>Trave</cite>) foram mantidas conforme original.</p></li>
+<li><p><strong>Manutenção das Outras Categorias:</strong> As demais categorias (<cite>‘Trave’</cite>, <cite>‘Bloqueado’</cite>, <cite>‘Trave’</cite>) foram mantidas conforme original.</p></li>
 </ul>
 </dd>
 </dl>
@@ -212,7 +212,6 @@ conseguimos garantir que as estatísticas realmente reflitam o que acontece nas 
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="head_part.html">head_part module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Relatório de Análise de Chutes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#hipotese">Hipótese</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#motivacao">Motivação</a></li>
@@ -228,7 +227,7 @@ conseguimos garantir que as estatísticas realmente reflitam o que acontece nas 
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="head_part.html" title="capítulo anterior">head_part module</a></li>
+      <li>Previous: <a href="rabello_hypothesis.html" title="capítulo anterior">rabello_hypothesis module</a></li>
       <li>Next: <a href="modules.html" title="próximo capítulo">src</a></li>
   </ul></li>
 </ul>

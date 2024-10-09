@@ -51,6 +51,12 @@ os chutes no alvo (‘On target’) em ‘Gol’ e ‘Defendido’ com base no v
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se o parâmetro <cite>df</cite> não for um pd.DataFrame.</p></li>
+<li><p><strong>KeyError</strong> – Se alguma das colunas [‘shot_outcome’, ‘is_goal’] não existir em <cite>df</cite>.</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -76,6 +82,12 @@ foram feitos dentro da área e a porcentagem de gols feitos fora da área.</p>
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se o parâmetro <cite>goals</cite> não for um pd.DataFrame.</p></li>
+<li><p><strong>KeyError</strong> – Se a coluna ‘situation’ não existir em <cite>goals</cite>.</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -89,6 +101,12 @@ de chutes dentro e fora da área para cada resultado de chute. O gráfico é sal
 <dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em>) – DataFrame contendo dados de chutes, que será utilizado para calcular as
 porcentagens que serão exibidas no gráfico.</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>df</cite> não for um pd.DataFrame.</p></li>
+<li><p><strong>KeyError</strong> – Se a coluna ‘Resultado’ não existir no DataFrame.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -124,6 +142,9 @@ e inclui informações sobre o resultado do chute e a situação (dentro ou fora
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – Se o parâmetro <cite>df</cite> não for um pd.DataFrame.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -151,6 +172,12 @@ e inclui informações sobre o resultado do chute e a situação (dentro ou fora
 </dd>
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se o parâmetro <cite>df</cite> não for um pd.DataFrame.</p></li>
+<li><p><strong>KeyError</strong> – Se alguma das colunas [‘shot_outcome’, ‘situation’] não existir em <cite>df</cite>.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -196,9 +223,15 @@ e inclui informações sobre o resultado do chute e a situação (dentro ou fora
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="head_part.html">head_part module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.hip_shots.html">Relatório de Análise de Chutes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="clean_data.html">clean_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">shots module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">

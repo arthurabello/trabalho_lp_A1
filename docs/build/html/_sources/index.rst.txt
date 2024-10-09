@@ -19,6 +19,7 @@ documentation for details.
    utils
    shots
    rabello_hypothesis
-   head_part
+   head
    1.hip_shots
+   hip_head
    modules

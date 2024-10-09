@@ -1,6 +1,31 @@
 import pandas as pd
 from typing import List, Dict, Union
 
+def load_dataset(csv_path):
+
+    """
+    Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado
+
+    Args:
+        csv_path (str): Caminho para o arquivo CSV contendo o dataset
+
+    Returns:
+        pandas.DataFrame: Um DataFrame contendo todos os dados carregados do arquivo CSV
+
+    Raises:
+        TypeError: Se `csv_path` não for uma string
+        FileNotFoundError: Se o arquivo CSV não for encontrado
+    """
+
+    #raises
+    if not isinstance(csv_path, str):
+        raise TypeError("O parâmetro 'csv_path' deve ser uma string")
+    #actual code
+    try:
+        return pd.read_csv(csv_path)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"O arquivo '{csv_path}' não foi encontrado")
+
 def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     """Remove colunas de um DataFrame
 

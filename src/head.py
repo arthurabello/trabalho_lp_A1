@@ -146,14 +146,12 @@ def graph_view(df: pd.DataFrame) -> None:
  
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
-    
-    plt.savefig('graph_head.png', format='png', dpi=300, transparent=True)
+
+    plt.savefig('../data/graph_shots.png',format='png', dpi=300, transparent=True)
     plt.close()
 
 
-def main():
-    filepath = "../data/events.csv"
-    df = pd.read_csv(filepath)
+def head_main(df: pd.DataFrame):
 
     remove_columns(df, ['side', 'shot_outcome', 'location'])
     df = get_rows_with_previous(df, {'bodypart': 3, 'is_goal': 1})
@@ -162,6 +160,3 @@ def main():
     print_dataframe(percent_of_origins, "ORIGEM DOS GOLS DE CABEÇA")
     graph_view(percent_of_origins)
 
-
-if __name__ == '__main__':
-    main()

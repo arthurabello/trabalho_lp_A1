@@ -124,7 +124,7 @@ def plot_summary(summary_df):
     plt.ylabel('Porcentagem (%)', fontsize=14)
     plt.xticks(rotation=0)
     plt.tight_layout()
-    plt.savefig('../data/home_results_summary.png',format='png', dpi=300)
+    plt.savefig('../data/graph_matches.png',format='png', dpi=300)
     plt.show()
 
 def matches_main(df: pd.DataFrame):

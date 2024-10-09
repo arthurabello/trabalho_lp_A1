@@ -138,5 +138,4 @@ CONTRIBUIÇÃO DE CADA INTEGRANTE
 
 - Arthur Rabello: Responsável por validar a hipótese sobre as vitórias do time da casa e elaboração do README.md.
 
-- Rodrigo Severo: Responsável por validar a hipótese dos chutes de fora da área. Colaborou com o pré-processamento dos dados e
-elaborou o arquivo utils.py.
+- Rodrigo Severo: Responsável por validar a hipótese dos chutes de fora da área. Colaborou com o pré-processamento dos dados e elaborou o arquivo utils.py.

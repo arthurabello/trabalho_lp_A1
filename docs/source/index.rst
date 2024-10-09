@@ -16,6 +16,7 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+   relatorio
    utils
    shots
    head

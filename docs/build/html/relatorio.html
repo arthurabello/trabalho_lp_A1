@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Trabalho-LP-A1 documentation &#8212; Documentação Trabalho-LP-A1 0.1</title>
+    <title>Relatório da Análise da Base de Dados Football Events &#8212; Documentação Trabalho-LP-A1 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="_static/basic_mod.css?v=9b2032db" />
     <script src="_static/documentation_options.js?v=88519e4e"></script>
@@ -16,7 +16,8 @@
     <script src="_static/js/petite-vue.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
-    <link rel="next" title="Relatório da Análise da Base de Dados Football Events" href="relatorio.html" /> 
+    <link rel="next" title="utils module" href="utils.html" />
+    <link rel="prev" title="Trabalho-LP-A1 documentation" href="index.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
 <div id="top_nav">
@@ -30,7 +31,7 @@
         <p id="toggle_sidebar">
             <a href="#" title="Toggle sidebar">|||</a>
         </p>
-        <h1><a href="#" title="Go to homepage">Documentação Trabalho-LP-A1 0.1</a></h1>
+        <h1><a href="index.html" title="Go to homepage">Documentação Trabalho-LP-A1 0.1</a></h1>
 
         <a id="mode_toggle" href="#" @click.prevent="handleClick" :title="mode">
     <template v-if="mode == 'light'">
@@ -119,8 +120,8 @@
     
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="relatorio.html">Relatório da Análise da Base de Dados Football Events</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Relatório da Análise da Base de Dados Football Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="head.html">head module</a></li>
@@ -139,86 +140,190 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="trabalho-lp-a1-documentation">
-<h1>Trabalho-LP-A1 documentation<a class="headerlink" href="#trabalho-lp-a1-documentation" title="Link para este cabeçalho">¶</a></h1>
-<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
-<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
-documentation for details.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="relatorio.html">Relatório da Análise da Base de Dados Football Events</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="relatorio.html#introducao">INTRODUÇÃO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="relatorio.html#hipoteses-propostas">HIPÓTESES PROPOSTAS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="relatorio.html#pre-processamento-de-dados">PRÉ-PROCESSAMENTO DE DADOS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="relatorio.html#resultados-da-analise">RESULTADOS DA ANÁLISE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="relatorio.html#validacao-das-hipoteses">VALIDAÇÃO DAS HIPÓTESES</a></li>
-<li class="toctree-l2"><a class="reference internal" href="relatorio.html#desafios-encontrados">DESAFIOS ENCONTRADOS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="relatorio.html#contribuicao-de-cada-integrante">CONTRIBUIÇÃO DE CADA INTEGRANTE</a></li>
-</ul>
+  <section id="relatorio-da-analise-da-base-de-dados-football-events">
+<h1>Relatório da Análise da Base de Dados Football Events<a class="headerlink" href="#relatorio-da-analise-da-base-de-dados-football-events" title="Link para este cabeçalho">¶</a></h1>
+<section id="introducao">
+<h2>INTRODUÇÃO<a class="headerlink" href="#introducao" title="Link para este cabeçalho">¶</a></h2>
+<p>O presente texto tem como objetivo discorrer sobre a análise de dados do dataset Football Events, que consiste em um conjunto de
+eventos que ocorreram em 9.074 jogos de futebol em ligas europeias. Nessa base de dados, cada uma das mais de 900.000 linhas
+representava um evento ocorrido. Sobre os dados coletados foram levantadas hipóteses e, utilizando Python e suas bibliotecas Pandas e
+Matplotib, foi realizada uma análise com objetivo de confirmá-las ou negá-las.</p>
+</section>
+<section id="hipoteses-propostas">
+<h2>HIPÓTESES PROPOSTAS<a class="headerlink" href="#hipoteses-propostas" title="Link para este cabeçalho">¶</a></h2>
+<p>As hipóteses a serem avaliadas pela análise realizada foram as seguintes:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Chute de fora da área tem menor chance de conversão a gol.</strong></dt><dd><p>Intuitivamente, espera-se que chutes de <strong>Fora da Área</strong> tenham menor chance de conversão a gol devido a vários fatores. Por
+exemplo, pelo chute vir de fora da área, o goleiro tem um maior tempo de reação para defender o chute. Além disso, há uma maior
+chance do chute ser bloqueado por um defensor, aumentando as dificuldades para marcar. Outros fatores incluem a menor precisão
+e força dos chutes provenientes de distâncias maiores.</p>
+</dd>
+</dl>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.filter_df"><code class="docutils literal notranslate"><span class="pre">filter_df()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.map_column_values"><code class="docutils literal notranslate"><span class="pre">map_column_values()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.print_dataframe"><code class="docutils literal notranslate"><span class="pre">print_dataframe()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.remove_columns"><code class="docutils literal notranslate"><span class="pre">remove_columns()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.remove_lines_by_condition"><code class="docutils literal notranslate"><span class="pre">remove_lines_by_condition()</span></code></a></li>
-</ul>
+<li><dl class="simple">
+<dt><strong>A maior parte dos gols de cabeça tem origem em lances de bola parada.</strong></dt><dd><p>Devido à natureza mais organizada e previsível dos lances de <strong>bola parada</strong>, esses lances são comumente associados a gols de
+cabeça, em especial, os escanteios, que é tradicionalmente cobrado com bola levantada na área com intenção de um jogador bem
+posicionado conseguir cabecear. Assim, é natural esperar que parte considerável dos gols de cabeça tenham origem nesses lances.</p>
+</dd>
+</dl>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="shots.html#shots.adjust_shot_outcome_df"><code class="docutils literal notranslate"><span class="pre">adjust_shot_outcome_df()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shots.html#shots.calculate_goals"><code class="docutils literal notranslate"><span class="pre">calculate_goals()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shots.html#shots.graph_view_shot_outcome"><code class="docutils literal notranslate"><span class="pre">graph_view_shot_outcome()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shots.html#shots.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shots.html#shots.perc_shot_outcome"><code class="docutils literal notranslate"><span class="pre">perc_shot_outcome()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shots.html#shots.shot_outcome_count"><code class="docutils literal notranslate"><span class="pre">shot_outcome_count()</span></code></a></li>
-</ul>
+<li><dl class="simple">
+<dt><strong>Times que jogam em casa tem maior taxa de vitórias</strong></dt><dd><p>Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.
+Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.</p>
+</dd>
+</dl>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="head.html">head module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="head.html#head.get_rows_with_previous"><code class="docutils literal notranslate"><span class="pre">get_rows_with_previous()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="head.html#head.graph_view"><code class="docutils literal notranslate"><span class="pre">graph_view()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="head.html#head.is_headed_goal"><code class="docutils literal notranslate"><span class="pre">is_headed_goal()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="head.html#head.is_same_match"><code class="docutils literal notranslate"><span class="pre">is_same_match()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="head.html#head.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="head.html#head.origin_of_headed_goals"><code class="docutils literal notranslate"><span class="pre">origin_of_headed_goals()</span></code></a></li>
+</ol>
+</section>
+<section id="pre-processamento-de-dados">
+<h2>PRÉ-PROCESSAMENTO DE DADOS<a class="headerlink" href="#pre-processamento-de-dados" title="Link para este cabeçalho">¶</a></h2>
+<p>Inicialmente, a base de dados trabalhada continha 22 colunas, das quais apenas 8 seriam utilizadas para validação das hipóteses. Dessa
+forma, um primeiro passo natural foi remover as colunas desnecessárias. Posteriormente, foram removidas as linhas que referiam-se a
+comerciais, cartões amarelos, segundos cartões amarelos, cartões vermelhos, substituição, faltas sofridas (faltas sofridas vem aos
+pares com faltas cometidas, para nossa análise bastava apenas um desses tipos de eventos), mão na bola e pênaltis cometidos.</p>
+</section>
+<section id="resultados-da-analise">
+<h2>RESULTADOS DA ANÁLISE<a class="headerlink" href="#resultados-da-analise" title="Link para este cabeçalho">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Chute de fora da área tem menor chance de conversão a gol.</strong></p></li>
+</ol>
+<section id="estatisticas-por-gol">
+<h3>Estatísticas por Gol<a class="headerlink" href="#estatisticas-por-gol" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situação</p></th>
+<th class="head"><p>Porcentagem</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dentro da área</p></td>
+<td><p>88.26</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fora da área</p></td>
+<td><p>11.74</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="estatisticas-por-chute">
+<h3>Estatísticas por Chute<a class="headerlink" href="#estatisticas-por-chute" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resultado</p></th>
+<th class="head"><p>Porcentagem_in</p></th>
+<th class="head"><p>Porcentagem_out</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fora</p></td>
+<td><p>38.34</p></td>
+<td><p>43.80</p></td>
+</tr>
+<tr class="row-odd"><td><p>Defendido</p></td>
+<td><p>24.29</p></td>
+<td><p>22.69</p></td>
+</tr>
+<tr class="row-even"><td><p>Bloqueado</p></td>
+<td><p>19.51</p></td>
+<td><p>29.45</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gol</p></td>
+<td><p>16.19</p></td>
+<td><p>2.67</p></td>
+</tr>
+<tr class="row-even"><td><p>Trave</p></td>
+<td><p>1.67</p></td>
+<td><p>1.38</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="grafico">
+<h3>Gráfico<a class="headerlink" href="#grafico" title="Link para este cabeçalho">¶</a></h3>
+<a class="reference internal image-reference" href="_images/graph_shots.png"><img alt="_images/graph_shots.png" class="align-center" src="_images/graph_shots.png" style="width: 600px; height: 400px;" />
+</a>
+<ol class="arabic simple" start="2">
+<li><p><strong>A maior parte dos gols de cabeça tem origem em lances de bola parada.</strong></p></li>
+</ol>
+</section>
+<section id="estatisticas">
+<h3>Estatísticas<a class="headerlink" href="#estatisticas" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ORIGEM</p></th>
+<th class="head"><p>Porcentagem</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Escanteios</p></td>
+<td><p>38.74</p></td>
+</tr>
+<tr class="row-odd"><td><p>Faltas</p></td>
+<td><p>10.53</p></td>
+</tr>
+<tr class="row-even"><td><p>impedimentos</p></td>
+<td><p>2.30</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOLA PARADA</p></td>
+<td><p>51.58</p></td>
+</tr>
+<tr class="row-even"><td><p>Outros</p></td>
+<td><p>48.42</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h3>Gráfico<a class="headerlink" href="#id1" title="Link para este cabeçalho">¶</a></h3>
+<a class="reference internal image-reference" href="_images/graph_head.png"><img alt="_images/graph_head.png" class="align-center" src="_images/graph_head.png" style="width: 600px; height: 400px;" />
+</a>
+<ol class="arabic simple" start="3">
+<li><p><strong>Times que jogam em casa tem maior taxa de vitórias</strong></p></li>
+</ol>
+<p>Uma tabela daora aqui.</p>
+<p>Um gráfico massa aqui.</p>
+</section>
+</section>
+<section id="validacao-das-hipoteses">
+<h2>VALIDAÇÃO DAS HIPÓTESES<a class="headerlink" href="#validacao-das-hipoteses" title="Link para este cabeçalho">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Chute de fora da área tem menor chance de conversão a gol.</strong></p></li>
+</ol>
+<p>Os resultados obtidos reforçam que chutes de Fora da Área têm uma chance menor de se transformar em gol. Nossa análise mostrou
+que <strong>88.26%</strong> dos gols foram marcados <strong>dentro da área</strong>, enquanto só <strong>11.74%</strong> aconteceram <strong>fora da área</strong>. Isso mostra que
+chutes de distâncias maiores enfrentam maiores dificuldades para resultar em gol.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>A maior parte dos gols de cabeça tem origem em lances de bola parada.</strong></p></li>
+</ol>
+<p>A análise mostra que, nos dados analisados, 51.58% dos gols de cabeça tiveram origem em gols de cabeça. Esse resultado reforça em parte
+a hipótese de que a maioria dos gols desse tipo surgem de escanteios, faltas e impedimentos. Todavia, a margem não é tão grande quanto
+o esperado. Dessa forma, embora a hipótese seja confirmada, a análise revela que grande parte dos gols de cabeça têm origem em lances
+bola parada. Além disso, como esperado, os gols com origem em escanteio representam parte substancial do total.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Times que jogam em casa tem maior taxa de vitórias</strong></p></li>
+</ol>
+<p>Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.
+Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.</p>
+</section>
+<section id="desafios-encontrados">
+<h2>DESAFIOS ENCONTRADOS<a class="headerlink" href="#desafios-encontrados" title="Link para este cabeçalho">¶</a></h2>
+<ul class="simple">
+<li><p>Interpretar o que é “fora da área” e “dentro da área”, uma vez que as localizações na base de dados eram pouco mais abstratas como “ângulo difícil a direita”, “ângulo difícil a esquerda” e “marca do pênalti”.</p></li>
+<li><p>Diferenciar quando um evento tinha relação com o evento anterior ou não.</p></li>
+<li><p>Entender quando dois eventos diferentes ocorreram em uma mesma partida.</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html#rabello_hypothesis.calculate_results"><code class="docutils literal notranslate"><span class="pre">calculate_results()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html#rabello_hypothesis.create_summary_dataframe"><code class="docutils literal notranslate"><span class="pre">create_summary_dataframe()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html#rabello_hypothesis.group_goals_by_match"><code class="docutils literal notranslate"><span class="pre">group_goals_by_match()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html#rabello_hypothesis.load_dataset"><code class="docutils literal notranslate"><span class="pre">load_dataset()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html#rabello_hypothesis.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html#rabello_hypothesis.plot_summary"><code class="docutils literal notranslate"><span class="pre">plot_summary()</span></code></a></li>
+</section>
+<section id="contribuicao-de-cada-integrante">
+<h2>CONTRIBUIÇÃO DE CADA INTEGRANTE<a class="headerlink" href="#contribuicao-de-cada-integrante" title="Link para este cabeçalho">¶</a></h2>
+<ul class="simple">
+<li><p>Antonio Francisco: Responsável por validar a hipótese sobre a origem dos gols de cabeça. Coloborou com o pré-processamento dos dados</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="1.hip_shots.html">Relatório de Análise de Chutes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="1.hip_shots.html#hipotese">Hipótese</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1.hip_shots.html#motivacao">Motivação</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1.hip_shots.html#metodologia">Metodologia</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1.hip_shots.html#resultados">Resultados</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1.hip_shots.html#conclusao">Conclusão</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="hip_head.html">Relatório da Análise sobre Origem dos Gols de Cabeça</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hip_head.html#hipotese">Hipótese</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hip_head.html#motivacao">Motivação</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hip_head.html#metodologia">Metodologia</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hip_head.html#resultados">Resultados</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hip_head.html#conclusao">Conclusão</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="clean_data.html">clean_data module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shots.html">shots module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="head.html">head module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<p>e elaborou o relatório.
+- Arthur Rabello: Responsável por validar a hipótese sobre as vitórias do time da casa e elaboração do README.md.
+- Rodrigo Severo: Responsável por validar a hipótese dos chutes de fora da área. Colaborou com o pré-processamento dos dados e
+elaborou o arquivo utils.py.</p>
+</section>
 </section>
 
 
@@ -227,6 +332,36 @@ documentation for details.</p>
         </div>
       </div>
     
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">Relatório da Análise da Base de Dados Football Events</a><ul>
+<li><a class="reference internal" href="#introducao">INTRODUÇÃO</a></li>
+<li><a class="reference internal" href="#hipoteses-propostas">HIPÓTESES PROPOSTAS</a></li>
+<li><a class="reference internal" href="#pre-processamento-de-dados">PRÉ-PROCESSAMENTO DE DADOS</a></li>
+<li><a class="reference internal" href="#resultados-da-analise">RESULTADOS DA ANÁLISE</a><ul>
+<li><a class="reference internal" href="#estatisticas-por-gol">Estatísticas por Gol</a></li>
+<li><a class="reference internal" href="#estatisticas-por-chute">Estatísticas por Chute</a></li>
+<li><a class="reference internal" href="#grafico">Gráfico</a></li>
+<li><a class="reference internal" href="#estatisticas">Estatísticas</a></li>
+<li><a class="reference internal" href="#id1">Gráfico</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validacao-das-hipoteses">VALIDAÇÃO DAS HIPÓTESES</a></li>
+<li><a class="reference internal" href="#desafios-encontrados">DESAFIOS ENCONTRADOS</a></li>
+<li><a class="reference internal" href="#contribuicao-de-cada-integrante">CONTRIBUIÇÃO DE CADA INTEGRANTE</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+    
 
       <div class="clearer"></div>
     </div>
@@ -234,11 +369,14 @@ documentation for details.</p>
         <div class="button_nav">
             <div class="left">
                 
+                <a href="index.html">
+                    <span class="icon">&lt;</span><span>Trabalho-LP-A1 documentation</span></a>
+                
             </div>
 
             <div class="right">
                 
-                    <a href="relatorio.html"><span>Relatório da Análise da Base de Dados Football Events</span><span class="icon">&gt;</span></a>
+                    <a href="utils.html"><span>utils module</span><span class="icon">&gt;</span></a>
                 
             </div>
         </div>

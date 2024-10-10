@@ -1,6 +1,34 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from utils import filter_df, load_dataset
+from utils import filter_df, print_dataframe
+
+"""
+Este módulo contém funções para analisar e visualizar dados relacionados aos resultados de jogos de futebol,
+com foco em agrupar os gols por partida, calcular resultados de jogos (vitórias, derrotas, empates) e 
+visualizar as porcentagens de cada um.
+
+Funções
+-------
+group_goals_by_match(df):
+    Agrupa os eventos por partida e lado do time (casa ou visitante), focando especificamente nos gols.
+
+calculate_results(goals_per_match):
+    Calcula o resultado de cada partida (vitória, derrota ou empate do time da casa) com base nos gols marcados.
+
+create_summary_dataframe(goals_per_match):
+    Cria um DataFrame com as porcentagens de vitórias, derrotas e empates do time da casa.
+
+graph_view(df):
+    Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do time da casa.
+
+matches_main(df):
+    Função principal que orquestra a análise e visualização dos resultados das partidas.
+
+Autor
+-----
+    Arthur Rabello Oliveira
+"""
+
 
 def group_goals_by_match(df):
 
@@ -14,7 +42,7 @@ def group_goals_by_match(df):
         pandas.DataFrame: Um DataFrame com colunas 'home' e 'away' representando os gols marcados pelos times da casa e visitantes
 
     Raises:
-        TypeError: Se `df` não for um pandas DataFrame
+        TypeError: Se df não for um pandas DataFrame
         KeyError: Se colunas essenciais não forem encontradas no DataFrame
     """
 
@@ -46,7 +74,7 @@ def calculate_results(goals_per_match):
         pandas.DataFrame: O DataFrame com uma coluna adicional 'result', indicando o resultado da partida
 
     Raises:
-        TypeError: Se `goals_per_match` não for um pandas DataFrame
+        TypeError: Se goals_per_match não for um pandas DataFrame
         KeyError: Se as colunas 'home' ou 'away' não existirem no DataFrame
     """
 
@@ -75,7 +103,7 @@ def create_summary_dataframe(goals_per_match):
         pandas.DataFrame: DataFrame com as porcentagens de vitórias, derrotas e empates para o time da casa
 
     Raises:
-        TypeError: Se `goals_per_match` não for um pandas DataFrame
+        TypeError: Se goals_per_match não for um pandas DataFrame
         KeyError: Se a coluna 'result' não existir no DataFrame
     """
 
@@ -94,12 +122,14 @@ def create_summary_dataframe(goals_per_match):
     total_matches = home_victories + home_defeats + home_draws
 
     summary_df = pd.DataFrame({
+        'results': ['Vitórias', 'Derrotas', 'Empates'],
         'home_percentage': [home_victories / total_matches * 100, home_defeats / total_matches * 100, home_draws / total_matches * 100]
-    }, index=['victories', 'defeats', 'draws'])
+    })
 
     return summary_df
 
-def plot_summary(summary_df):
+def graph_view(df: pd.DataFrame) -> None:
+    
     """
     Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do time da casa
 
@@ -111,32 +141,29 @@ def plot_summary(summary_df):
     """
 
     #raises
-    if not isinstance(summary_df, pd.DataFrame):
-        raise TypeError("O parâmetro 'summary_df' deve ser um pandas DataFrame")
-
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame")
+    
     #actual code
     plt.figure(figsize=(8, 6))
-    summary_df['home_percentage'].plot(kind='bar', color=['#4CAF50', '#FF9800', '#2196F3'])
+    plt.bar(df['results'], df['home_percentage'],
+            color=['#3889ce', '#3889ce', '#3889ce'])
+    
+    plt.title('Porcentagem de vitórias , derrotas e empates', color='white')
+    plt.ylabel('Porcentagem', color='white')
 
-    plt.title('Porcentagem de vitórias, derrotas e empates do time da casa', fontsize=16, color='white')
-    plt.xlabel('Resultados', fontsize=14, color='white')
-    plt.ylabel('Porcentagem (%)', fontsize=14, color='white')
-    plt.xticks(rotation=0, color='white')
-    plt.yticks(color='white')
-
-    ax = plt.gca() 
+    ax = plt.gca()
     ax.spines['bottom'].set_color('white')
     ax.spines['left'].set_color('white')
     ax.spines['top'].set_color('white')
     ax.spines['right'].set_color('white')
 
+ 
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
 
-    plt.tight_layout()
-    plt.savefig('../data/graph_matches_black.png', format='png', dpi=300, transparent=True)
-    plt.show()
-
+    plt.savefig('../data/graph_matches.png',format='png', dpi=300, transparent=True)
+    plt.plot()
 
 def matches_main(df: pd.DataFrame):
 
@@ -151,6 +178,5 @@ def matches_main(df: pd.DataFrame):
     goals_per_match = calculate_results(goals_per_match)
     summary_df = create_summary_dataframe(goals_per_match)
 
-    plot_summary(summary_df)
-    print(summary_df)
-
+    graph_view(summary_df)
+    print_dataframe(summary_df, "RESULTADOS DOS JOGOS")

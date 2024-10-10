@@ -229,6 +229,12 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
 
 
 def shots_main(df: pd.DataFrame):
+    """Função principal que executa o fluxo de análise e visualização dos chutes,
+    utilizando as funções documentadas anteriormentes.
+
+    Args:
+        df (pd.DataFrame): DataFrame a ser recebido pela função.
+    """
     df = remove_columns(df, ['time', 'side', 'bodypart'])
     df = filter_df(df, {'event_type': 1})
     df = remove_lines_by_condition(df, 'location', [1, 2, 7, 8, 19])

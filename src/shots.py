@@ -25,10 +25,14 @@ Autor
 -----
     Rodrigo Severo Araújo    
 """
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from utils import remove_columns, remove_lines_by_condition, filter_df, map_column_values, print_dataframe
+from utils import (remove_columns, remove_lines_by_condition, filter_df,
+                   map_column_values, print_dataframe)
+
+# Hipótese: Chutes de fora da área têm menor chance de conversão a gol
 
 def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
     """Recebe um Dataframe com todos os gols e calcula a porcentagem de gols que 
@@ -46,7 +50,6 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
         TypeError: Se o parâmetro `goals` não for um pd.DataFrame.
         KeyError: Se a coluna 'situation' não existir em `goals`.    
     """
-
     # Tratamento de Erro
     if not isinstance(goals, pd.DataFrame):
         raise TypeError("O parâmetro 'goals' deve ser um pandas DataFrame.")
@@ -70,6 +73,7 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
     })
 
     return results
+
 
 def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
     """Conta a frequência de cada resultado de chute (shot_outcome) dentro e fora da área.
@@ -104,6 +108,7 @@ def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
     attempts = attempts_inside.merge(attempts_outside, on='shot_outcome', suffixes=('_in', '_out'))
 
     attempts.columns = ['Resultado', 'count_in', 'count_out']
+
     return attempts
 
 def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
@@ -135,7 +140,9 @@ def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
     attempts['Porcentagem_out'] = ((attempts['count_out'] / attempts['count_out'].sum()) * 100).round(2)
 
     remove_columns(attempts, ['count_in','count_out'])
+
     return attempts
+
 
 def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
     """Ajusta a coluna 'shot_outcome' do DataFrame para criar uma nova categoria que separa
@@ -168,6 +175,7 @@ def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
     )
     
     return df
+
 
 def graph_view_shot_outcome(df: pd.DataFrame) -> None:
     """Exibe um gráfico de barras duplas das porcentagens de resultados de chutes.
@@ -221,7 +229,6 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
 
 
 def shots_main(df: pd.DataFrame):
-
     df = remove_columns(df, ['time', 'side', 'bodypart'])
     df = filter_df(df, {'event_type': 1})
     df = remove_lines_by_condition(df, 'location', [1, 2, 7, 8, 19])

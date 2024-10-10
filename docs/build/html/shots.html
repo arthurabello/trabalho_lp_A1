@@ -148,6 +148,31 @@
             
   <section id="module-shots">
 <span id="shots-module"></span><h1>shots module<a class="headerlink" href="#module-shots" title="Link para este cabeçalho">¶</a></h1>
+<p>Este módulo contém funções para analisar e visualizar dados relacionados aos chutes,
+com foco em calcular estatísticas de chutes dentro e fora da área.</p>
+<section id="funcoes">
+<h2>Funções<a class="headerlink" href="#funcoes" title="Link para este cabeçalho">¶</a></h2>
+<dl class="simple">
+<dt>calculate_goals(goals):</dt><dd><p>Calcula a porcentagem de gols feitos dentro e fora da área.</p>
+</dd>
+<dt>shot_outcome_count(df)</dt><dd><p>Conta a frequência de cada resultado de chute (shot_outcome) dentro e fora da área.</p>
+</dd>
+<dt>perc_shot_outcome(df)</dt><dd><p>Calcula a porcentagem de cada resultado de chute (shot_outcome) dentro e fora da área.</p>
+</dd>
+<dt>adjust_shot_outcome_df(df)</dt><dd><p>Ajusta a coluna ‘shot_outcome’ para separar chutes no alvo em ‘Gol’ e ‘Defendido’.</p>
+</dd>
+<dt>graph_view_shot_outcome(df)</dt><dd><p>Gera e salva um gráfico de barras comparando os resultados de chutes dentro e fora da área.</p>
+</dd>
+<dt>shots_main(df)</dt><dd><p>Função principal que executa o fluxo de análise e visualização dos chutes.</p>
+</dd>
+</dl>
+</section>
+<section id="autor">
+<h2>Autor<a class="headerlink" href="#autor" title="Link para este cabeçalho">¶</a></h2>
+<blockquote>
+<div><p>Rodrigo Severo Araújo</p>
+</div></blockquote>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="shots.adjust_shot_outcome_df">
 <span class="sig-prename descclassname"><span class="pre">shots.</span></span><span class="sig-name descname"><span class="pre">adjust_shot_outcome_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#shots.adjust_shot_outcome_df" title="Link para esta definição">¶</a></dt>
@@ -311,6 +336,8 @@ e inclui informações sobre o resultado do chute e a situação (dentro ou fora
             <div class="page_toc">
                 <ul>
 <li><a class="reference internal" href="#">shots module</a><ul>
+<li><a class="reference internal" href="#funcoes">Funções</a></li>
+<li><a class="reference internal" href="#autor">Autor</a></li>
 <li><a class="reference internal" href="#shots.adjust_shot_outcome_df"><code class="docutils literal notranslate"><span class="pre">adjust_shot_outcome_df()</span></code></a></li>
 <li><a class="reference internal" href="#shots.calculate_goals"><code class="docutils literal notranslate"><span class="pre">calculate_goals()</span></code></a></li>
 <li><a class="reference internal" href="#shots.graph_view_shot_outcome"><code class="docutils literal notranslate"><span class="pre">graph_view_shot_outcome()</span></code></a></li>

@@ -2,7 +2,6 @@ import pandas as pd
 from typing import List, Dict, Union
 
 def load_dataset(csv_path):
-
     """
     Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado
 
@@ -16,7 +15,6 @@ def load_dataset(csv_path):
         TypeError: Se `csv_path` não for uma string
         FileNotFoundError: Se o arquivo CSV não for encontrado
     """
-
     # Tratamento de Erro
     if not isinstance(csv_path, str):
         raise TypeError("O parâmetro 'csv_path' deve ser uma string")
@@ -26,6 +24,7 @@ def load_dataset(csv_path):
         return pd.read_csv(csv_path)
     except FileNotFoundError:
         raise FileNotFoundError(f"O arquivo '{csv_path}' não foi encontrado")
+
 
 def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     """Remove colunas de um DataFrame
@@ -145,7 +144,6 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Un
         1   2  Bernaldo   8.5
 
     """
-    
     # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
@@ -159,7 +157,9 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Un
     # Código Principal
     for cond in conditions:
         df = df[df[column] != cond]
+
     return df
+
 
 def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
     """Mapeia os valores de uma coluna específica de acordo com um mapeamento
@@ -207,6 +207,7 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
 
     return df
 
+
 def print_dataframe(df: pd.DataFrame, title: str) -> None:
     """Imprime o DataFrame com um título fornecido.
 
@@ -229,4 +230,3 @@ def print_dataframe(df: pd.DataFrame, title: str) -> None:
     print(f'{f"  {title}  ":=^50}')
     print('-'*50)
     print(df.to_string(index=False))
-

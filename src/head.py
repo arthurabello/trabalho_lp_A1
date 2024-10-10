@@ -169,7 +169,6 @@ def graph_view(df: pd.DataFrame) -> None:
     ax.spines['top'].set_color('white')
     ax.spines['right'].set_color('white')
 
- 
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
 
@@ -178,11 +177,9 @@ def graph_view(df: pd.DataFrame) -> None:
 
 
 def head_main(df: pd.DataFrame):
-
     remove_columns(df, ['side', 'shot_outcome', 'location'])
     df = get_rows_with_previous(df, {'bodypart': 3, 'is_goal': 1})
 
     percent_of_origins = origin_of_headed_goals(df)
     print_dataframe(percent_of_origins, "ORIGEM DOS GOLS DE CABEÇA")
     graph_view(percent_of_origins)
-

@@ -148,6 +148,33 @@
             
   <section id="module-head">
 <span id="head-module"></span><h1>head module<a class="headerlink" href="#module-head" title="Link para este cabeçalho">¶</a></h1>
+<p>Este módulo é responsável por calcular a porcentagem de cada possível origem dos gols de
+cabeça em eventos de futebol. Ele analisa jogadas anteriores aos gols de cabeça e
+categorizando-as em escanteios, faltas, impedimentos ou outros. Também gera uma
+visualização gráfica das porcentagens das origens dos gols de cabeça.</p>
+<section id="funcoes">
+<h2>Funções<a class="headerlink" href="#funcoes" title="Link para este cabeçalho">¶</a></h2>
+<dl class="simple">
+<dt>get_rows_with_previous(df, conditions)</dt><dd><p>Filtra linhas de eventos e inclui o evento anterior ao gol.</p>
+</dd>
+<dt>is_headed_goal(df, row_index)</dt><dd><p>Verifica se um evento é um gol marcado de cabeça.</p>
+</dd>
+<dt>is_same_match(df, row_index_a, row_index_b):</dt><dd><p>Verifica se dois eventos ocorreram na mesma partida.</p>
+</dd>
+<dt>origin_of_headed_goals(df):</dt><dd><p>Calcula a porcentagem de gols de cabeça com base na origem.</p>
+</dd>
+<dt>graph_view(df)</dt><dd><p>Gera um gráfico de barras das porcentagens das origens dos gols de cabeça.</p>
+</dd>
+<dt>head_main(df)</dt><dd><p>Função principal que executa a análise e a visualização.</p>
+</dd>
+</dl>
+</section>
+<section id="autor">
+<h2>Autor<a class="headerlink" href="#autor" title="Link para este cabeçalho">¶</a></h2>
+<blockquote>
+<div><p>Antonio Francisco Batista Filho</p>
+</div></blockquote>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="head.get_rows_with_previous">
 <span class="sig-prename descclassname"><span class="pre">head.</span></span><span class="sig-name descname"><span class="pre">get_rows_with_previous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#head.get_rows_with_previous" title="Link para esta definição">¶</a></dt>
@@ -273,6 +300,8 @@ cabeça.</p>
             <div class="page_toc">
                 <ul>
 <li><a class="reference internal" href="#">head module</a><ul>
+<li><a class="reference internal" href="#funcoes">Funções</a></li>
+<li><a class="reference internal" href="#autor">Autor</a></li>
 <li><a class="reference internal" href="#head.get_rows_with_previous"><code class="docutils literal notranslate"><span class="pre">get_rows_with_previous()</span></code></a></li>
 <li><a class="reference internal" href="#head.graph_view"><code class="docutils literal notranslate"><span class="pre">graph_view()</span></code></a></li>
 <li><a class="reference internal" href="#head.head_main"><code class="docutils literal notranslate"><span class="pre">head_main()</span></code></a></li>

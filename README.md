@@ -29,7 +29,6 @@ O projeto está organizado em diferentes branches e diretórios, cada um com seu
     Documentação gerada com Sphinx. O relatório final pode ser acessado em formato HTML. Para gerar e visualizar a documentação:
     ```bash
     make html
-    open build/html/relatorio.html
     ```
 
   - **data/**:  

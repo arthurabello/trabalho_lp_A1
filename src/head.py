@@ -1,3 +1,29 @@
+"""
+Este módulo é responsável por calcular a porcentagem de cada possível origem dos gols de
+cabeça em eventos de futebol. Ele analisa jogadas anteriores aos gols de cabeça e
+categorizando-as em escanteios, faltas, impedimentos ou outros. Também gera uma
+visualização gráfica das porcentagens das origens dos gols de cabeça.
+
+Funções
+-------
+get_rows_with_previous(df, conditions)
+    Filtra linhas de eventos e inclui o evento anterior ao gol.
+is_headed_goal(df, row_index)
+    Verifica se um evento é um gol marcado de cabeça.
+is_same_match(df, row_index_a, row_index_b):
+    Verifica se dois eventos ocorreram na mesma partida.
+origin_of_headed_goals(df):
+    Calcula a porcentagem de gols de cabeça com base na origem.
+graph_view(df)
+    Gera um gráfico de barras das porcentagens das origens dos gols de cabeça.
+head_main(df)
+    Função principal que executa a análise e a visualização.
+
+Autor
+-----
+    Antonio Francisco Batista Filho
+"""
+
 import pandas as pd
 from typing import Dict, Union
 import matplotlib.pyplot as plt

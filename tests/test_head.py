@@ -1,14 +1,12 @@
 import unittest
 import pandas as pd
-
 import sys
 
 sys.path.append('../src')
-
 from head import (get_rows_with_previous, is_headed_goal, is_same_match,
                   origin_of_headed_goals)
 
-#Dataframes utilizados para os testesgi
+#Dataframes utilizados para os testes
 events_df = pd.DataFrame({
             'id_odsp': ['match1', 'match1', 'match1', 'match1', 'match2', 'match2',
                         'match2', 'match3', 'match3', 'match3'],

@@ -15,7 +15,9 @@
     <script src="_static/js/theme.js"></script>
     <script src="_static/js/petite-vue.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
-    <link rel="search" title="Buscar" href="search.html" /> 
+    <link rel="search" title="Buscar" href="search.html" />
+    <link rel="next" title="src" href="modules.html" />
+    <link rel="prev" title="head module" href="head.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
 <div id="top_nav">
@@ -118,12 +120,21 @@
     
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="relatorio.html">Relatório da Análise da Base de Dados Football Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="head.html">head module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">matches module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="clean_data.html">clean_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shots.html">shots module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="head.html">head module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">matches module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -207,31 +218,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="matches.load_dataset">
-<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.load_dataset" title="Link para esta definição">¶</a></dt>
-<dd><p>Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>csv_path</strong> (<em>str</em>) – Caminho para o arquivo CSV contendo o dataset</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>Um DataFrame contendo todos os dados carregados do arquivo CSV</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
-</dd>
-<dt class="field-even">Levanta<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – Se <cite>csv_path</cite> não for uma string</p></li>
-<li><p><strong>FileNotFoundError</strong> – Se o arquivo CSV não for encontrado</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="matches.main">
-<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matches.main" title="Link para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="matches.matches_main">
+<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">matches_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.matches_main" title="Link para esta definição">¶</a></dt>
 <dd><p>Função principal para orquestrar a análise e exibir os resultados</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna<span class="colon">:</span></dt>
@@ -277,8 +265,7 @@
 <li><a class="reference internal" href="#matches.calculate_results"><code class="docutils literal notranslate"><span class="pre">calculate_results()</span></code></a></li>
 <li><a class="reference internal" href="#matches.create_summary_dataframe"><code class="docutils literal notranslate"><span class="pre">create_summary_dataframe()</span></code></a></li>
 <li><a class="reference internal" href="#matches.group_goals_by_match"><code class="docutils literal notranslate"><span class="pre">group_goals_by_match()</span></code></a></li>
-<li><a class="reference internal" href="#matches.load_dataset"><code class="docutils literal notranslate"><span class="pre">load_dataset()</span></code></a></li>
-<li><a class="reference internal" href="#matches.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#matches.matches_main"><code class="docutils literal notranslate"><span class="pre">matches_main()</span></code></a></li>
 <li><a class="reference internal" href="#matches.plot_summary"><code class="docutils literal notranslate"><span class="pre">plot_summary()</span></code></a></li>
 </ul>
 </li>
@@ -294,9 +281,14 @@
         <div class="button_nav">
             <div class="left">
                 
+                <a href="head.html">
+                    <span class="icon">&lt;</span><span>head module</span></a>
+                
             </div>
 
             <div class="right">
+                
+                    <a href="modules.html"><span>src</span><span class="icon">&gt;</span></a>
                 
             </div>
         </div>
@@ -305,7 +297,7 @@
 
     <div class="footer" role="contentinfo">
     &#169; Copyright 2024, Antonio Francisco, Arthur Rabello, Rodrigo Severo.
-      Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 7.4.7.
+      Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 8.0.2.
     </div>
 
 <p id="theme_credit">Styled using the <a href="https://github.com/piccolo-orm/piccolo_theme">Piccolo Theme</a></p>

@@ -173,8 +173,14 @@ def graph_view(df: pd.DataFrame) -> None:
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
 
+<<<<<<< HEAD
+    plt.tight_layout()
+    plt.savefig('../data/home_results_summary.png',format='png', dpi=300)
+    plt.show()
+=======
     plt.savefig('../data/graph_matches.png',format='png', dpi=300, transparent=True)
     plt.plot()
+>>>>>>> main
 
 
 def matches_main(df: pd.DataFrame):

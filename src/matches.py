@@ -1,8 +1,3 @@
-import pandas as pd
-import matplotlib.pyplot as plt
-
-from utils import filter_df, print_dataframe
-
 """
 Este módulo contém funções para analisar e visualizar dados relacionados aos resultados
 de jogos de futebol, com foco em agrupar os gols por partida, calcular resultados de
@@ -33,8 +28,12 @@ Autor
     Arthur Rabello Oliveira
 """
 
-def group_goals_by_match(df: pd.DataFrame) -> pd.DataFrame:
+import pandas as pd
+import matplotlib.pyplot as plt
 
+from utils import filter_df, print_dataframe
+
+def group_goals_by_match(df: pd.DataFrame) -> pd.DataFrame:
     """
     Agrupa os eventos por partida e lado do time (casa ou visitante), focando
     especificamente nos gols.
@@ -50,7 +49,6 @@ def group_goals_by_match(df: pd.DataFrame) -> pd.DataFrame:
         TypeError: Se df não for um pandas DataFrame.
         KeyError: Se colunas essenciais não forem encontradas no DataFrame.
     """
-
     #raises
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame")
@@ -69,7 +67,6 @@ def group_goals_by_match(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def calculate_results(goals_per_match: pd.DataFrame) -> pd.DataFrame:
-
     """
     Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e
     visitantes.
@@ -100,8 +97,8 @@ def calculate_results(goals_per_match: pd.DataFrame) -> pd.DataFrame:
     )
     return goals_per_match
 
-def create_summary_dataframe(goals_per_match: pd.DataFrame) -> pd.DataFrame:
 
+def create_summary_dataframe(goals_per_match: pd.DataFrame) -> pd.DataFrame:
     """
     Cria um DataFrame com porcentagens: 'home_percentage' para vitórias, derrotas e
     empates do time da casa.
@@ -141,8 +138,8 @@ def create_summary_dataframe(goals_per_match: pd.DataFrame) -> pd.DataFrame:
 
     return summary_df
 
-def graph_view(df: pd.DataFrame) -> None:  
 
+def graph_view(df: pd.DataFrame) -> None:  
     """
     Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do
     time da casa.
@@ -180,8 +177,7 @@ def graph_view(df: pd.DataFrame) -> None:
     plt.plot()
 
 
-def matches_main(df: pd.DataFrame) -> pd.DataFrame:
-    
+def matches_main(df: pd.DataFrame) -> pd.DataFrame:   
     """
     Função principal para orquestrar a análise e exibir os resultados.
 

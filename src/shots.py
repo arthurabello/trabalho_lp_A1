@@ -111,6 +111,7 @@ def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
 
     return attempts
 
+
 def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
     """Calcula a porcentagem de cada resultado de chute (shot_outcome) dentro e fora da área.
     Esta função transforma as contagens de cada um dos resultados de chute obtidos a partir da função 

@@ -177,6 +177,12 @@ def graph_view(df: pd.DataFrame) -> None:
 
 
 def head_main(df: pd.DataFrame):
+    """Função principal que executa a análise e visilação das origens dos gols de cabeça,
+    utilizando as funções documentadas anteriormentes.
+
+    Args:
+        df (pd.DataFrame): DataFrame que contém os eventos.
+    """
     remove_columns(df, ['side', 'shot_outcome', 'location'])
     df = get_rows_with_previous(df, {'bodypart': 3, 'is_goal': 1})
 

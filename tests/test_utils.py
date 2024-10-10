@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
-
 import sys
+
 sys.path.append('../src')
 
 from utils import remove_columns, filter_df, remove_lines_by_condition, map_column_values, print_dataframe
@@ -14,7 +14,6 @@ grades = [
 grades_df = pd.DataFrame(grades, columns=['ID', 'Nome', 'Nota'])
 
 class TestRemoveColumns(unittest.TestCase):
-    
     def test_remove_columns_success(self):
         """Testa o funcionamento da função remove_columns."""
         expected = pd.DataFrame({
@@ -42,8 +41,8 @@ class TestRemoveColumns(unittest.TestCase):
         self.assertRaises(KeyError, remove_columns, grades_df, ['Situação'])
         self.assertRaises(KeyError, remove_columns, grades_df, ['ID', 'Situação'])
 
-class TestFilterDf(unittest.TestCase):
 
+class TestFilterDf(unittest.TestCase):
     def test_filter_df_success(self):
         """Testa o funcionamento da função filter_df."""
         expected = pd.DataFrame({
@@ -74,6 +73,7 @@ class TestFilterDf(unittest.TestCase):
         """Testa o funcionamento da função remove_columns caso alguma
         coluna não existir no dataframe"""
         self.assertRaises(KeyError, filter_df, grades_df, {'Situação': "Aprovado"})
+
 
 class TestRemoveLinesByCondition(unittest.TestCase):
     def test_remove_lines_by_condition_success(self):
@@ -115,7 +115,6 @@ class TestRemoveLinesByCondition(unittest.TestCase):
 
 
 class MapColumnValues(unittest.TestCase):
-
     def test_map_column_values_sucess(self):
         """Testa o funcionamento da função map_column_values"""
         expected = pd.DataFrame({
@@ -155,9 +154,9 @@ class MapColumnValues(unittest.TestCase):
         alguma coluna que não existe no dataframe."""
         mapping = {"Aprovado": ">=6", "Reprovado": "<6"}
         self.assertRaises(KeyError, map_column_values, grades_df, 'Situação', mapping)
-           
-class PrintDataFrame(unittest.TestCase):
 
+
+class PrintDataFrame(unittest.TestCase):
     def test_invalid_df(self):
         """Testa o funcionamento da função print_dataframe ao receber 
         um parâmetro do tipo errado para df."""
@@ -171,3 +170,4 @@ class PrintDataFrame(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    

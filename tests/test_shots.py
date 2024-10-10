@@ -1,11 +1,11 @@
 import unittest
 import pandas as pd
-
 import sys
 
 sys.path.append('../src')
 
-from shots import calculate_goals, shot_outcome_count, perc_shot_outcome, adjust_shot_outcome_df
+from shots import (calculate_goals, shot_outcome_count, perc_shot_outcome,
+                   adjust_shot_outcome_df)
 
 # dados para os testes
 grades = [
@@ -63,7 +63,6 @@ adjust_shots_df = pd.DataFrame(adjust_shots_data)
 # testes unitários
 
 class TestCalculateGoals(unittest.TestCase):
-
     def test_calculate_goals_success(self):
         """Testa o funcionamento da função calculate_goals. """
         expected = pd.DataFrame({
@@ -85,7 +84,6 @@ class TestCalculateGoals(unittest.TestCase):
 
 
 class TestShotOutcomeCount(unittest.TestCase):
-
     def test_shot_outcome_count_success(self):
         """Testa o funcionamento da função shot_outcome_count. """
         expected = pd.DataFrame({
@@ -107,8 +105,7 @@ class TestShotOutcomeCount(unittest.TestCase):
         self.assertRaises(KeyError, shot_outcome_count, goals_df)
 
 
-class TestShotOutcomePerc(unittest.TestCase):
-        
+class TestShotOutcomePerc(unittest.TestCase):     
     def test_perc_shot_outcome_sucess(self):
         """Testa o funcionamento da função perc_shot_outcome."""
         expected = pd.DataFrame({
@@ -124,8 +121,8 @@ class TestShotOutcomePerc(unittest.TestCase):
         um parâmetro do tipo errado para df."""
         self.assertRaises(TypeError, perc_shot_outcome, shots_data)
 
-class TestAdjustShotOutcomeDf(unittest.TestCase):
 
+class TestAdjustShotOutcomeDf(unittest.TestCase):
     def test_adjust_shot_outcome_df_sucess(self):
         """Testa o funcionamento da função adjust_shot_outcome_df."""
         expected = pd.DataFrame([
@@ -152,3 +149,4 @@ class TestAdjustShotOutcomeDf(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    

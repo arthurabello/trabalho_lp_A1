@@ -1,4 +1,3 @@
-import pandas as pd
 from clean_data import clean_data
 from utils import load_dataset
 from head import head_main
@@ -16,7 +15,6 @@ def main():
     shots_main(df.copy())
     head_main(df.copy())
 
+
 if __name__ == "__main__":
     main()
-
-    

@@ -1,6 +1,6 @@
-import sys
-import pandas as pd
 import unittest
+import pandas as pd
+import sys
 
 sys.path.append('../src')
 

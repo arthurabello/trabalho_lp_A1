@@ -3,6 +3,7 @@ import pandas as pd
 import sys
 
 sys.path.append('../src')
+
 from head import (get_rows_with_previous, is_headed_goal, is_same_match,
                   origin_of_headed_goals)
 

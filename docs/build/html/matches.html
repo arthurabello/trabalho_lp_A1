@@ -146,105 +146,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-matches">
-<span id="matches-module"></span><h1>matches module<a class="headerlink" href="#module-matches" title="Link para este cabeçalho">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="matches.calculate_results">
-<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">calculate_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.calculate_results" title="Link para esta definição">¶</a></dt>
-<dd><p>Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e visitantes</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo os gols por partida</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>O DataFrame com uma coluna adicional ‘result’, indicando o resultado da partida</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
-</dd>
-<dt class="field-even">Levanta<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – Se <cite>goals_per_match</cite> não for um pandas DataFrame</p></li>
-<li><p><strong>KeyError</strong> – Se as colunas ‘home’ ou ‘away’ não existirem no DataFrame</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="matches.create_summary_dataframe">
-<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">create_summary_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.create_summary_dataframe" title="Link para esta definição">¶</a></dt>
-<dd><p>Cria um DataFrame com porcentagens: ‘home_percentage’ para vitórias, derrotas e empates do time da casa</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo os resultados das partidas</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>DataFrame com as porcentagens de vitórias, derrotas e empates para o time da casa</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
-</dd>
-<dt class="field-even">Levanta<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – Se <cite>goals_per_match</cite> não for um pandas DataFrame</p></li>
-<li><p><strong>KeyError</strong> – Se a coluna ‘result’ não existir no DataFrame</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="matches.group_goals_by_match">
-<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">group_goals_by_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.group_goals_by_match" title="Link para esta definição">¶</a></dt>
-<dd><p>Agrupa os eventos por partida e lado do time (casa ou visitante), focando especificamente nos gols</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – O dataset original contendo todos os eventos de futebol</p>
-</dd>
-<dt class="field-even">Retorna<span class="colon">:</span></dt>
-<dd class="field-even"><p>Um DataFrame com colunas ‘home’ e ‘away’ representando os gols marcados pelos times da casa e visitantes</p>
-</dd>
-<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
-</dd>
-<dt class="field-even">Levanta<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – Se <cite>df</cite> não for um pandas DataFrame</p></li>
-<li><p><strong>KeyError</strong> – Se colunas essenciais não forem encontradas no DataFrame</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="matches.matches_main">
-<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">matches_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.matches_main" title="Link para esta definição">¶</a></dt>
-<dd><p>Função principal para orquestrar a análise e exibir os resultados</p>
-<dl class="field-list simple">
-<dt class="field-odd">Retorna<span class="colon">:</span></dt>
-<dd class="field-odd"><p>DataFrame contendo as porcentagens de vitórias, derrotas e empates do time da casa</p>
-</dd>
-<dt class="field-even">Tipo de retorno<span class="colon">:</span></dt>
-<dd class="field-even"><p>pandas.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="matches.plot_summary">
-<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">plot_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.plot_summary" title="Link para esta definição">¶</a></dt>
-<dd><p>Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do time da casa</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>summary_df</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo as porcentagens de vitórias, derrotas e empates</p>
-</dd>
-<dt class="field-even">Levanta<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – Se ‘summary_df’ não for um pandas DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="matches-module">
+<h1>matches module<a class="headerlink" href="#matches-module" title="Link para este cabeçalho">¶</a></h1>
 </section>
 
 
@@ -252,27 +155,6 @@
           </div>
         </div>
       </div>
-    
-        <div id="show_right_sidebar">
-            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
-        </div>
-
-        <div id="right_sidebar">
-            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
-            <div class="page_toc">
-                <ul>
-<li><a class="reference internal" href="#">matches module</a><ul>
-<li><a class="reference internal" href="#matches.calculate_results"><code class="docutils literal notranslate"><span class="pre">calculate_results()</span></code></a></li>
-<li><a class="reference internal" href="#matches.create_summary_dataframe"><code class="docutils literal notranslate"><span class="pre">create_summary_dataframe()</span></code></a></li>
-<li><a class="reference internal" href="#matches.group_goals_by_match"><code class="docutils literal notranslate"><span class="pre">group_goals_by_match()</span></code></a></li>
-<li><a class="reference internal" href="#matches.matches_main"><code class="docutils literal notranslate"><span class="pre">matches_main()</span></code></a></li>
-<li><a class="reference internal" href="#matches.plot_summary"><code class="docutils literal notranslate"><span class="pre">plot_summary()</span></code></a></li>
-</ul>
-</li>
-</ul>
-
-            </div>
-        </div>
     
 
       <div class="clearer"></div>

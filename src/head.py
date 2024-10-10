@@ -4,8 +4,8 @@ cabeça em eventos de futebol. Ele analisa jogadas anteriores aos gols de cabeç
 categorizando-as em escanteios, faltas, impedimentos ou outros. Também gera uma
 visualização gráfica das porcentagens das origens dos gols de cabeça.
 
-Funções:
--------------------
+Funções
+-------
 get_rows_with_previous(df, conditions)
     Filtra linhas de eventos e inclui o evento anterior ao gol.
 is_headed_goal(df, row_index)
@@ -19,8 +19,8 @@ graph_view(df)
 head_main(df)
     Função principal que executa a análise e a visualização.
 
-Autor:
-------
+Autor
+-----
     Antonio Francisco Batista Filho
 """
 

@@ -178,6 +178,7 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
     plt.xticks(rotation=0)
     plt.ylim(0, 50) 
     plt.savefig('../data/graph_shots.png',format='png', dpi=300)
+    plt.plot()
 
 
 def shots_main(df: pd.DataFrame):

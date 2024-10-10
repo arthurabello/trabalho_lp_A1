@@ -3,8 +3,9 @@
 <html lang="pt-BR" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Índice &#8212; Documentação Trabalho-LP-A1 0.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>matches module &#8212; Documentação Trabalho-LP-A1 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="_static/basic_mod.css?v=9b2032db" />
     <script src="_static/documentation_options.js?v=88519e4e"></script>
@@ -13,7 +14,7 @@
     <script src="_static/translations.js?v=daa5921a"></script>
     <script src="_static/js/theme.js"></script>
     <script src="_static/js/petite-vue.js"></script>
-    <link rel="index" title="Índice" href="#" />
+    <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
@@ -122,7 +123,6 @@
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="head.html">head module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="matches.html">matches module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
 </ul>
 
@@ -135,223 +135,157 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
+  <section id="module-matches">
+<span id="matches-module"></span><h1>matches module<a class="headerlink" href="#module-matches" title="Link para este cabeçalho">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="matches.calculate_results">
+<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">calculate_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.calculate_results" title="Link para esta definição">¶</a></dt>
+<dd><p>Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e visitantes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo os gols por partida</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>O DataFrame com uma coluna adicional ‘result’, indicando o resultado da partida</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>goals_per_match</cite> não for um pandas DataFrame</p></li>
+<li><p><strong>KeyError</strong> – Se as colunas ‘home’ ou ‘away’ não existirem no DataFrame</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
-<h1 id="index">Índice</h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="matches.create_summary_dataframe">
+<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">create_summary_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goals_per_match</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.create_summary_dataframe" title="Link para esta definição">¶</a></dt>
+<dd><p>Cria um DataFrame com porcentagens: ‘home_percentage’ para vitórias, derrotas e empates do time da casa</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>goals_per_match</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo os resultados das partidas</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame com as porcentagens de vitórias, derrotas e empates para o time da casa</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>goals_per_match</cite> não for um pandas DataFrame</p></li>
+<li><p><strong>KeyError</strong> – Se a coluna ‘result’ não existir no DataFrame</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
-<div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
- | <a href="#C"><strong>C</strong></a>
- | <a href="#F"><strong>F</strong></a>
- | <a href="#G"><strong>G</strong></a>
- | <a href="#H"><strong>H</strong></a>
- | <a href="#I"><strong>I</strong></a>
- | <a href="#L"><strong>L</strong></a>
- | <a href="#M"><strong>M</strong></a>
- | <a href="#O"><strong>O</strong></a>
- | <a href="#P"><strong>P</strong></a>
- | <a href="#R"><strong>R</strong></a>
- | <a href="#S"><strong>S</strong></a>
- | <a href="#U"><strong>U</strong></a>
- 
-</div>
-<h2 id="A">A</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="shots.html#shots.adjust_shot_outcome_df">adjust_shot_outcome_df() (no módulo shots)</a>
-</li>
-  </ul></td>
-</tr></table>
+<dl class="py function">
+<dt class="sig sig-object py" id="matches.group_goals_by_match">
+<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">group_goals_by_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.group_goals_by_match" title="Link para esta definição">¶</a></dt>
+<dd><p>Agrupa os eventos por partida e lado do time (casa ou visitante), focando especificamente nos gols</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – O dataset original contendo todos os eventos de futebol</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Um DataFrame com colunas ‘home’ e ‘away’ representando os gols marcados pelos times da casa e visitantes</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>df</cite> não for um pandas DataFrame</p></li>
+<li><p><strong>KeyError</strong> – Se colunas essenciais não forem encontradas no DataFrame</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
-<h2 id="C">C</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="shots.html#shots.calculate_goals">calculate_goals() (no módulo shots)</a>
-</li>
-      <li><a href="matches.html#matches.calculate_results">calculate_results() (no módulo matches)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    clean_data
+<dl class="py function">
+<dt class="sig sig-object py" id="matches.load_dataset">
+<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.load_dataset" title="Link para esta definição">¶</a></dt>
+<dd><p>Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>csv_path</strong> (<em>str</em>) – Caminho para o arquivo CSV contendo o dataset</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Um DataFrame contendo todos os dados carregados do arquivo CSV</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Se <cite>csv_path</cite> não for uma string</p></li>
+<li><p><strong>FileNotFoundError</strong> – Se o arquivo CSV não for encontrado</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
-      <ul>
-        <li><a href="clean_data.html#module-clean_data">module</a>
-</li>
-      </ul></li>
-      <li><a href="matches.html#matches.create_summary_dataframe">create_summary_dataframe() (no módulo matches)</a>
-</li>
-  </ul></td>
-</tr></table>
+<dl class="py function">
+<dt class="sig sig-object py" id="matches.main">
+<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matches.main" title="Link para esta definição">¶</a></dt>
+<dd><p>Função principal para orquestrar a análise e exibir os resultados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame contendo as porcentagens de vitórias, derrotas e empates do time da casa</p>
+</dd>
+<dt class="field-even">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
 
-<h2 id="F">F</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.filter_df">filter_df() (no módulo utils)</a>
-</li>
-  </ul></td>
-</tr></table>
+<dl class="py function">
+<dt class="sig sig-object py" id="matches.plot_summary">
+<span class="sig-prename descclassname"><span class="pre">matches.</span></span><span class="sig-name descname"><span class="pre">plot_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matches.plot_summary" title="Link para esta definição">¶</a></dt>
+<dd><p>Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do time da casa</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>summary_df</strong> (<em>pandas.DataFrame</em>) – DataFrame contendo as porcentagens de vitórias, derrotas e empates</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – Se ‘summary_df’ não for um pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
 
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="head.html#head.get_rows_with_previous">get_rows_with_previous() (no módulo head)</a>
-</li>
-      <li><a href="head.html#head.graph_view">graph_view() (no módulo head)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="shots.html#shots.graph_view_shot_outcome">graph_view_shot_outcome() (no módulo shots)</a>
-</li>
-      <li><a href="matches.html#matches.group_goals_by_match">group_goals_by_match() (no módulo matches)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="H">H</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    head
-
-      <ul>
-        <li><a href="head.html#module-head">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="I">I</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="head.html#head.is_headed_goal">is_headed_goal() (no módulo head)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="head.html#head.is_same_match">is_same_match() (no módulo head)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="L">L</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="matches.html#matches.load_dataset">load_dataset() (no módulo matches)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="M">M</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="clean_data.html#clean_data.main">main() (no módulo clean_data)</a>
-
-      <ul>
-        <li><a href="head.html#head.main">(no módulo head)</a>
-</li>
-        <li><a href="matches.html#matches.main">(no módulo matches)</a>
-</li>
-        <li><a href="shots.html#shots.main">(no módulo shots)</a>
-</li>
-      </ul></li>
-      <li><a href="utils.html#utils.map_column_values">map_column_values() (no módulo utils)</a>
-</li>
-      <li>
-    matches
-
-      <ul>
-        <li><a href="matches.html#module-matches">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    module
-
-      <ul>
-        <li><a href="clean_data.html#module-clean_data">clean_data</a>
-</li>
-        <li><a href="head.html#module-head">head</a>
-</li>
-        <li><a href="matches.html#module-matches">matches</a>
-</li>
-        <li><a href="shots.html#module-shots">shots</a>
-</li>
-        <li><a href="utils.html#module-utils">utils</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="O">O</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="head.html#head.origin_of_headed_goals">origin_of_headed_goals() (no módulo head)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="P">P</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="shots.html#shots.perc_shot_outcome">perc_shot_outcome() (no módulo shots)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="matches.html#matches.plot_summary">plot_summary() (no módulo matches)</a>
-</li>
-      <li><a href="utils.html#utils.print_dataframe">print_dataframe() (no módulo utils)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="R">R</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.remove_columns">remove_columns() (no módulo utils)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.remove_lines_by_condition">remove_lines_by_condition() (no módulo utils)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="S">S</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="shots.html#shots.shot_outcome_count">shot_outcome_count() (no módulo shots)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    shots
-
-      <ul>
-        <li><a href="shots.html#module-shots">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="U">U</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    utils
-
-      <ul>
-        <li><a href="utils.html#module-utils">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
+</section>
 
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
+    
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">matches module</a><ul>
+<li><a class="reference internal" href="#matches.calculate_results"><code class="docutils literal notranslate"><span class="pre">calculate_results()</span></code></a></li>
+<li><a class="reference internal" href="#matches.create_summary_dataframe"><code class="docutils literal notranslate"><span class="pre">create_summary_dataframe()</span></code></a></li>
+<li><a class="reference internal" href="#matches.group_goals_by_match"><code class="docutils literal notranslate"><span class="pre">group_goals_by_match()</span></code></a></li>
+<li><a class="reference internal" href="#matches.load_dataset"><code class="docutils literal notranslate"><span class="pre">load_dataset()</span></code></a></li>
+<li><a class="reference internal" href="#matches.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#matches.plot_summary"><code class="docutils literal notranslate"><span class="pre">plot_summary()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
     
 
       <div class="clearer"></div>

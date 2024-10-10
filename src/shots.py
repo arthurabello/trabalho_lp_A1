@@ -23,7 +23,7 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
         KeyError: Se a coluna 'situation' não existir em `goals`.    
     """
 
-    # raises
+    # Tratamento de Erro
     if not isinstance(goals, pd.DataFrame):
         raise TypeError("O parâmetro 'goals' deve ser um pandas DataFrame.")
     
@@ -32,7 +32,7 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
         if colunm not in goals.columns:
             raise KeyError(f"A coluna {colunm} não existe no DataFrame")
 
-    # main code
+    # Código Principal
     total_goals = goals.shape[0]
     goals_inside = filter_df(goals, {'situation': 'inside'}).shape[0]
     goals_outside = filter_df(goals, {'situation': 'outside'}).shape[0]
@@ -65,7 +65,7 @@ def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
         TypeError: Se o parâmetro `df` não for um pd.DataFrame.
         KeyError: Se alguma das colunas ['shot_outcome', 'situation'] não existir em `df`.
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -74,7 +74,7 @@ def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
         if colunm not in df.columns:
             raise KeyError(f"A coluna {colunm} não existe no DataFrame")
     
-    # main code
+    # Código principal
     attempts_inside = filter_df(df, {'situation': 'inside'})['shot_outcome'].value_counts().reset_index()
     attempts_outside = filter_df(df, {'situation': 'outside'})['shot_outcome'].value_counts().reset_index()
     attempts = attempts_inside.merge(attempts_outside, on='shot_outcome', suffixes=('_in', '_out'))
@@ -101,11 +101,11 @@ def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
     Raises:
         TypeError: Se o parâmetro `df` não for um pd.DataFrame.  
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
-    # main code
+    # Código principal
     attempts = shot_outcome_count(df)
     attempts['Porcentagem_in'] = ((attempts['count_in'] / attempts['count_in'].sum()) * 100).round(2)
     attempts['Porcentagem_out'] = ((attempts['count_out'] / attempts['count_out'].sum()) * 100).round(2)
@@ -127,7 +127,7 @@ def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
         TypeError: Se o parâmetro `df` não for um pd.DataFrame.
         KeyError: Se alguma das colunas ['shot_outcome', 'is_goal'] não existir em `df`.
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -136,7 +136,7 @@ def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
         if colunm not in df.columns:
             raise KeyError(f"A coluna {colunm} não existe no DataFrame")
     
-    # main code
+    # Código principal
     df['shot_outcome'] = df.apply(
         lambda row: 'Gol' if row['shot_outcome'] == 'No alvo' and row['is_goal'] == 1 
                     else 'Defendido' if row['shot_outcome'] == 'No alvo' and row['is_goal'] == 0
@@ -160,7 +160,7 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
         KeyError: Se a coluna 'Resultado' não existir no DataFrame.
     """
  
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -169,7 +169,7 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
         if col not in df.columns:
             raise KeyError(f"A coluna '{col}' não existe no DataFrame.")
     
-    # main code
+    # Código principal
     ax = df.set_index('Resultado').plot.bar(
         title='Chutes dentro e fora da área', 
         color=['#3889ce', 'lightblue']

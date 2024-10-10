@@ -15,7 +15,6 @@ from matches import (
 class TestFootballAnalysis(unittest.TestCase):
 
     def test_load_dataset_valid(self):
-
         """
         Testa a função load_dataset com um caminho de arquivo CSV válido
         Verifica se o resultado é um DataFrame
@@ -25,7 +24,6 @@ class TestFootballAnalysis(unittest.TestCase):
         self.assertIsInstance(df, pd.DataFrame, "O resultado deve ser um DataFrame")
 
     def test_load_dataset_invalid_path(self):
-
         """
         Testa a função load_dataset com um caminho de arquivo CSV inválido
         Verifica se uma FileNotFoundError é levantada
@@ -35,7 +33,6 @@ class TestFootballAnalysis(unittest.TestCase):
             load_dataset('invalid_path.csv')
 
     def test_group_goals_by_match_valid(self):
-
         """
         Testa a função group_goals_by_match com um DataFrame válido
         Verifica se o resultado contém as colunas 'home' e 'away'
@@ -54,7 +51,6 @@ class TestFootballAnalysis(unittest.TestCase):
         self.assertIn('away', goals_per_match.columns, "A coluna 'away' deve estar presente")
 
     def test_group_goals_by_match_invalid_type(self):
-
         """
         Testa a função group_goals_by_match com um tipo de entrada inválido
         Verifica se uma TypeError é levantada
@@ -64,7 +60,6 @@ class TestFootballAnalysis(unittest.TestCase):
             group_goals_by_match('invalid input')
 
     def test_calculate_results_valid(self):
-
         """
         Testa a função calculate_results com um DataFrame válido
         Verifica se a coluna 'result' está presente no resultado
@@ -82,7 +77,6 @@ class TestFootballAnalysis(unittest.TestCase):
         self.assertIn('result', results.columns, "A coluna 'result' deve estar presente")
 
     def test_calculate_results_invalid_type(self):
-
         """
         Testa a função calculate_results com um tipo de entrada inválido
         Verifica se uma TypeError é levantada
@@ -92,7 +86,6 @@ class TestFootballAnalysis(unittest.TestCase):
             calculate_results('invalid input')
 
     def test_create_summary_dataframe_valid(self):
-
         """
         Testa a função create_summary_dataframe com um DataFrame válido
         Verifica se a coluna 'home_percentage' está presente no resultado
@@ -112,7 +105,6 @@ class TestFootballAnalysis(unittest.TestCase):
         self.assertIn('home_percentage', summary_df.columns, "A coluna 'home_percentage' deve estar presente")
 
     def test_create_summary_dataframe_invalid_type(self):
-
         """
         Testa a função create_summary_dataframe com um tipo de entrada inválido
         Verifica se uma TypeError é levantada
@@ -122,7 +114,6 @@ class TestFootballAnalysis(unittest.TestCase):
             create_summary_dataframe('invalid input')
 
     def test_plot_summary_valid(self):
-
         """
         Testa a função plot_summary com um DataFrame válido
         Verifica se não ocorre exceção durante a execução
@@ -142,6 +133,7 @@ class TestFootballAnalysis(unittest.TestCase):
             plot_summary(summary_df)
         except Exception as e:
             self.fail(f"plot_summary levantou uma exceção inesperada: {e}")
+
 
 if __name__ == '__main__':
     unittest.main()

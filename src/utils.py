@@ -1,6 +1,31 @@
 import pandas as pd
 from typing import List, Dict, Union
 
+def load_dataset(csv_path):
+    """
+    Carrega o dataset de eventos de futebol a partir de um arquivo CSV especificado
+
+    Args:
+        csv_path (str): Caminho para o arquivo CSV contendo o dataset
+
+    Returns:
+        pandas.DataFrame: Um DataFrame contendo todos os dados carregados do arquivo CSV
+
+    Raises:
+        TypeError: Se `csv_path` não for uma string
+        FileNotFoundError: Se o arquivo CSV não for encontrado
+    """
+    # Tratamento de Erro
+    if not isinstance(csv_path, str):
+        raise TypeError("O parâmetro 'csv_path' deve ser uma string")
+    
+    # Código Principal
+    try:
+        return pd.read_csv(csv_path)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"O arquivo '{csv_path}' não foi encontrado")
+
+
 def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     """Remove colunas de um DataFrame
 
@@ -28,7 +53,7 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
         1   8.5
         2   9.7
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -39,7 +64,7 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     if missing_columns:
         raise KeyError(f"As seguintes colunas não existem no DataFrame: {missing_columns}")
 
-    # main code
+    # Código Principal
     for column in columns:
         df.drop(column, axis=1, inplace=True)
 
@@ -55,7 +80,7 @@ def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -
         pelo filtro.
 
     Returns:
-        pd.DataFrame: DataFrame filtrado contendo apenas as linhas que atendem as soluções.
+        pd.DataFrame: DataFrame filtrado contendo apenas as linhas que atendem às condições.
 
     Raises:
         TypeError: Se `df` não for um pd.DataFrame ou `conditions` não for um dicionário.
@@ -73,7 +98,7 @@ def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -
         0   1   Arnaldo   7.0
         2   3  Cernaldo   7.0
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -84,8 +109,7 @@ def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -
         if column not in df.columns:
             raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
 
-    # main code
-
+    # Código Principal
     for column, value in conditions.items():
         df = df[df[column] == value]
     
@@ -120,8 +144,7 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Un
         1   2  Bernaldo   8.5
 
     """
-    
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
 
@@ -131,10 +154,12 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Un
     if column not in df.columns:
         raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
     
-    # main code
+    # Código Principal
     for cond in conditions:
         df = df[df[column] != cond]
+
     return df
+
 
 def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
     """Mapeia os valores de uma coluna específica de acordo com um mapeamento
@@ -166,7 +191,7 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
         1   2  Aluno 2   8.5
         2   3  Aluno 3   7.0"""
 
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
 
@@ -176,11 +201,12 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
     if column not in df.columns:
         raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
     
-    # main code
+    # Código Principal
 
     df[column] = df[column].map(map)
 
     return df
+
 
 def print_dataframe(df: pd.DataFrame, title: str) -> None:
     """Imprime o DataFrame com um título fornecido.
@@ -192,16 +218,15 @@ def print_dataframe(df: pd.DataFrame, title: str) -> None:
     Raises:
         TypeError: Se `df` não for um pd.DataFrame ou `title` não for uma string.
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
     if not isinstance(title, str):
         raise TypeError("O parâmetro 'title' deve ser uma string.")
     
-    # main code
+    # Código Principal
     print('-'*50)
     print(f'{f"  {title}  ":=^50}')
     print('-'*50)
     print(df.to_string(index=False))
-

@@ -1,10 +1,38 @@
-import os
+"""Este módulo contém funções para analisar e visualizar dados relacionados aos chutes,
+com foco em calcular estatísticas de chutes dentro e fora da área.
+
+Funções
+-------
+calculate_goals(goals):
+    Calcula a porcentagem de gols feitos dentro e fora da área.
+
+shot_outcome_count(df)
+    Conta a frequência de cada resultado de chute (shot_outcome) dentro e fora da área.
+
+perc_shot_outcome(df)
+    Calcula a porcentagem de cada resultado de chute (shot_outcome) dentro e fora da área.
+
+adjust_shot_outcome_df(df)
+    Ajusta a coluna 'shot_outcome' para separar chutes no alvo em 'Gol' e 'Defendido'.
+
+graph_view_shot_outcome(df)
+    Gera e salva um gráfico de barras comparando os resultados de chutes dentro e fora da área.
+
+shots_main(df)
+    Função principal que executa o fluxo de análise e visualização dos chutes.
+
+Autor
+-----
+    Rodrigo Severo Araújo    
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from utils import remove_columns, remove_lines_by_condition, filter_df, map_column_values, print_dataframe
+from utils import (remove_columns, remove_lines_by_condition, filter_df,
+                   map_column_values, print_dataframe)
 
-# Hipotese: Chutes de dentro da area tem mais chance de conversão a gol
+# Hipótese: Chutes de fora da área têm menor chance de conversão a gol
 
 def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
     """Recebe um Dataframe com todos os gols e calcula a porcentagem de gols que 
@@ -22,8 +50,7 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
         TypeError: Se o parâmetro `goals` não for um pd.DataFrame.
         KeyError: Se a coluna 'situation' não existir em `goals`.    
     """
-
-    # raises
+    # Tratamento de Erro
     if not isinstance(goals, pd.DataFrame):
         raise TypeError("O parâmetro 'goals' deve ser um pandas DataFrame.")
     
@@ -32,7 +59,7 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
         if colunm not in goals.columns:
             raise KeyError(f"A coluna {colunm} não existe no DataFrame")
 
-    # main code
+    # Código Principal
     total_goals = goals.shape[0]
     goals_inside = filter_df(goals, {'situation': 'inside'}).shape[0]
     goals_outside = filter_df(goals, {'situation': 'outside'}).shape[0]
@@ -46,6 +73,7 @@ def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
     })
 
     return results
+
 
 def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
     """Conta a frequência de cada resultado de chute (shot_outcome) dentro e fora da área.
@@ -65,7 +93,7 @@ def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
         TypeError: Se o parâmetro `df` não for um pd.DataFrame.
         KeyError: Se alguma das colunas ['shot_outcome', 'situation'] não existir em `df`.
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -74,12 +102,13 @@ def shot_outcome_count(df: pd.DataFrame) -> pd.DataFrame:
         if colunm not in df.columns:
             raise KeyError(f"A coluna {colunm} não existe no DataFrame")
     
-    # main code
+    # Código principal
     attempts_inside = filter_df(df, {'situation': 'inside'})['shot_outcome'].value_counts().reset_index()
     attempts_outside = filter_df(df, {'situation': 'outside'})['shot_outcome'].value_counts().reset_index()
     attempts = attempts_inside.merge(attempts_outside, on='shot_outcome', suffixes=('_in', '_out'))
 
     attempts.columns = ['Resultado', 'count_in', 'count_out']
+
     return attempts
 
 def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
@@ -101,17 +130,19 @@ def perc_shot_outcome(df: pd.DataFrame) -> pd.DataFrame:
     Raises:
         TypeError: Se o parâmetro `df` não for um pd.DataFrame.  
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
-    # main code
+    # Código principal
     attempts = shot_outcome_count(df)
     attempts['Porcentagem_in'] = ((attempts['count_in'] / attempts['count_in'].sum()) * 100).round(2)
     attempts['Porcentagem_out'] = ((attempts['count_out'] / attempts['count_out'].sum()) * 100).round(2)
 
     remove_columns(attempts, ['count_in','count_out'])
+
     return attempts
+
 
 def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
     """Ajusta a coluna 'shot_outcome' do DataFrame para criar uma nova categoria que separa
@@ -127,7 +158,7 @@ def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
         TypeError: Se o parâmetro `df` não for um pd.DataFrame.
         KeyError: Se alguma das colunas ['shot_outcome', 'is_goal'] não existir em `df`.
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -136,7 +167,7 @@ def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
         if colunm not in df.columns:
             raise KeyError(f"A coluna {colunm} não existe no DataFrame")
     
-    # main code
+    # Código principal
     df['shot_outcome'] = df.apply(
         lambda row: 'Gol' if row['shot_outcome'] == 'No alvo' and row['is_goal'] == 1 
                     else 'Defendido' if row['shot_outcome'] == 'No alvo' and row['is_goal'] == 0
@@ -144,6 +175,7 @@ def adjust_shot_outcome_df(df: pd.DataFrame) -> pd.DataFrame:
     )
     
     return df
+
 
 def graph_view_shot_outcome(df: pd.DataFrame) -> None:
     """Exibe um gráfico de barras duplas das porcentagens de resultados de chutes.
@@ -160,7 +192,7 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
         KeyError: Se a coluna 'Resultado' não existir no DataFrame.
     """
  
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -169,24 +201,34 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
         if col not in df.columns:
             raise KeyError(f"A coluna '{col}' não existe no DataFrame.")
     
-    # main code
-    df.set_index('Resultado').plot.bar(title='Chutes dentro e fora da área', color=['lightblue', 'orange'])
+    # Código principal
+    ax = df.set_index('Resultado').plot.bar(
+        title='Chutes dentro e fora da área', 
+        color=['#3889ce', 'lightblue']
+    )
 
-    plt.xlabel('Resultado do chute')
-    plt.ylabel('Porcentagem')
-    plt.legend(title='Situação', labels=['Dentro da Área', 'Fora da Área'])
+    ax.set_xlabel('Resultado do chute', color='white')
+    ax.set_ylabel('Porcentagem', color='white')
+    legend = ax.legend(title='Situação', labels=['Dentro da Área', 'Fora da Área'], facecolor='none', edgecolor='white')
+    
+    plt.setp(legend.get_texts(), color='white')
+    plt.setp(legend.get_title(), color='white')
+
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+
+    ax.spines['top'].set_color('white')
+    ax.spines['bottom'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.spines['right'].set_color('white')
+    
     plt.xticks(rotation=0)
     plt.ylim(0, 50) 
+    plt.title('Chutes dentro e fora da área', color='white')
+    plt.savefig('../data/graph_shots.png', format='png', dpi=300, transparent=True)
 
-    path = os.path.join("../data", 'graph_shots.png')
-    plt.savefig(path,format='png', dpi=300)
 
-
-def main():
-
-    filepath = "../data/cleaned_events.csv"
-    df = pd.read_csv(filepath)
-
+def shots_main(df: pd.DataFrame):
     df = remove_columns(df, ['time', 'side', 'bodypart'])
     df = filter_df(df, {'event_type': 1})
     df = remove_lines_by_condition(df, 'location', [1, 2, 7, 8, 19])
@@ -211,6 +253,3 @@ def main():
     print_dataframe(perc_attempts, "ESTATÍSTICAS POR CHUTE")
 
     graph_view_shot_outcome(perc_attempts)
-
-if __name__ == '__main__':
-    main()

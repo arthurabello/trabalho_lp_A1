@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Relatório da Análise da Base de Dados Football Events &#8212; Documentação Trabalho-LP-A1 0.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/basic_mod.css?v=9b2032db" />
+    <script src="_static/documentation_options.js?v=88519e4e"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=daa5921a"></script>
+    <script src="_static/js/theme.js"></script>
+    <script src="_static/js/petite-vue.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Buscar" href="search.html" />
+    <link rel="next" title="utils module" href="utils.html" />
+    <link rel="prev" title="Trabalho-LP-A1 documentation" href="index.html" /> 
+  </head><body data-dark_mode_code_blocks="true">
+
+<div id="top_nav">
+    
+
+    <nav>
+        
+            
+        
+
+        <p id="toggle_sidebar">
+            <a href="#" title="Toggle sidebar">|||</a>
+        </p>
+        <h1><a href="index.html" title="Go to homepage">Documentação Trabalho-LP-A1 0.1</a></h1>
+
+        <a id="mode_toggle" href="#" @click.prevent="handleClick" :title="mode">
+    <template v-if="mode == 'light'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_light"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M67.48,18.073c1.913,-1.912 1.913,-5.018 0,-6.931c-1.912,-1.912 -5.018,-1.912 -6.931,0l-6.798,6.799c-1.912,1.912 -1.912,5.018 0,6.931c1.913,1.912 5.018,1.912 6.931,-0l6.798,-6.799Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.728,61.108c1.912,-1.913 1.912,-5.018 -0,-6.931c-1.913,-1.913 -5.019,-1.913 -6.931,-0l-6.799,6.798c-1.912,1.913 -1.912,5.019 0,6.931c1.913,1.913 5.019,1.913 6.931,0l6.799,-6.798Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.682,54.177c-1.913,-1.913 -5.018,-1.913 -6.931,-0c-1.912,1.913 -1.912,5.018 0,6.931l6.798,6.798c1.913,1.913 5.019,1.913 6.931,0c1.913,-1.912 1.913,-5.018 0,-6.931l-6.798,-6.798Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M4.901,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,-0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M18.929,11.142c-1.912,-1.912 -5.018,-1.912 -6.931,0c-1.912,1.913 -1.912,5.019 0,6.931l6.799,6.799c1.912,1.912 5.018,1.912 6.931,-0c1.912,-1.913 1.912,-5.019 -0,-6.931l-6.799,-6.799Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.108,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c-0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c-0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'dark'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_dark"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.901,2.196 -4.901,4.901c0,2.705 2.197,4.901 4.901,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.662,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.989,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.732,61.103c1.91,-1.91 1.91,-5.011 0,-6.921l-0.009,-0.01c-1.91,-1.91 -5.012,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.909,1.91 5.011,1.91 6.92,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.672,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.52,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l-0,-0.01c-0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.901,2.196 -4.901,4.901c0,2.704 2.197,4.9 4.901,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.73,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 -0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.098,34.623c-2.699,0 -4.891,2.192 -4.891,4.892l-0,0.019c-0,2.699 2.192,4.891 4.891,4.891c2.7,0 4.892,-2.192 4.892,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.892,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'darkest'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_darkest"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><path d="M39.315,23.791c8.684,-0 15.734,7.05 15.734,15.733c0,8.684 -7.05,15.734 -15.734,15.734c-8.683,0 -15.733,-7.05 -15.733,-15.734c-0,-8.683 7.05,-15.733 15.733,-15.733Zm0,4.737c6.069,0 10.997,4.927 10.997,10.996c-0,6.069 -4.928,10.996 -10.997,10.996c-6.068,0 -10.996,-4.927 -10.996,-10.996c0,-6.069 4.928,-10.996 10.996,-10.996Z" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.216,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.9,2.196 -4.9,4.901c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.666,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.99,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.737,61.103c1.909,-1.91 1.909,-5.011 -0,-6.921l-0.01,-0.01c-1.91,-1.91 -5.011,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.91,1.91 5.011,1.91 6.921,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.676,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.524,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l0,-0.01c0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.216,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901c-0,2.704 2.196,4.9 4.9,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.734,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.103,34.623c-2.7,0 -4.892,2.192 -4.892,4.892l-0,0.019c-0,2.699 2.192,4.891 4.892,4.891c2.699,0 4.891,-2.192 4.891,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.891,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+</a>
+
+<script>
+(function() {
+    const LOCAL_STORAGE_KEY = 'piccoloThemeMode'
+
+    var initialMode = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+    if (initialMode) {
+        // Make sure the value in local storage is valid
+        if (['light', 'dark', 'darkest'].indexOf(initialMode) == -1) {
+            initialMode = 'light'
+            localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+        }
+    } else {
+        // Check if the client prefers dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            initialMode = 'dark'
+        } else {
+            initialMode = 'light'
+        }
+        localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+    }
+
+    document.documentElement.dataset.mode = initialMode
+
+    PetiteVue.createApp({
+        'mode': initialMode,
+        handleClick() {
+            let currentMode = this.mode
+
+            if (currentMode == 'light') {
+                this.mode = 'dark'
+            } else if (currentMode == 'dark') {
+                this.mode = 'darkest'
+            } else if (currentMode == 'darkest') {
+                this.mode = 'light'
+            }
+
+            document.documentElement.dataset.mode = this.mode
+            localStorage.setItem(LOCAL_STORAGE_KEY, this.mode)
+
+            console.log(this.mode)
+        }
+    }).mount('#mode_toggle')
+})()
+</script>
+            <p class="mobile_search_link">
+                <a href="search.html" title="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 64" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+                        <path d="M14.873 40.009c-2.315-3.943-3.642-8.532-3.642-13.429C11.231 11.91 23.141 0 37.811 0s26.58 11.91 26.58 26.58-11.91 26.58-26.58 26.58a26.44 26.44 0 0 1-14.277-4.161L9.739 62.794a3.12 3.12 0 0 1-4.413 0L.913 58.382c-1.217-1.218-1.217-3.196 0-4.413l13.96-13.96zM37.811 8.054c10.225 0 18.526 8.301 18.526 18.526s-8.301 18.526-18.526 18.526-18.526-8.301-18.526-18.526S27.586 8.054 37.811 8.054z" fill="#fff" />
+                    </svg>
+                </a>
+            </p>
+        
+
+        <div class="searchbox_wrapper">
+            
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Busca rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+    </nav>
+</div>
+
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Relatório da Análise da Base de Dados Football Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="head.html">head module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matches.html">matches module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="relatorio-da-analise-da-base-de-dados-football-events">
+<h1>Relatório da Análise da Base de Dados Football Events<a class="headerlink" href="#relatorio-da-analise-da-base-de-dados-football-events" title="Link para este cabeçalho">¶</a></h1>
+<section id="introducao">
+<h2>INTRODUÇÃO<a class="headerlink" href="#introducao" title="Link para este cabeçalho">¶</a></h2>
+<p>O presente texto tem como objetivo discorrer sobre a análise de dados do dataset Football Events, que consiste em um conjunto de
+eventos que ocorreram em 9.074 jogos de futebol em ligas europeias. Nessa base de dados, cada uma das mais de 900.000 linhas
+representava um evento ocorrido. Sobre os dados coletados foram levantadas hipóteses e, utilizando Python e suas bibliotecas Pandas e
+Matplotib, foi realizada uma análise com objetivo de confirmá-las ou negá-las.</p>
+</section>
+<section id="hipoteses-propostas">
+<h2>HIPÓTESES PROPOSTAS<a class="headerlink" href="#hipoteses-propostas" title="Link para este cabeçalho">¶</a></h2>
+<p>As hipóteses a serem avaliadas pela análise realizada foram as seguintes:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Chute de fora da área tem menor chance de conversão a gol.</strong></dt><dd><p>Intuitivamente, espera-se que chutes de <strong>Fora da Área</strong> tenham menor chance de conversão a gol devido a vários fatores. Por
+exemplo, pelo chute vir de fora da área, o goleiro tem um maior tempo de reação para defender o chute. Além disso, há uma maior
+chance do chute ser bloqueado por um defensor, aumentando as dificuldades para marcar. Outros fatores incluem a menor precisão
+e força dos chutes provenientes de distâncias maiores.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>A maior parte dos gols de cabeça tem origem em lances de bola parada.</strong></dt><dd><p>Devido à natureza mais organizada e previsível dos lances de <strong>bola parada</strong>, esses lances são comumente associados a gols de
+cabeça, em especial, os escanteios, que é tradicionalmente cobrado com bola levantada na área com intenção de um jogador bem
+posicionado conseguir cabecear. Assim, é natural esperar que parte considerável dos gols de cabeça tenham origem nesses lances.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Times que jogam em casa tem maior taxa de vitórias</strong></dt><dd><p>Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.
+Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="pre-processamento-de-dados">
+<h2>PRÉ-PROCESSAMENTO DE DADOS<a class="headerlink" href="#pre-processamento-de-dados" title="Link para este cabeçalho">¶</a></h2>
+<p>Inicialmente, a base de dados trabalhada continha 22 colunas, das quais apenas 8 seriam utilizadas para validação das hipóteses. Dessa
+forma, um primeiro passo natural foi remover as colunas desnecessárias. Posteriormente, foram removidas as linhas que referiam-se a
+comerciais, cartões amarelos, segundos cartões amarelos, cartões vermelhos, substituição, faltas sofridas (faltas sofridas vem aos
+pares com faltas cometidas, para nossa análise bastava apenas um desses tipos de eventos), mão na bola e pênaltis cometidos.</p>
+</section>
+<section id="resultados-da-analise">
+<h2>RESULTADOS DA ANÁLISE<a class="headerlink" href="#resultados-da-analise" title="Link para este cabeçalho">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Chute de fora da área tem menor chance de conversão a gol.</strong></p></li>
+</ol>
+<section id="estatisticas-por-gol">
+<h3>Estatísticas por Gol<a class="headerlink" href="#estatisticas-por-gol" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situação</p></th>
+<th class="head"><p>Porcentagem</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dentro da área</p></td>
+<td><p>88.26</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fora da área</p></td>
+<td><p>11.74</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="estatisticas-por-chute">
+<h3>Estatísticas por Chute<a class="headerlink" href="#estatisticas-por-chute" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resultado</p></th>
+<th class="head"><p>Porcentagem_in</p></th>
+<th class="head"><p>Porcentagem_out</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fora</p></td>
+<td><p>38.34</p></td>
+<td><p>43.80</p></td>
+</tr>
+<tr class="row-odd"><td><p>Defendido</p></td>
+<td><p>24.29</p></td>
+<td><p>22.69</p></td>
+</tr>
+<tr class="row-even"><td><p>Bloqueado</p></td>
+<td><p>19.51</p></td>
+<td><p>29.45</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gol</p></td>
+<td><p>16.19</p></td>
+<td><p>2.67</p></td>
+</tr>
+<tr class="row-even"><td><p>Trave</p></td>
+<td><p>1.67</p></td>
+<td><p>1.38</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="grafico">
+<h3>Gráfico<a class="headerlink" href="#grafico" title="Link para este cabeçalho">¶</a></h3>
+<a class="reference internal image-reference" href="_images/graph_shots.png"><img alt="_images/graph_shots.png" class="align-center" src="_images/graph_shots.png" style="width: 600px; height: 400px;" />
+</a>
+<ol class="arabic simple" start="2">
+<li><p><strong>A maior parte dos gols de cabeça tem origem em lances de bola parada.</strong></p></li>
+</ol>
+</section>
+<section id="estatisticas">
+<h3>Estatísticas<a class="headerlink" href="#estatisticas" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ORIGEM</p></th>
+<th class="head"><p>Porcentagem</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Escanteios</p></td>
+<td><p>38.74</p></td>
+</tr>
+<tr class="row-odd"><td><p>Faltas</p></td>
+<td><p>10.53</p></td>
+</tr>
+<tr class="row-even"><td><p>impedimentos</p></td>
+<td><p>2.30</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOLA PARADA</p></td>
+<td><p>51.58</p></td>
+</tr>
+<tr class="row-even"><td><p>Outros</p></td>
+<td><p>48.42</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h3>Gráfico<a class="headerlink" href="#id1" title="Link para este cabeçalho">¶</a></h3>
+<a class="reference internal image-reference" href="_images/graph_head.png"><img alt="_images/graph_head.png" class="align-center" src="_images/graph_head.png" style="width: 600px; height: 400px;" />
+</a>
+<ol class="arabic simple" start="3">
+<li><p><strong>Times que jogam em casa tem maior taxa de vitórias</strong></p></li>
+</ol>
+</section>
+<section id="id2">
+<h3>Estatísticas<a class="headerlink" href="#id2" title="Link para este cabeçalho">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resultado</p></th>
+<th class="head"><p>Porcentagem</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vitórias</p></td>
+<td><p>50.13</p></td>
+</tr>
+<tr class="row-odd"><td><p>Derrotas</p></td>
+<td><p>30.84</p></td>
+</tr>
+<tr class="row-even"><td><p>Empates</p></td>
+<td><p>19.03</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h3>Gráfico<a class="headerlink" href="#id3" title="Link para este cabeçalho">¶</a></h3>
+<a class="reference internal image-reference" href="_images/graph_matches.png"><img alt="_images/graph_matches.png" class="align-center" src="_images/graph_matches.png" style="width: 600px; height: 400px;" />
+</a>
+</section>
+</section>
+<section id="validacao-das-hipoteses">
+<h2>VALIDAÇÃO DAS HIPÓTESES<a class="headerlink" href="#validacao-das-hipoteses" title="Link para este cabeçalho">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Chute de fora da área tem menor chance de conversão a gol.</strong></p></li>
+</ol>
+<p>Os resultados obtidos reforçam que chutes de Fora da Área têm uma chance menor de se transformar em gol. Nossa análise mostrou
+que <strong>88.26%</strong> dos gols foram marcados <strong>dentro da área</strong>, enquanto só <strong>11.74%</strong> aconteceram <strong>fora da área</strong>. Isso mostra que
+chutes de distâncias maiores enfrentam maiores dificuldades para resultar em gol.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>A maior parte dos gols de cabeça tem origem em lances de bola parada.</strong></p></li>
+</ol>
+<p>A análise mostra que, nos dados analisados, 51.58% dos gols de cabeça tiveram origem em gols de cabeça. Esse resultado reforça em parte
+a hipótese de que a maioria dos gols desse tipo surgem de escanteios, faltas e impedimentos. Todavia, a margem não é tão grande quanto
+o esperado. Dessa forma, embora a hipótese seja confirmada, a análise revela que grande parte dos gols de cabeça têm origem em lances
+bola parada. Além disso, como esperado, os gols com origem em escanteio representam parte substancial do total.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Times que jogam em casa tem maior taxa de vitórias</strong></p></li>
+</ol>
+<p>A análise dos dados confirma a hipótese de que times jogando em casa têm uma maior taxa de vitórias.
+Os resultados mostram que 50.13% dos jogos em casa resultam em vitórias para o time da casa,
+enquanto as derrotas representam 30.84% e os empates 19.03%. Essa diferença significativa reforça
+a vantagem de jogar em casa no futebol, que pode ser atribuída a fatores como familiaridade com o
+campo, apoio da torcida e ausência de desgaste com viagens.</p>
+</section>
+<section id="desafios-encontrados">
+<h2>DESAFIOS ENCONTRADOS<a class="headerlink" href="#desafios-encontrados" title="Link para este cabeçalho">¶</a></h2>
+<ul class="simple">
+<li><p>Interpretar o que é “fora da área” e “dentro da área”, uma vez que as localizações na base de dados eram pouco mais abstratas como “ângulo difícil a direita”, “ângulo difícil a esquerda” e “marca do pênalti”.</p></li>
+<li><p>Diferenciar quando um evento tinha relação com o evento anterior ou não.</p></li>
+<li><p>Entender quando dois eventos diferentes ocorreram em uma mesma partida.</p></li>
+</ul>
+</section>
+<section id="contribuicao-de-cada-integrante">
+<h2>CONTRIBUIÇÃO DE CADA INTEGRANTE<a class="headerlink" href="#contribuicao-de-cada-integrante" title="Link para este cabeçalho">¶</a></h2>
+<ul class="simple">
+<li><p>Antonio Francisco Batista Filho: Responsável por validar a hipótese sobre a origem dos gols de cabeça. Colaborou com o pré-processamento dos dados e elaborou o relatório.</p></li>
+<li><p>Arthur Rabello Oliveira: Responsável por validar a hipótese sobre as vitórias do time da casa e elaboração do README.md.</p></li>
+<li><p>Rodrigo Severo Araújo: Responsável por validar a hipótese dos chutes de fora da área. Colaborou com o pré-processamento dos dados e elaborou o arquivo utils.py.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+    
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">Relatório da Análise da Base de Dados Football Events</a><ul>
+<li><a class="reference internal" href="#introducao">INTRODUÇÃO</a></li>
+<li><a class="reference internal" href="#hipoteses-propostas">HIPÓTESES PROPOSTAS</a></li>
+<li><a class="reference internal" href="#pre-processamento-de-dados">PRÉ-PROCESSAMENTO DE DADOS</a></li>
+<li><a class="reference internal" href="#resultados-da-analise">RESULTADOS DA ANÁLISE</a><ul>
+<li><a class="reference internal" href="#estatisticas-por-gol">Estatísticas por Gol</a></li>
+<li><a class="reference internal" href="#estatisticas-por-chute">Estatísticas por Chute</a></li>
+<li><a class="reference internal" href="#grafico">Gráfico</a></li>
+<li><a class="reference internal" href="#estatisticas">Estatísticas</a></li>
+<li><a class="reference internal" href="#id1">Gráfico</a></li>
+<li><a class="reference internal" href="#id2">Estatísticas</a></li>
+<li><a class="reference internal" href="#id3">Gráfico</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validacao-das-hipoteses">VALIDAÇÃO DAS HIPÓTESES</a></li>
+<li><a class="reference internal" href="#desafios-encontrados">DESAFIOS ENCONTRADOS</a></li>
+<li><a class="reference internal" href="#contribuicao-de-cada-integrante">CONTRIBUIÇÃO DE CADA INTEGRANTE</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+    
+
+      <div class="clearer"></div>
+    </div>
+    <div class="button_nav_wrapper">
+        <div class="button_nav">
+            <div class="left">
+                
+                <a href="index.html">
+                    <span class="icon">&lt;</span><span>Trabalho-LP-A1 documentation</span></a>
+                
+            </div>
+
+            <div class="right">
+                
+                    <a href="utils.html"><span>utils module</span><span class="icon">&gt;</span></a>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Antonio Francisco, Arthur Rabello, Rodrigo Severo.
+      Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 8.0.2.
+    </div>
+
+<p id="theme_credit">Styled using the <a href="https://github.com/piccolo-orm/piccolo_theme">Piccolo Theme</a></p>
+  </body>
+</html>

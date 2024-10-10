@@ -1,3 +1,8 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from utils import filter_df, print_dataframe
+
 """
 Este módulo contém funções para analisar e visualizar dados relacionados aos resultados
 de jogos de futebol, com foco em agrupar os gols por partida, calcular resultados de
@@ -28,28 +33,22 @@ Autor
     Arthur Rabello Oliveira
 """
 
-import pandas as pd
-import matplotlib.pyplot as plt
+def group_goals_by_match(df: pd.DataFrame) -> pd.DataFrame:
 
-from utils import filter_df, print_dataframe
-
-# Hipótese: Times que jogam em casa têm maior percentual de vitórias
-
-def group_goals_by_match(df):
     """
     Agrupa os eventos por partida e lado do time (casa ou visitante), focando
-    especificamente nos gols
+    especificamente nos gols.
 
     Args:
-        df (pandas.DataFrame): O dataset original contendo todos os eventos de futebol
+        df (pandas.DataFrame): O dataset original contendo todos os eventos de futebol.
 
     Returns:
         pandas.DataFrame: Um DataFrame com colunas 'home' e 'away' representando os gols
-        marcados pelos times da casa e visitantes
+        marcados pelos times da casa e visitantes.
 
     Raises:
-        TypeError: Se df não for um pandas DataFrame
-        KeyError: Se colunas essenciais não forem encontradas no DataFrame
+        TypeError: Se df não for um pandas DataFrame.
+        KeyError: Se colunas essenciais não forem encontradas no DataFrame.
     """
 
     #raises
@@ -59,8 +58,7 @@ def group_goals_by_match(df):
     required_columns = ['id_odsp', 'side', 'event_type', 'is_goal']
     missing_columns = set(required_columns) - set(df.columns)
     if missing_columns:
-        raise KeyError(f"As seguintes colunas estão faltando no DataFrame:
-                       {missing_columns}")
+        raise KeyError(f"As seguintes colunas estão faltando no DataFrame: {missing_columns}")
 
     #actual code
     df_goals = filter_df(df, {'event_type': 1, 'is_goal': 1})
@@ -70,22 +68,24 @@ def group_goals_by_match(df):
     return goals_per_match
 
 
-def calculate_results(goals_per_match):
+def calculate_results(goals_per_match: pd.DataFrame) -> pd.DataFrame:
+
     """
     Calcula o resultado de cada partida com base nos gols marcados pelos times da casa e
-    visitantes
+    visitantes.
 
     Args:
-        goals_per_match (pandas.DataFrame): DataFrame contendo os gols por partida
+        goals_per_match (pandas.DataFrame): DataFrame contendo os gols por partida.
 
     Returns:
         pandas.DataFrame: O DataFrame com uma coluna adicional 'result', indicando o
-        resultado da partida
+        resultado da partida.
 
     Raises:
-        TypeError: Se goals_per_match não for um pandas DataFrame
-        KeyError: Se as colunas 'home' ou 'away' não existirem no DataFrame
+        TypeError: Se goals_per_match não for um pandas DataFrame.
+        KeyError: Se as colunas 'home' ou 'away' não existirem no DataFrame.
     """
+
     #raises
     if not isinstance(goals_per_match, pd.DataFrame):
         raise TypeError("O parâmetro 'goals_per_match' deve ser um pandas DataFrame")
@@ -100,22 +100,24 @@ def calculate_results(goals_per_match):
     )
     return goals_per_match
 
-def create_summary_dataframe(goals_per_match):
+def create_summary_dataframe(goals_per_match: pd.DataFrame) -> pd.DataFrame:
+
     """
     Cria um DataFrame com porcentagens: 'home_percentage' para vitórias, derrotas e
-    empates do time da casa
+    empates do time da casa.
 
     Args:
-        goals_per_match (pandas.DataFrame): DataFrame contendo os resultados das partidas
+        goals_per_match (pandas.DataFrame): DataFrame contendo os resultados das partidas.
 
     Returns:
         pandas.DataFrame: DataFrame com as porcentagens de vitórias, derrotas e empates
-        para o time da casa
+        para o time da casa.
 
     Raises:
-        TypeError: Se goals_per_match não for um pandas DataFrame
-        KeyError: Se a coluna 'result' não existir no DataFrame
+        TypeError: Se goals_per_match não for um pandas DataFrame.
+        KeyError: Se a coluna 'result' não existir no DataFrame.
     """
+
     #raises
     if not isinstance(goals_per_match, pd.DataFrame):
         raise TypeError("O parâmetro 'goals_per_match' deve ser um pandas DataFrame")
@@ -139,18 +141,20 @@ def create_summary_dataframe(goals_per_match):
 
     return summary_df
 
-def graph_view(df: pd.DataFrame) -> None:   
+def graph_view(df: pd.DataFrame) -> None:  
+
     """
     Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do
-    time da casa
+    time da casa.
 
     Args:
-        summary_df (pandas.DataFrame): DataFrame contendo as porcentagens de vitórias,
-        derrotas e empates
+        df (pandas.DataFrame): DataFrame contendo as porcentagens de vitórias,
+        derrotas e empates.
 
     Raises:
-        TypeError: Se 'summary_df' não for um pandas DataFrame
+        TypeError: Se 'df' não for um pandas DataFrame.
     """
+
     #raises
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame")
@@ -160,7 +164,7 @@ def graph_view(df: pd.DataFrame) -> None:
     plt.bar(df['results'], df['home_percentage'],
             color=['#3889ce', '#3889ce', '#3889ce'])
     
-    plt.title('Porcentagem de vitórias , derrotas e empates', color='white')
+    plt.title('Porcentagem de vitórias, derrotas e empates', color='white')
     plt.ylabel('Porcentagem', color='white')
 
     ax = plt.gca()
@@ -169,21 +173,24 @@ def graph_view(df: pd.DataFrame) -> None:
     ax.spines['top'].set_color('white')
     ax.spines['right'].set_color('white')
 
- 
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
 
-    plt.savefig('../data/graph_matches.png',format='png', dpi=300, transparent=True)
+    plt.savefig('../data/graph_matches.png', format='png', dpi=300, transparent=True)
     plt.plot()
 
 
-def matches_main(df: pd.DataFrame):
+def matches_main(df: pd.DataFrame) -> pd.DataFrame:
+    
     """
-    Função principal para orquestrar a análise e exibir os resultados
+    Função principal para orquestrar a análise e exibir os resultados.
+
+    Args:
+        df (pandas.DataFrame): O dataset original contendo todos os eventos de futebol.
 
     Returns:
         pandas.DataFrame: DataFrame contendo as porcentagens de vitórias, derrotas e
-        empates do time da casa
+        empates do time da casa.
     """
 
     goals_per_match = group_goals_by_match(df)
@@ -192,3 +199,5 @@ def matches_main(df: pd.DataFrame):
 
     graph_view(summary_df)
     print_dataframe(summary_df, "RESULTADOS DOS JOGOS")
+
+    return summary_df

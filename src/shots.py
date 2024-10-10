@@ -170,14 +170,30 @@ def graph_view_shot_outcome(df: pd.DataFrame) -> None:
             raise KeyError(f"A coluna '{col}' não existe no DataFrame.")
     
     # main code
-    df.set_index('Resultado').plot.bar(title='Chutes dentro e fora da área', color=['lightblue', 'orange'])
+    ax = df.set_index('Resultado').plot.bar(
+        title='Chutes dentro e fora da área', 
+        color=['#3889ce', 'lightblue']
+    )
 
-    plt.xlabel('Resultado do chute')
-    plt.ylabel('Porcentagem')
-    plt.legend(title='Situação', labels=['Dentro da Área', 'Fora da Área'])
+    ax.set_xlabel('Resultado do chute', color='white')
+    ax.set_ylabel('Porcentagem', color='white')
+    legend = ax.legend(title='Situação', labels=['Dentro da Área', 'Fora da Área'], facecolor='none', edgecolor='white')
+    
+    plt.setp(legend.get_texts(), color='white')
+    plt.setp(legend.get_title(), color='white')
+
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+
+    ax.spines['top'].set_color('white')
+    ax.spines['bottom'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.spines['right'].set_color('white')
+    
     plt.xticks(rotation=0)
     plt.ylim(0, 50) 
-    plt.savefig('../data/graph_shots.png',format='png', dpi=300)
+    plt.title('Chutes dentro e fora da área', color='white')
+    plt.savefig('../data/graph_shots.png', format='png', dpi=300, transparent=True)
 
 
 def shots_main(df: pd.DataFrame):

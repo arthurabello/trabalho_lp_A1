@@ -17,10 +17,11 @@ def load_dataset(csv_path):
         FileNotFoundError: Se o arquivo CSV não for encontrado
     """
 
-    #raises
+    # Tratamento de Erro
     if not isinstance(csv_path, str):
         raise TypeError("O parâmetro 'csv_path' deve ser uma string")
-    #actual code
+    
+    # Código Principal
     try:
         return pd.read_csv(csv_path)
     except FileNotFoundError:
@@ -53,7 +54,7 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
         1   8.5
         2   9.7
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -64,7 +65,7 @@ def remove_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     if missing_columns:
         raise KeyError(f"As seguintes colunas não existem no DataFrame: {missing_columns}")
 
-    # main code
+    # Código Principal
     for column in columns:
         df.drop(column, axis=1, inplace=True)
 
@@ -98,7 +99,7 @@ def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -
         0   1   Arnaldo   7.0
         2   3  Cernaldo   7.0
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
@@ -109,8 +110,7 @@ def filter_df(df: pd.DataFrame, conditions: Dict[str, Union[str, int, float]]) -
         if column not in df.columns:
             raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
 
-    # main code
-
+    # Código Principal
     for column, value in conditions.items():
         df = df[df[column] == value]
     
@@ -146,7 +146,7 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Un
 
     """
     
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
 
@@ -156,7 +156,7 @@ def remove_lines_by_condition(df: pd.DataFrame, column: str, conditions: List[Un
     if column not in df.columns:
         raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
     
-    # main code
+    # Código Principal
     for cond in conditions:
         df = df[df[column] != cond]
     return df
@@ -191,7 +191,7 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
         1   2  Aluno 2   8.5
         2   3  Aluno 3   7.0"""
 
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
 
@@ -201,7 +201,7 @@ def map_column_values(df: pd.DataFrame, column: str, map: Dict) -> pd.DataFrame:
     if column not in df.columns:
         raise KeyError(f"A coluna '{column}' não existe no DataFrame.")
     
-    # main code
+    # Código Principal
 
     df[column] = df[column].map(map)
 
@@ -217,14 +217,14 @@ def print_dataframe(df: pd.DataFrame, title: str) -> None:
     Raises:
         TypeError: Se `df` não for um pd.DataFrame ou `title` não for uma string.
     """
-    # raises
+    # Tratamento de Erro
     if not isinstance(df, pd.DataFrame):
         raise TypeError("O parâmetro 'df' deve ser um pandas DataFrame.")
     
     if not isinstance(title, str):
         raise TypeError("O parâmetro 'title' deve ser uma string.")
     
-    # main code
+    # Código Principal
     print('-'*50)
     print(f'{f"  {title}  ":=^50}')
     print('-'*50)

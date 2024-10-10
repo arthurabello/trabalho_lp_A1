@@ -1,10 +1,34 @@
-import os
+"""Este módulo contém funções para analisar e visualizar dados relacionados aos chutes,
+com foco em calcular estatísticas de chutes dentro e fora da área.
+
+Funções
+-------
+calculate_goals(goals):
+    Calcula a porcentagem de gols feitos dentro e fora da área.
+
+shot_outcome_count(df)
+    Conta a frequência de cada resultado de chute (shot_outcome) dentro e fora da área.
+
+perc_shot_outcome(df)
+    Calcula a porcentagem de cada resultado de chute (shot_outcome) dentro e fora da área.
+
+adjust_shot_outcome_df(df)
+    Ajusta a coluna 'shot_outcome' para separar chutes no alvo em 'Gol' e 'Defendido'.
+
+graph_view_shot_outcome(df)
+    Gera e salva um gráfico de barras comparando os resultados de chutes dentro e fora da área.
+
+shots_main(df)
+    Função principal que executa o fluxo de análise e visualização dos chutes.
+
+Autor
+-----
+    Rodrigo Severo Araújo    
+"""
 import pandas as pd
 import matplotlib.pyplot as plt
 
 from utils import remove_columns, remove_lines_by_condition, filter_df, map_column_values, print_dataframe
-
-# Hipotese: Chutes de dentro da area tem mais chance de conversão a gol
 
 def calculate_goals(goals: pd.DataFrame) -> pd.DataFrame:
     """Recebe um Dataframe com todos os gols e calcula a porcentagem de gols que 

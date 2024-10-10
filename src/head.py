@@ -147,8 +147,8 @@ def graph_view(df: pd.DataFrame) -> None:
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
 
-    plt.savefig('../data/graph_shots.png',format='png', dpi=300, transparent=True)
-    plt.close()
+    plt.savefig('../data/graph_head.png',format='png', dpi=300, transparent=True)
+    plt.plot()
 
 
 def head_main(df: pd.DataFrame):

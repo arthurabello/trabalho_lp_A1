@@ -122,7 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="head.html">head module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matches.html">matches module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
 </ul>
 
@@ -145,6 +145,7 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
@@ -166,8 +167,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="shots.html#shots.calculate_goals">calculate_goals() (no módulo shots)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matches.html#matches.calculate_results">calculate_results() (no módulo matches)</a>
+</li>
       <li>
     clean_data
 
@@ -175,6 +176,12 @@
         <li><a href="clean_data.html#module-clean_data">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="clean_data.html#clean_data.clean_data">clean_data() (no módulo clean_data)</a>
+</li>
+      <li><a href="matches.html#matches.create_summary_dataframe">create_summary_dataframe() (no módulo matches)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -191,11 +198,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="head.html#head.get_rows_with_previous">get_rows_with_previous() (no módulo head)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="head.html#head.graph_view">graph_view() (no módulo head)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="shots.html#shots.graph_view_shot_outcome">graph_view_shot_outcome() (no módulo shots)</a>
+</li>
+      <li><a href="matches.html#matches.group_goals_by_match">group_goals_by_match() (no módulo matches)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -211,6 +220,10 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="head.html#head.head_main">head_main() (no módulo head)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="I">I</h2>
@@ -225,18 +238,36 @@
   </ul></td>
 </tr></table>
 
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="utils.html#utils.load_dataset">load_dataset() (no módulo utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="clean_data.html#clean_data.main">main() (no módulo clean_data)</a>
+      <li>
+    main
 
       <ul>
-        <li><a href="head.html#head.main">(no módulo head)</a>
-</li>
-        <li><a href="shots.html#shots.main">(no módulo shots)</a>
+        <li><a href="main.html#module-main">module</a>
 </li>
       </ul></li>
+      <li><a href="main.html#main.main">main() (no módulo main)</a>
+</li>
       <li><a href="utils.html#utils.map_column_values">map_column_values() (no módulo utils)</a>
+</li>
+      <li>
+    matches
+
+      <ul>
+        <li><a href="matches.html#module-matches">module</a>
+</li>
+      </ul></li>
+      <li><a href="matches.html#matches.matches_main">matches_main() (no módulo matches)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -247,6 +278,10 @@
         <li><a href="clean_data.html#module-clean_data">clean_data</a>
 </li>
         <li><a href="head.html#module-head">head</a>
+</li>
+        <li><a href="main.html#module-main">main</a>
+</li>
+        <li><a href="matches.html#module-matches">matches</a>
 </li>
         <li><a href="shots.html#module-shots">shots</a>
 </li>
@@ -271,6 +306,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matches.html#matches.plot_summary">plot_summary() (no módulo matches)</a>
+</li>
       <li><a href="utils.html#utils.print_dataframe">print_dataframe() (no módulo utils)</a>
 </li>
   </ul></td>
@@ -293,8 +330,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="shots.html#shots.shot_outcome_count">shot_outcome_count() (no módulo shots)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     shots
 
@@ -302,6 +337,10 @@
         <li><a href="shots.html#module-shots">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="shots.html#shots.shots_main">shots_main() (no módulo shots)</a>
+</li>
   </ul></td>
 </tr></table>
 

@@ -20,5 +20,5 @@ documentation for details.
    utils
    shots
    head
-   rabello_hypothesis
+   matches
    modules

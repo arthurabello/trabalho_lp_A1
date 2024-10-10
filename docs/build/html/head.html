@@ -16,7 +16,7 @@
     <script src="_static/js/petite-vue.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
-    <link rel="next" title="rabello_hypothesis module" href="rabello_hypothesis.html" />
+    <link rel="next" title="matches module" href="matches.html" />
     <link rel="prev" title="shots module" href="shots.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
@@ -125,10 +125,16 @@
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shots.html">shots module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">head module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rabello_hypothesis.html">rabello_hypothesis module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.hip_shots.html">Relatório de Análise de Chutes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hip_head.html">Relatório da Análise sobre Origem dos Gols de Cabeça</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matches.html">matches module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="clean_data.html">clean_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shots.html">shots module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">head module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matches.html">matches module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -178,6 +184,11 @@ cabeça.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="head.head_main">
+<span class="sig-prename descclassname"><span class="pre">head.</span></span><span class="sig-name descname"><span class="pre">head_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#head.head_main" title="Link para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="head.is_headed_goal">
 <span class="sig-prename descclassname"><span class="pre">head.</span></span><span class="sig-name descname"><span class="pre">is_headed_goal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#head.is_headed_goal" title="Link para esta definição">¶</a></dt>
 <dd><p>Confere se um evento é um gol de cabeça.</p>
@@ -217,11 +228,6 @@ cabeça.</p>
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="head.main">
-<span class="sig-prename descclassname"><span class="pre">head.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#head.main" title="Link para esta definição">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="head.origin_of_headed_goals">
@@ -269,9 +275,9 @@ cabeça.</p>
 <li><a class="reference internal" href="#">head module</a><ul>
 <li><a class="reference internal" href="#head.get_rows_with_previous"><code class="docutils literal notranslate"><span class="pre">get_rows_with_previous()</span></code></a></li>
 <li><a class="reference internal" href="#head.graph_view"><code class="docutils literal notranslate"><span class="pre">graph_view()</span></code></a></li>
+<li><a class="reference internal" href="#head.head_main"><code class="docutils literal notranslate"><span class="pre">head_main()</span></code></a></li>
 <li><a class="reference internal" href="#head.is_headed_goal"><code class="docutils literal notranslate"><span class="pre">is_headed_goal()</span></code></a></li>
 <li><a class="reference internal" href="#head.is_same_match"><code class="docutils literal notranslate"><span class="pre">is_same_match()</span></code></a></li>
-<li><a class="reference internal" href="#head.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li><a class="reference internal" href="#head.origin_of_headed_goals"><code class="docutils literal notranslate"><span class="pre">origin_of_headed_goals()</span></code></a></li>
 </ul>
 </li>
@@ -294,7 +300,7 @@ cabeça.</p>
 
             <div class="right">
                 
-                    <a href="rabello_hypothesis.html"><span>rabello_hypothesis module</span><span class="icon">&gt;</span></a>
+                    <a href="matches.html"><span>matches module</span><span class="icon">&gt;</span></a>
                 
             </div>
         </div>

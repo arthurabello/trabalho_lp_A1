@@ -100,7 +100,6 @@ def create_summary_dataframe(goals_per_match):
     return summary_df
 
 def plot_summary(summary_df):
-
     """
     Plota um gráfico de barras com as porcentagens de vitórias, derrotas e empates do time da casa
 
@@ -116,16 +115,28 @@ def plot_summary(summary_df):
         raise TypeError("O parâmetro 'summary_df' deve ser um pandas DataFrame")
 
     #actual code
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(8, 6))
     summary_df['home_percentage'].plot(kind='bar', color=['#4CAF50', '#FF9800', '#2196F3'])
 
-    plt.title('Porcentagem de vitórias, derrotas e empates do time da casa', fontsize=16)
-    plt.xlabel('Resultados', fontsize=14)
-    plt.ylabel('Porcentagem (%)', fontsize=14)
-    plt.xticks(rotation=0)
+    plt.title('Porcentagem de vitórias, derrotas e empates do time da casa', fontsize=16, color='white')
+    plt.xlabel('Resultados', fontsize=14, color='white')
+    plt.ylabel('Porcentagem (%)', fontsize=14, color='white')
+    plt.xticks(rotation=0, color='white')
+    plt.yticks(color='white')
+
+    ax = plt.gca() 
+    ax.spines['bottom'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.spines['top'].set_color('white')
+    ax.spines['right'].set_color('white')
+
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+
     plt.tight_layout()
-    plt.savefig('../data/graph_matches.png',format='png', dpi=300)
+    plt.savefig('../data/graph_matches_black.png', format='png', dpi=300, transparent=True)
     plt.show()
+
 
 def matches_main(df: pd.DataFrame):
 

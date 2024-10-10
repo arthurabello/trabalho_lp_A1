@@ -99,9 +99,23 @@ Gráfico
 
 3. **Times que jogam em casa tem maior taxa de vitórias**
 
-Uma tabela daora aqui.
+Estatísticas
+^^^^^^^^^^^^
 
-Um gráfico massa aqui.
+==========  ===========
+Resultado   Porcentagem
+==========  ===========
+Vitórias    50.13
+Derrotas    30.84
+Empates     19.03
+==========  ===========
+
+Gráfico
+^^^^^^^
+.. image:: ../../data/graph_matches.png
+   :width: 600px
+   :height: 400px
+   :align: center
 
 VALIDAÇÃO DAS HIPÓTESES
 -----------------------
@@ -121,8 +135,11 @@ bola parada. Além disso, como esperado, os gols com origem em escanteio represe
 
 3. **Times que jogam em casa tem maior taxa de vitórias**
 
-Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.
-Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa. Alguma coisa bem massa.
+A análise dos dados confirma a hipótese de que times jogando em casa têm uma maior taxa de vitórias. 
+Os resultados mostram que 50.13% dos jogos em casa resultam em vitórias para o time da casa, 
+enquanto as derrotas representam 30.84% e os empates 19.03%. Essa diferença significativa reforça 
+a vantagem de jogar em casa no futebol, que pode ser atribuída a fatores como familiaridade com o 
+campo, apoio da torcida e ausência de desgaste com viagens.
 
 DESAFIOS ENCONTRADOS
 --------------------
@@ -134,8 +151,8 @@ DESAFIOS ENCONTRADOS
 CONTRIBUIÇÃO DE CADA INTEGRANTE
 -------------------------------
 
-- Antonio Francisco: Responsável por validar a hipótese sobre a origem dos gols de cabeça. Coloborou com o pré-processamento dos dados e elaborou o relatório.
+- Antonio Francisco Batista Filho: Responsável por validar a hipótese sobre a origem dos gols de cabeça. Colaborou com o pré-processamento dos dados e elaborou o relatório.
 
-- Arthur Rabello: Responsável por validar a hipótese sobre as vitórias do time da casa e elaboração do README.md.
+- Arthur Rabello Oliveira: Responsável por validar a hipótese sobre as vitórias do time da casa e elaboração do README.md.
 
-- Rodrigo Severo: Responsável por validar a hipótese dos chutes de fora da área. Colaborou com o pré-processamento dos dados e elaborou o arquivo utils.py.
+- Rodrigo Severo Araújo: Responsável por validar a hipótese dos chutes de fora da área. Colaborou com o pré-processamento dos dados e elaborou o arquivo utils.py.
